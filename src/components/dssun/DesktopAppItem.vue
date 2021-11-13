@@ -4,6 +4,7 @@
     :class="displayMode"
     @mousedown="dskAppMouseDown"
     @mouseup="dskAppMouseUp"
+    @mouseleave="dskAppMouseLeave"
   >
     <div class="deskAppIcon">
       <img :class="imgClass" :src="imgUrl" :alt="appName" />
@@ -32,14 +33,17 @@ export default {
     dskAppMouseUp() {
       setTimeout(() => (this.imgClass = "normal"), 200);
     },
+    dskAppMouseLeave() {
+      setTimeout(() => (this.imgClass = "normal"), 200);
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .dskApp {
-  margin: 8px;
-  padding: 12px;
+  margin: 4px;
+  padding: 12px 18px 24px;
 
   align-items: center;
   font-size: 0.8em;
@@ -56,7 +60,8 @@ export default {
 }
 
 .deskAppIcon > img {
-  transition: width 0.2s;
+  -webkit-user-drag: none;
+  transition: all 0.2s;
 }
 
 .small {
@@ -100,12 +105,15 @@ export default {
 
 .small .smaller {
   width: 28px;
+  transform: translateY(4px);
 }
 .middle .smaller {
   width: 34px;
+  transform: translateY(5px);
 }
 .big .smaller {
   width: 43px;
+  transform: translateY(6px);
 }
 
 .deskAppIcon {
@@ -114,7 +122,7 @@ export default {
 
 .dskApp .appName {
   color: #fafafa;
-  margin: 4px 0;
+  margin: 2px 0;
   height: 30%;
 
   text-shadow: 0 0 4px rgb(0 0 0 / 60%);

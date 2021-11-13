@@ -10,22 +10,23 @@
   <div class="desktop">
     <div class="main">
       <!-- 桌面图标列表组件 -->
-      <AppList :displayMode="displayMode"></AppList>
+      <AppList :displayMode="displayMode" :sortMethod="sortMethod"></AppList>
     </div>
     <taskBar></taskBar>
   </div>
 </template>
 
 <script>
-import taskBar from '../components/dfhe/taskBar.vue';
-import AppList from '../components/dssun/desktop-app-list.vue';
+import taskBar from "../components/dfhe/taskBar.vue";
+import AppList from "../components/dssun/DesktopAppList.vue";
 export default {
   data() {
     return {
-      displayMode: 'small', // 控制桌面图标大小：small 小图标（默认） middle 中图标 big 大图标
+      displayMode: "small", // 控制桌面图标大小：small 小图标（默认） middle 中图标 big 大图标
+      sortMethod: "date", // 控制图标排序方式：size 按大小 date 按时间 name 按名称
     };
   },
-  name: 'desktop',
+  name: "desktop",
   components: {
     taskBar,
     AppList,
@@ -40,7 +41,7 @@ export default {
   justify-content: flex-end;
   width: 100vw;
   height: 100vh;
-  background-image: url('../assets/img/wallpapers/light.jpg');
+  background-image: url("../assets/img/wallpapers/light.jpg");
   background-position: center;
   background-size: cover;
   overflow: hidden;
