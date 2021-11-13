@@ -1,14 +1,8 @@
-<!--
- * @Author: your name
- * @Date: 2021-11-13 14:06:23
- * @LastEditTime: 2021-11-13 22:00:51
- * @LastEditors: Please set LastEditors
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \win11_vue\src\views\desktop.vue
--->
 <template>
   <div class="desktop">
-    <div class="main">
+    <div class="main" @contextmenu.prevent="rightClick">
+      <!-- 鼠标右键出现的列表 -->
+      <Click ref="clickRef" v-if="visClick"></Click>
       <!-- 桌面图标列表组件 -->
       <AppList :displayMode="displayMode" :sortMethod="sortMethod"></AppList>
     </div>
@@ -19,17 +13,26 @@
 <script>
 import taskBar from "../components/dfhe/taskBar.vue";
 import AppList from "../components/dssun/DesktopAppList.vue";
+import Click from "../components/panzhou/click.vue";
 export default {
-  data() {
-    return {
-      displayMode: "small", // 控制桌面图标大小：small 小图标（默认） middle 中图标 big 大图标
-      sortMethod: "date", // 控制图标排序方式：size 按大小 date 按时间 name 按名称
-    };
-  },
   name: "desktop",
   components: {
     taskBar,
     AppList,
+    Click,
+  },
+  data() {
+    return {
+      visClick: true,
+      displayMode: "small", // 控制桌面图标大小：small 小图标（默认） middle 中图标 big 大图标
+      sortMethod: "date", // 控制图标排序方式：size 按大小 date 按时间 name 按名称
+    };
+  },
+  methods: {
+    rightClick(e) {
+      console.log(this.$refs);
+      const { clientX, clientY } = e;
+    },
   },
 };
 </script>
@@ -46,6 +49,7 @@ export default {
   background-size: cover;
   overflow: hidden;
   user-select: none;
+  position: relative;
   .main {
     flex: 1;
     // background-color: green;
