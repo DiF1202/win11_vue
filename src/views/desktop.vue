@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-11-13 14:06:23
- * @LastEditTime: 2021-11-13 17:37:53
+ * @LastEditTime: 2021-11-13 18:31:33
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \win11_vue\src\views\desktop.vue
@@ -9,12 +9,18 @@
 <template>
   <div class="desktop">
     <div class="main"></div>
-    <div class="taskBar"></div>
+    <taskBar></taskBar>
   </div>
 </template>
 
 <script>
-export default {};
+import taskBar from '../components/dfhe/taskBar.vue';
+export default {
+  name: 'desktop',
+  components: {
+    taskBar,
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -31,13 +37,6 @@ export default {};
   .main {
     flex: 1;
     // background-color: green;
-  }
-  .taskBar {
-    height: 40px;
-    width: 100%;
-    background-color: red;
-    display: flex;
-    align-self: flex-end;
   }
 }
 </style>
