@@ -8,13 +8,26 @@
 -->
 <template>
   <div class="desktop">
-    <div class="main"></div>
+    <div class="main">
+      <!-- 桌面图标列表组件 -->
+      <AppList :displayMode="displayMode"></AppList>
+    </div>
     <div class="taskBar"></div>
   </div>
 </template>
 
 <script>
-export default {};
+// 导入桌面图标列表组件
+import AppList from "../components/dssun/desktop-app-list.vue";
+
+export default {
+  components: { AppList },
+  data() {
+    return {
+      displayMode: "small", // 控制桌面图标大小：small 小图标（默认） middle 中图标 big 大图标
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -24,13 +37,15 @@ export default {};
   justify-content: flex-end;
   width: 100vw;
   height: 100vh;
-  background-image: url('../assets/img/wallpapers/light.jpg');
+  background-image: url("../assets/img/wallpapers/light.jpg");
   background-position: center;
   background-size: cover;
   overflow: hidden;
+  user-select: none;
   .main {
     flex: 1;
     // background-color: green;
+    height: calc(100vh - 40px);
   }
   .taskBar {
     height: 40px;
