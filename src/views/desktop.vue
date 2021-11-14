@@ -1,6 +1,6 @@
 <template>
   <div class="desktop">
-    <div class="main" @contextmenu.prevent="rightClick">
+    <div class="main" @click="closeClick" @contextmenu.prevent="rightClick">
       <!-- 鼠标右键出现的列表 -->
       <Click></Click>
       <!-- 桌面图标列表组件 -->
@@ -56,11 +56,17 @@ export default {
         // * max -> normal : 从最大化状态到还原
         edge: 'max',
       },
-      methods: {
-        rightClick(e) {
+      //#region  panzhou代码
+      // 1. 鼠标右键点击出现 小弹框
+      rightClick(e) {
           const {clientX,clientY} = e;
-        }
+          this.$store.commit('setClick',{clientX,clientY,vis:true})
+      },
+      // 2. 鼠标左键点击关闭小弹框
+      closeClick() {
+         this.$store.commit('setClick',{vis:false})
       }
+      //#endregion
     };
   },
 };
