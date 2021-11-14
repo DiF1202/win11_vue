@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import Taskbar from '../components/dfhe/Taskbar';
+import Taskbar from '../components/dfhe/taskBar';
 import AppList from '../components/dssun/DesktopAppList.vue';
 import Click from '../components/panzhou/click.vue';
 import EdgeApp from '../components/dssun/EdgeApp.vue';
