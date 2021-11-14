@@ -14,11 +14,10 @@ export default {
     .root {
       position: absolute;
       top: 4rem;
-      left: 10rem;
-      right: 300px;
+      left: 9.333333rem;
       width: 5.2rem;
       height: 5.533333rem;
-      border-radius: 10px;
+      border-radius: .133333rem;
       background-color: rgb(225,230,250);
     }
 </style>

@@ -2,7 +2,7 @@
   <div class="desktop">
     <div class="main" @contextmenu.prevent="rightClick">
       <!-- 鼠标右键出现的列表 -->
-      <Click ref="clickRef" v-if="visClick"></Click>
+      <Click v-if="visClick"></Click>
       <!-- 桌面图标列表组件 -->
       <AppList :displayMode="displayMode"></AppList>
     </div>
@@ -25,12 +25,10 @@ export default {
     return {
       visClick: true,
       displayMode: 'small', // 控制桌面图标大小：small 小图标（默认） middle 中图标 big 大图标
-      
     };
   },
   methods:{
-      rightClick(e) {
-        console.log(this.$refs);        
+      rightClick(e) {     
           const{clientX,clientY} = e;
           
       }
