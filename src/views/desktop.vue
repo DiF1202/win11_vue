@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import TaskBar from '../components/dfhe/TaskBar';
+import TaskBar from '../components/dfhe/taskBar.vue';
 import AppList from '../components/dssun/DesktopAppList.vue';
 import Click from '../components/panzhou/click.vue';
 
