@@ -6,6 +6,8 @@
       :imgUrl="require('@/assets/img/appIcons/' + ap.description + '.png')"
       :displayMode="displayMode"
       :key="index"
+      @click="openApp"
+      :id="ap.description"
     ></Item>
   </div>
 </template>
@@ -54,7 +56,6 @@ export default {
           date: "2021-11-10",
         },
         {
-          // appName: "Visual Studio Code",
           appName: "VSCode",
           description: "vscode",
           size: 2,
@@ -80,6 +81,18 @@ export default {
         else return 0;
       });
       return this.appsList;
+    },
+  },
+  methods: {
+    openApp(e) {
+      let tar = e.target;
+      let i = 0;
+      while (!tar.id && i < 5) {
+        tar = tar.parentNode;
+        ++i;
+      }
+      if (i >= 5) return;
+      this.$emit("winStateChange", tar.id, 4);
     },
   },
 };

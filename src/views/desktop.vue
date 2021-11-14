@@ -4,12 +4,17 @@
       <!-- 鼠标右键出现的列表 -->
       <Click></Click>
       <!-- 桌面图标列表组件 -->
-      <AppList :displayMode="displayMode" :sortMethod="sortMethod"></AppList>
+      <AppList
+        :displayMode="displayMode"
+        :sortMethod="sortMethod"
+        @winStateChange="winStateChange"
+      ></AppList>
       <!-- Edge应用窗口 -->
       <EdgeApp
         :winMax="winMax['edge']"
         :winHide="winHide['edge']"
         :winSize="winSize['edge']"
+        @winStateChange="winStateChange"
       ></EdgeApp>
     </div>
     <TaskBar></TaskBar>
@@ -17,14 +22,15 @@
 </template>
 
 <script>
-import TaskBar from '../components/dfhe/TaskBar';
-import AppList from '../components/dssun/DesktopAppList.vue';
-import Click from '../components/panzhou/click.vue';
+import TaskBar from "../components/dfhe/TaskBar.vue";
+
+import AppList from "../components/dssun/DesktopAppList.vue";
+import Click from "../components/panzhou/click.vue";
 
 import EdgeApp from '../components/dssun/EdgeApp.vue';
 
 export default {
-  name: 'desktop',
+  name: "desktop",
   components: {
     TaskBar,
     AppList,
@@ -80,9 +86,29 @@ export default {
       this.$store.commit('setClick', {
         vis: false
       })
-    }
+    },
     //#endregion
-  }
+
+    // 组件监听事件
+    winStateChange(appname, e) {
+      // console.log(appname, e);
+      // appname 应用名称的唯一标识符
+      // e 事件编码：0 关闭按钮被按下 1 最小化按钮被按下 2 最大化/还原按钮被按下 3 任务栏图标被按下 4 桌面图标被按下
+      if (e === 0) {
+        this.winHide[appname] = "true";
+      } else if (e === 1) {
+        this.winMax[appname] = "false";
+      } else if (e === 2) {
+        if (this.winSize[appname] === "normal") this.winSize[appname] = "max";
+        else this.winSize[appname] = "normal";
+      } else if (e === 3) {
+        if (this.winMax[appname] === "false") this.winMax[appname] = "true";
+        else this.winMax[appname] = "false";
+      } else {
+        this.winHide[appname] = "false";
+      }
+    },
+  },
 };
 </script>
 
@@ -93,7 +119,7 @@ export default {
   justify-content: flex-end;
   width: 100vw;
   height: 100vh;
-  background-image: url('../assets/img/wallpapers/light.jpg');
+  background-image: url("../assets/img/wallpapers/light.jpg");
   background-position: center;
   background-size: cover;
   overflow: hidden;
