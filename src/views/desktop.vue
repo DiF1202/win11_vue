@@ -33,6 +33,7 @@ export default {
   },
   data() {
     return {
+      //#region  dss 控制的 data
       displayMode: 'small', // 控制桌面图标大小：small 小图标（默认） middle 中图标 big 大图标
       sortMethod: 'date', // 控制图标排序方式：size 按大小 date 按时间 name 按名称
       winMax: {
@@ -56,19 +57,32 @@ export default {
         // * max -> normal : 从最大化状态到还原
         edge: 'max',
       },
-      //#region  panzhou代码
-      // 1. 鼠标右键点击出现 小弹框
-      rightClick(e) {
-          const {clientX,clientY} = e;
-          this.$store.commit('setClick',{clientX,clientY,vis:true})
-      },
-      // 2. 鼠标左键点击关闭小弹框
-      closeClick() {
-         this.$store.commit('setClick',{vis:false})
-      }
       //#endregion
     };
   },
+  methods: {
+    
+    //#region  panzhou控制的 method
+    // 1. 鼠标右键点击出现 小弹框
+    rightClick(e) {
+      const {
+        clientX,
+        clientY
+      } = e;
+      this.$store.commit('setClick', {
+        clientX,
+        clientY,
+        vis: true
+      })
+    },
+    // 2. 鼠标左键点击关闭小弹框
+    closeClick() {
+      this.$store.commit('setClick', {
+        vis: false
+      })
+    }
+    //#endregion
+  }
 };
 </script>
 
