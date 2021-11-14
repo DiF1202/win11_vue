@@ -105,19 +105,21 @@ export default {
 
 .small .smaller {
   width: 28px;
-  transform: translateY(4px);
 }
 .middle .smaller {
   width: 34px;
-  transform: translateY(5px);
 }
 .big .smaller {
   width: 43px;
-  transform: translateY(6px);
 }
 
 .deskAppIcon {
   text-align: center;
+
+  /* flex */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .dskApp .appName {

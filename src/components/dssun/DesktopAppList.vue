@@ -96,6 +96,5 @@ height: calc(100vh - 任务栏高度); */
 
   width: 0;
   height: 100%;
-  background-color: lightblue;
 }
 </style>
