@@ -2,41 +2,71 @@
   <div class="desktop">
     <div class="main" @contextmenu.prevent="rightClick">
       <!-- 鼠标右键出现的列表 -->
-      <Click v-if="visClick"></Click>
+      <Click></Click>
       <!-- 桌面图标列表组件 -->
-      <AppList :displayMode="displayMode"></AppList>
+      <AppList :displayMode="displayMode" :sortMethod="sortMethod"></AppList>
+      <!-- Edge应用窗口 -->
+      <EdgeApp
+        :winMax="winMax['edge']"
+        :winHide="winHide['edge']"
+        :winSize="winSize['edge']"
+      ></EdgeApp>
     </div>
-    <taskBar></taskBar>
+    <TaskBar></TaskBar>
   </div>
 </template>
 
 <script>
-import taskBar from '../components/dfhe/taskBar.vue';
-import AppList from '../components/dssun/desktop-app-list.vue';
-import Click from '../components/panzhou/click.vue'
+import TaskBar from '../components/dfhe/TaskBar';
+import AppList from '../components/dssun/DesktopAppList.vue';
+import Click from '../components/panzhou/click.vue';
+
+import EdgeApp from '../components/dssun/EdgeApp.vue';
+
 export default {
   name: 'desktop',
   components: {
-    taskBar,
+    TaskBar,
     AppList,
     Click,
+    EdgeApp,
   },
   data() {
     return {
-      visClick: true,
       displayMode: 'small', // 控制桌面图标大小：small 小图标（默认） middle 中图标 big 大图标
+      sortMethod: 'date', // 控制图标排序方式：size 按大小 date 按时间 name 按名称
+      winMax: {
+        // 窗口是否最大化：false 否 true 是
+        // 通过改变对应 app 的该数组项来控制窗口的**最小化和显示**：
+        // * true -> false : 从显示状态最小化
+        // * false -> true : 从最小化状态显示窗口
+        edge: 'true',
+      },
+      winHide: {
+        // 窗口是否隐藏：false 否 true 是
+        // 通过改变对应 app 的该数组项来控制窗口的**打开和关闭**：
+        // * true -> false : 从关闭状态到打开
+        // * false -> true : 从打开状态到关闭
+        edge: 'true',
+      },
+      winSize: {
+        // 窗口尺寸：normal 还原窗口 max 最大化窗口
+        // 通过改变对应 app 的该数组项来控制窗口的**最大化和还原**：
+        // * normal -> max : 从还原状态到最大化
+        // * max -> normal : 从最大化状态到还原
+        edge: 'max',
+      },
+      methods: {
+        rightClick(e) {
+          const {clientX,clientY} = e;
+        }
+      }
     };
   },
-  methods:{
-      rightClick(e) {     
-          const{clientX,clientY} = e;
-          
-      }
-  }
 };
 </script>
 
-<style lang="scss" scoped> 
+<style lang="scss" scoped>
 .desktop {
   display: flex;
   flex-direction: column;

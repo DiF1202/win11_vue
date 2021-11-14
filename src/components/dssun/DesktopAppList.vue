@@ -1,7 +1,7 @@
 <template>
   <div class="desktopContainer">
     <Item
-      v-for="(ap, index) in appsList"
+      v-for="(ap, index) in sortedAppsList"
       :appName="ap.appName"
       :imgUrl="require('@/assets/img/appIcons/' + ap.description + '.png')"
       :displayMode="displayMode"
@@ -11,12 +11,13 @@
 </template>
 
 <script>
-import Item from "./desktop-app-item.vue";
+import Item from "./DesktopAppItem.vue";
 
 export default {
   name: "desktop-app-list",
   props: {
     displayMode: String, // 图标显示模式：big 大图标 middle 中图标 small 小图标
+    sortMethod: String, // 图标排序方式：size 按大小 date 按时间 name 按名称
   },
   components: { Item },
   data() {
@@ -32,13 +33,13 @@ export default {
           appName: "资源管理器",
           description: "explorer",
           size: 0,
-          date: "2020-01-01",
+          date: "2020-01-02",
         },
         {
           appName: "回收站",
           description: "bin",
           size: 0,
-          date: "2020-01-01",
+          date: "2020-01-03",
         },
         {
           appName: "浏览器",
@@ -68,10 +69,23 @@ export default {
       ],
     };
   },
+  computed: {
+    sortedAppsList() {
+      let k;
+      if (this.sortMethod === "name") k = "appName";
+      else k = this.sortMethod;
+      this.appsList.sort(function (a, b) {
+        if (a[k] > b[k]) return 1;
+        else if (a[k] < b[k]) return -1;
+        else return 0;
+      });
+      return this.appsList;
+    },
+  },
 };
 </script>
 
-<style>
+<style scoped>
 /* 上层容器使用：
 height: calc(100vh - 任务栏高度); */
 
@@ -82,6 +96,5 @@ height: calc(100vh - 任务栏高度); */
 
   width: 0;
   height: 100%;
-  background-color: lightblue;
 }
 </style>
