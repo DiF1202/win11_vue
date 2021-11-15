@@ -17,12 +17,12 @@
         @winStateChange="winStateChange"
       ></EdgeApp>
     </div>
-    <Taskbar></Taskbar>
+    <BarTask></BarTask>
   </div>
 </template>
 
 <script>
-import Taskbar from '../components/dfhe/taskBar';
+import BarTask from '../components/dfhe/BarTask.vue';
 import AppList from '../components/dssun/DesktopAppList.vue';
 import Click from '../components/panzhou/click.vue';
 import EdgeApp from '../components/dssun/EdgeApp.vue';
@@ -33,7 +33,7 @@ export default {
     AppList,
     Click,
     EdgeApp,
-    Taskbar,
+    BarTask,
   },
   data() {
     return {
