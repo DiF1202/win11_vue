@@ -46,6 +46,7 @@ export default {
   padding: 12px 18px 24px;
 
   align-items: center;
+  justify-content: center;
   font-size: 0.8em;
   transition: all 0.2s ease-in-out;
 
@@ -122,10 +123,12 @@ export default {
   justify-content: center;
 }
 
-.dskApp .appName {
+.appName {
   color: #fafafa;
-  margin: 2px 0;
+  margin-top: 2px;
+  margin-left: -30%;
   height: 30%;
+  width: 160%;
 
   text-shadow: 0 0 4px rgb(0 0 0 / 60%);
   font-size: 12px;

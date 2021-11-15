@@ -16,8 +16,9 @@
       @newItemCallback="newItemCallback"
     ></NewItem>
     <!-- 测试按钮 -->
-    <button @click="test1" style="height:42px">测试新建文件夹</button>
-    <button @click="test2" style="height:42px">测试新建txt</button>
+    <button @click="test1" style="height: 42px">测试新建文件夹</button>
+    <button @click="test2" style="height: 42px">测试新建txt</button>
+    <button @click="test3" style="height: 42px">测试大小图标切换</button>
   </div>
 </template>
 
@@ -138,6 +139,12 @@ export default {
     },
     test2() {
       this.createNewItem("txt");
+    },
+    test3() {
+      if (this.displayMode === "small") this.$emit("changeDeskIconSize", 1);
+      else if (this.displayMode === "middle")
+        this.$emit("changeDeskIconSize", 2);
+      else this.$emit("changeDeskIconSize", 0);
     },
   },
 };

@@ -234,11 +234,7 @@ export default {
 @import "../../assets/scss/_window.scss";
 
 .edgeBrowser {
-  --bg0: #e7eaec;
-  --bg1: #f7fafc;
-  --ipbar: #fefefe;
-  --shd: rgba(80, 80, 80, 0.2);
-  background: var(--bg0);
+  background: #e7eaec;
 }
 
 .toolbar {
@@ -311,7 +307,6 @@ export default {
   height: 26px;
   margin: 0 4px;
   background: #f7fafc;
-  // color: var(--txt-col);
   border-radius: 4px 4px 0 0;
   box-shadow: 2px 0 2px rgba(80, 80, 80, 0.2);
   display: flex;
@@ -371,7 +366,7 @@ export default {
 }
 .addCont input {
   box-sizing: border-box;
-  background: var(--ipbar);
+  background: #fefefe;
   border-radius: 4px;
   border: 1px solid rgb(211, 211, 211);
   width: 100%;
@@ -380,8 +375,8 @@ export default {
   padding-right: 15px;
   padding-top: 2px;
   padding-bottom: 4px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue";
+  font-family: "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue";
   outline: none;
 }
 
@@ -402,9 +397,7 @@ export default {
 
 .bookbar {
   background: #f7fafc;
-  color: var(--txt-col);
   width: 100%;
-  // padding-top: 5px;
   padding-bottom: 5px;
   display: flex;
 }

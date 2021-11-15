@@ -7,7 +7,8 @@
       <AppList
         :displayMode="displayMode"
         :sortMethod="sortMethod"
-        @winStateChange="winStateChange"
+        @winStateChange="winStateChange" 
+        @changeDeskIconSize="changeDeskIconSize"
       ></AppList>
       <!-- Edge应用窗口 -->
       <EdgeApp
@@ -83,10 +84,11 @@ export default {
     },
     //#endregion
 
-    //#region dssun 提供给窗口子组件的回调函数
+    //#region dssun 回调函数
+
+    // 1 提供给**窗口子组件**的回调函数
     // 请在窗口子组件的右上角三个按钮的事件函数中使用 $emit 调用该函数以调整窗口状态
     winStateChange(appname, e) {
-      // console.log(appname, e);
       // appname 应用名称的唯一标识符
       // e 事件编码：0 关闭按钮被按下 1 最小化按钮被按下 2 最大化/还原按钮被按下 3 任务栏图标被按下 4 桌面图标被按下
       if (e === 0) {
@@ -103,6 +105,16 @@ export default {
         this.winHide[appname] = 'false';
       }
     },
+
+    // 2 提供给**右键菜单**子组件的回调函数
+    // 请在右键菜单子组件的切换大中小图标的事件函数中使用 $emit 调用该函数以调整桌面图标大小
+    changeDeskIconSize(iconSize) {
+      // iconSize 要切换成的图标尺寸：0 小图标 1 中图标 2 大图标
+      if(iconSize === 0) this.displayMode = "small";
+      else if(iconSize === 1) this.displayMode = "middle";
+      else this.displayMode = "big";
+    }
+
     //#endregion 
   },
 };
