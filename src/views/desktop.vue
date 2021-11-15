@@ -30,17 +30,9 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-import TaskBar from "../components/dfhe/taskBar.vue";
-
-import AppList from "../components/dssun/DesktopAppList.vue";
-import Click from "../components/panzhou/click.vue";
-
-=======
 import BarTask from '../components/dfhe/BarTask.vue';
 import AppList from '../components/dssun/DesktopAppList.vue';
 import Click from '../components/panzhou/click.vue';
->>>>>>> e07f762ea7758ddb54e4c2e1d2104bfef1f79668
 import EdgeApp from '../components/dssun/EdgeApp.vue';
 import MarkdownApp from '../components/xhli/MarkdownApp.vue';
 
@@ -50,11 +42,7 @@ export default {
     AppList,
     Click,
     EdgeApp,
-<<<<<<< HEAD
     MarkdownApp
-=======
-    BarTask,
->>>>>>> e07f762ea7758ddb54e4c2e1d2104bfef1f79668
   },
   data() {
     return {
