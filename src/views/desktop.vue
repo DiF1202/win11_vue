@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import TaskBar from '../components/dfhe/TaskBar';
+import TaskBar from '../components/dfhe/taskBar';
 import AppList from '../components/dssun/DesktopAppList.vue';
 import Click from '../components/panzhou/click.vue';
 
@@ -61,7 +61,7 @@ export default {
     };
   },
   methods: {
-    
+
     //#region  panzhou控制的 method
     // 1. 鼠标右键点击出现 小弹框
     rightClick(e) {
