@@ -113,12 +113,8 @@ export default {
         if (this.winMax[appname] === 'false') this.winMax[appname] = 'true';
         else this.winMax[appname] = 'false';
       } else {
-<<<<<<< HEAD
         this.winHide[appname] = "false";
         console.log('this.winHide', this.winHide[appname])
-=======
-        this.winHide[appname] = 'false';
->>>>>>> e07f762ea7758ddb54e4c2e1d2104bfef1f79668
       }
     },
 
