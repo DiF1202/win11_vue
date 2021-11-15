@@ -16,6 +16,13 @@
         :winSize="winSize['edge']"
         @winStateChange="winStateChange"
       ></EdgeApp>
+      <!-- VSCode应用窗口 -->
+      <VscodeApp
+        :winMax="winMax['vscode']"
+        :winHide="winHide['vscode']"
+        :winSize="winSize['vscode']"
+        @winStateChange="winStateChange"
+      ></VscodeApp>
     </div>
     <BarTask></BarTask>
   </div>
@@ -26,6 +33,7 @@ import BarTask from '../components/dfhe/BarTask.vue';
 import AppList from '../components/dssun/DesktopAppList.vue';
 import Click from '../components/panzhou/click.vue';
 import EdgeApp from '../components/dssun/EdgeApp.vue';
+import VscodeApp from '../components/dssun/VscodeApp.vue';
 
 export default {
   name: 'desktop',
@@ -34,6 +42,7 @@ export default {
     Click,
     EdgeApp,
     BarTask,
+    VscodeApp,
   },
   data() {
     return {
@@ -46,6 +55,7 @@ export default {
         // * true -> false : 从显示状态最小化
         // * false -> true : 从最小化状态显示窗口
         edge: 'true',
+        vscode: 'true',
       },
       winHide: {
         // 窗口是否隐藏：false 否 true 是
@@ -53,6 +63,7 @@ export default {
         // * true -> false : 从关闭状态到打开
         // * false -> true : 从打开状态到关闭
         edge: 'true',
+        vscode: 'true',
       },
       winSize: {
         // 窗口尺寸：normal 还原窗口 max 最大化窗口
@@ -60,6 +71,7 @@ export default {
         // * normal -> max : 从还原状态到最大化
         // * max -> normal : 从最大化状态到还原
         edge: 'max',
+        vscode: 'max',
       },
       //#endregion
     };
