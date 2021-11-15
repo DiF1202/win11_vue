@@ -1,15 +1,22 @@
 <template>
-  <div
-    class="dskApp"
-    :class="displayMode"
-    @mousedown="dskAppMouseDown"
-    @mouseup="dskAppMouseUp"
-    @mouseleave="dskAppMouseLeave"
-  >
+  <div class="dskApp" :class="displayMode">
     <div class="deskAppIcon">
-      <img :class="imgClass" :src="imgUrl" :alt="appName" />
+      <img
+        :class="imgClass"
+        :src="require('@/assets/img/appIcons/' + fileType + '.png')"
+        :alt="appName"
+      />
     </div>
-    <div class="appName">{{ appName }}</div>
+    <div class="textareaCon">
+      <textarea
+        type="text"
+        name=""
+        v-model="appName"
+        ref="appNameInput"
+        @blur="inputSubmit"
+        :style="{ height: calHeight + 'px' }"
+      ></textarea>
+    </div>
   </div>
 </template>
 
@@ -17,25 +24,35 @@
 export default {
   name: "desktop-app-item",
   props: {
-    appName: String, // 应用名称：显示在桌面图标下方
-    imgUrl: String, // 应用图标URL
+    fileType: String, // folder 或 txt
     displayMode: String, // 显式模式：大/中/小图标
   },
   data() {
+    let appName;
+    if (this.fileType === "folder") appName = "新建文件夹";
+    else appName = "新建txt文件.txt";
     return {
+      appName,
       imgClass: "normal",
     };
   },
   methods: {
-    dskAppMouseDown() {
-      this.imgClass = "smaller";
+    inputSubmit() {
+      this.nameSubmit = true;
+      this.$emit("newItemCallback", this.fileType, this.appName);
     },
-    dskAppMouseUp() {
-      setTimeout(() => (this.imgClass = "normal"), 200);
+  },
+  computed: {
+    calHeight() {
+      if (this.displayMode === "small" || this.displayMode === "middle") {
+        return (Math.floor(this.appName.length / 5) + 1) * 14;
+      } else {
+        return (Math.floor(this.appName.length / 6) + 1) * 14;
+      }
     },
-    dskAppMouseLeave() {
-      setTimeout(() => (this.imgClass = "normal"), 200);
-    },
+  },
+  mounted: function () {
+    this.$refs.appNameInput.select();
   },
 };
 </script>
@@ -46,18 +63,26 @@ export default {
   padding: 12px 18px 24px;
 
   align-items: center;
-  justify-content: center;
   font-size: 0.8em;
   transition: all 0.2s ease-in-out;
 
   border: rgba(233, 233, 233, 0) solid 1px;
   text-align: center;
 
-  display: grid;
+  display: flex;
+  flex-direction: column;
 }
 .dskApp:hover {
   background-color: rgba(233, 233, 233, 0.4);
   border: rgba(233, 233, 233, 0.4) solid 1px;
+}
+.dskApp.big {
+  padding-top: 17px;
+  padding-bottom: 19px;
+}
+.dskApp.middle {
+  padding-top: 16px;
+  padding-bottom: 20px;
 }
 
 .deskAppIcon > img {
@@ -117,23 +142,21 @@ export default {
 .deskAppIcon {
   text-align: center;
 
-  /* flex */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.appName {
-  color: #fafafa;
-  margin-top: 2px;
-  margin-left: -30%;
-  height: 30%;
-  width: 160%;
+.textareaCon {
+  display: flex;
+  align-items: center;
+  width: 180%;
+  margin-top: 12px;
+}
 
-  text-shadow: 0 0 4px rgb(0 0 0 / 60%);
-  font-size: 12px;
-
-  cursor: default;
-  user-select: none;
+textarea {
+  resize: none;
+  overflow-y: hidden;
+  text-align: center;
 }
 </style>

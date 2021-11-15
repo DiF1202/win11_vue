@@ -7,7 +7,8 @@
       <AppList
         :displayMode="displayMode"
         :sortMethod="sortMethod"
-        @winStateChange="winStateChange"
+        @winStateChange="winStateChange" 
+        @changeDeskIconSize="changeDeskIconSize"
       ></AppList>
       <!-- Edge应用窗口 -->
       <EdgeApp
@@ -24,31 +25,40 @@
         @winStateChange="winStateChange"
       ></MarkdownApp>
     </div>
-    <TaskBar></TaskBar>
+    <BarTask></BarTask>
   </div>
 </template>
 
 <script>
+<<<<<<< HEAD
 import TaskBar from "../components/dfhe/taskBar.vue";
 
 import AppList from "../components/dssun/DesktopAppList.vue";
 import Click from "../components/panzhou/click.vue";
 
+=======
+import BarTask from '../components/dfhe/BarTask.vue';
+import AppList from '../components/dssun/DesktopAppList.vue';
+import Click from '../components/panzhou/click.vue';
+>>>>>>> e07f762ea7758ddb54e4c2e1d2104bfef1f79668
 import EdgeApp from '../components/dssun/EdgeApp.vue';
 import MarkdownApp from '../components/xhli/MarkdownApp.vue';
 
 export default {
-  name: "desktop",
+  name: 'desktop',
   components: {
-    TaskBar,
     AppList,
     Click,
     EdgeApp,
+<<<<<<< HEAD
     MarkdownApp
+=======
+    BarTask,
+>>>>>>> e07f762ea7758ddb54e4c2e1d2104bfef1f79668
   },
   data() {
     return {
-      //#region  dss 控制的 data
+      //#region  dssun 控制的 data
       displayMode: 'small', // 控制桌面图标大小：small 小图标（默认） middle 中图标 big 大图标
       sortMethod: 'date', // 控制图标排序方式：size 按大小 date 按时间 name 按名称
       winMax: {
@@ -79,48 +89,61 @@ export default {
     };
   },
   methods: {
-    
     //#region  panzhou控制的 method
     // 1. 鼠标右键点击出现 小弹框
     rightClick(e) {
-      const {
-        clientX,
-        clientY
-      } = e;
+      const { clientX, clientY } = e;
       this.$store.commit('setClick', {
         clientX,
         clientY,
-        vis: true
-      })
+        vis: true,
+      });
     },
     // 2. 鼠标左键点击关闭小弹框
     closeClick() {
       this.$store.commit('setClick', {
-        vis: false
-      })
+        vis: false,
+      });
     },
     //#endregion
 
-    // 组件监听事件
+    //#region dssun 回调函数
+
+    // 1 提供给**窗口子组件**的回调函数
+    // 请在窗口子组件的右上角三个按钮的事件函数中使用 $emit 调用该函数以调整窗口状态
     winStateChange(appname, e) {
-      // console.log(appname, e);
       // appname 应用名称的唯一标识符
       // e 事件编码：0 关闭按钮被按下 1 最小化按钮被按下 2 最大化/还原按钮被按下 3 任务栏图标被按下 4 桌面图标被按下
       if (e === 0) {
-        this.winHide[appname] = "true";
+        this.winHide[appname] = 'true';
       } else if (e === 1) {
-        this.winMax[appname] = "false";
+        this.winMax[appname] = 'false';
       } else if (e === 2) {
-        if (this.winSize[appname] === "normal") this.winSize[appname] = "max";
-        else this.winSize[appname] = "normal";
+        if (this.winSize[appname] === 'normal') this.winSize[appname] = 'max';
+        else this.winSize[appname] = 'normal';
       } else if (e === 3) {
-        if (this.winMax[appname] === "false") this.winMax[appname] = "true";
-        else this.winMax[appname] = "false";
+        if (this.winMax[appname] === 'false') this.winMax[appname] = 'true';
+        else this.winMax[appname] = 'false';
       } else {
+<<<<<<< HEAD
         this.winHide[appname] = "false";
         console.log('this.winHide', this.winHide[appname])
+=======
+        this.winHide[appname] = 'false';
+>>>>>>> e07f762ea7758ddb54e4c2e1d2104bfef1f79668
       }
     },
+
+    // 2 提供给**右键菜单**子组件的回调函数
+    // 请在右键菜单子组件的切换大中小图标的事件函数中使用 $emit 调用该函数以调整桌面图标大小
+    changeDeskIconSize(iconSize) {
+      // iconSize 要切换成的图标尺寸：0 小图标 1 中图标 2 大图标
+      if(iconSize === 0) this.displayMode = "small";
+      else if(iconSize === 1) this.displayMode = "middle";
+      else this.displayMode = "big";
+    }
+
+    //#endregion 
   },
 };
 </script>
@@ -132,7 +155,7 @@ export default {
   justify-content: flex-end;
   width: 100vw;
   height: 100vh;
-  background-image: url("../assets/img/wallpapers/light.jpg");
+  background-image: url('../assets/img/wallpapers/light.jpg');
   background-position: center;
   background-size: cover;
   overflow: hidden;
