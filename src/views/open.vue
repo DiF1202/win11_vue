@@ -7,10 +7,10 @@
  * @FilePath: \win11_vue\src\views\open.vue
 -->
 <template>
-  <template v-if="clock">
-    <login class="a"></login>
-  </template>
-  <template v-else><bootscreen></bootscreen></template>
+  
+    <login   v-if="clock" class="a"></login>
+ 
+  <bootscreen  v-else></bootscreen>
 </template>
 
 <script>
@@ -37,11 +37,5 @@ export default {
 </script>
 
 <style scoped>
-.a {
-  display: none;
-  z-index: 0;
-}
-.b {
-  z-index: 1;
-}
+
 </style>

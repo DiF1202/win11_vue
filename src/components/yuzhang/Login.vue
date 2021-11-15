@@ -1,29 +1,30 @@
 <template >
   <div class="bg">
-    <el-avatar
+   
+    <div id="log">
+      <el-avatar
       src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
       size="100"
     ></el-avatar>
     <div id="username">Yuki</div>
     <div class="el-input--suffix el-input">
-      <!----><input
+      <input
         type="text"
         autocomplete="off"
         :placeholder="content"
         class="el-input__inner"
-      /><!----><span class="el-input__suffix"
+      /><span class="el-input__suffix"
         ><span class="el-input__suffix-inner"
           ><a href="#"
             ><img
               height="40"
               width="40"
               src="../../assets/img/login/rightrow.png" /></a
-          ><!----><!----><!----></span
-        ><!----></span
-      ><!----><!---->
+          ></span
+        ></span
+      >
     </div>
-  </div>
-  <div class="fgmypw">
+    <div class="fgmypw">
     忘记密码<br />
     <br />
     <br />
@@ -31,58 +32,66 @@
     <br />
   </div>
   <div class="logimg">
-    <a href="#"
+    <a href="javascript:void(0);"
       ><img
         :class="a"
         @click="changeBorderA"
         src="../../assets/img/login/pinlock.png"
     /></a>
-    &emsp;<a href="#"
-      ><img
+    <span width="10px"></span>
+    <a href="javascript:void(0);">
+      <img
         :class="b"
         @click="changeBorderB"
         src="../../assets/img/login/passkey.png"
     /></a>
+    </div>
   </div>
+
+  </div>
+  
 </template>
 
 <script>
 export default {
-  name: 'Name',
+  name: "Name",
   data() {
     return {
-      input: '',
-      a: '',
-      b: 'active',
-      content: '密码',
+      input: "",
+      a: "",
+      b: "active",
+      content: "密码",
     };
   },
-  beforeCreate() {
-    undefined;
-    document
-      .querySelector('body')
-      .setAttribute(
-        'style',
-        'margin: 0 auto; width: 100%; max-width: 750px;min-width: 300px; background:#171b2a; overflow-x: hidden;height: 100%;'
-      );
-  },
+
   methods: {
     changeBorderA() {
-      this.a = 'active';
-      this.b = '';
-      this.content = 'Pin';
+      this.a = "active";
+      this.b = "";
+      this.content = "Pin";
     },
     changeBorderB() {
-      this.b = 'active';
-      this.a = '';
-      this.content = '密码';
+      this.b = "active";
+      this.a = "";
+      this.content = "密码";
     },
   },
 };
 </script>
 
 <style scoped>
+#log{
+  margin: auto;
+  position: absolute;
+  left: 50%;
+  margin-left:-140px ;
+  height: 700px;
+  width: 300px;
+}
 .bg {
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
   background-image: url(../../assets/img/wallpapers/light.jpg);
 }
 
@@ -101,41 +110,42 @@ a:active {
   border-width: thin;
 }
 .logimg {
-  position: fixed;
+  position: absolute;
   left: 50%;
-  top: 58%;
-  margin-left: -50px;
+  top: 500px;
+  margin-left: -61px;
 }
 .logimg img {
   width: 38px;
   border-radius: 2px;
+  margin: 10px;
 }
 .logimg img:focus {
   border-style: dashed;
 }
 #username {
-  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   font-weight: 600;
-  position: fixed;
-  top: 39%;
+  position: absolute;
+  top: 310px;
   left: 50%;
   color: rgb(255, 255, 255);
   font-size: 25px;
   margin-left: -30px;
 }
 .fgmypw {
-  position: fixed;
+  position: absolute;
   color: rgba(240, 248, 255, 0.671);
   font-size: 10px;
-  top: 50%;
+  top: 420px;
   left: 50%;
   margin-left: -27px;
 }
 .el-input {
   width: 250px;
-  position: fixed;
-  top: 45%;
+  position: absolute;
+  top: 350px;
   left: 50%;
   margin-left: -125px;
   --el-input-border-radius: 0;
@@ -146,7 +156,7 @@ a:active {
 
 .el-avatar {
   --el-avatar-large-size: 165px;
-  position: fixed;
+  position: absolute;
   top: 20%;
   left: 50%;
   margin-left: -82.5px;

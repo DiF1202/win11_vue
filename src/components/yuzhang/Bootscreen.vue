@@ -7,7 +7,7 @@
  * @FilePath: \win11_vue\src\components\HeDiFei\test.vue
 -->
 <template>
-  <div ref="roll" id="roll">
+  <div  id="roll">
     <img height="270" src="../../assets/img/login/rootscreen.png" />
     <div id="box">
       <div class="loading">
@@ -32,23 +32,16 @@ export default {
       fullscreenLoading: false,
     };
   },
-  beforeCreate() {
-    undefined;
-    document
-      .querySelector('body')
-      .setAttribute(
-        'style',
-        'margin: 0 auto; width: 100%; max-width: 750px;min-width: 300px; background:rgb(0,0,0); overflow-x: hidden;height: 100%;'
-      );
-  },
+ 
 };
 </script>
 
 <style scoped>
-* {
-  background-color: rgb(0, 0, 0);
-  margin: 0;
-  padding: 0;
+/* 这个 我reset过啦  margin:0这些*/
+#roll{
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
 }
 #box {
   position: fixed;
