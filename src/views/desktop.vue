@@ -37,7 +37,7 @@ export default {
   },
   data() {
     return {
-      //#region  dss 控制的 data
+      //#region  dssun 控制的 data
       displayMode: 'small', // 控制桌面图标大小：small 小图标（默认） middle 中图标 big 大图标
       sortMethod: 'date', // 控制图标排序方式：size 按大小 date 按时间 name 按名称
       winMax: {
@@ -83,7 +83,8 @@ export default {
     },
     //#endregion
 
-    // 组件监听事件
+    //#region dssun 提供给窗口子组件的回调函数
+    // 请在窗口子组件的右上角三个按钮的事件函数中使用 $emit 调用该函数以调整窗口状态
     winStateChange(appname, e) {
       // console.log(appname, e);
       // appname 应用名称的唯一标识符
@@ -102,6 +103,7 @@ export default {
         this.winHide[appname] = 'false';
       }
     },
+    //#endregion 
   },
 };
 </script>
