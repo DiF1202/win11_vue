@@ -16,24 +16,26 @@
         :winSize="winSize['edge']"
         @winStateChange="winStateChange"
       ></EdgeApp>
+      <!-- Markdown应用窗口 -->
+      <MarkdownApp
+        :winMax="winMax['markdown']"
+        :winHide="winHide['markdown']"
+        :winSize="winSize['markdown']"
+        @winStateChange="winStateChange"
+      ></MarkdownApp>
     </div>
     <TaskBar></TaskBar>
   </div>
 </template>
 
 <script>
-<<<<<<< HEAD
-import TaskBar from '../components/dfhe/taskBar.vue';
-import AppList from '../components/dssun/DesktopAppList.vue';
-import Click from '../components/panzhou/click.vue';
-=======
-import TaskBar from "../components/dfhe/TaskBar.vue";
->>>>>>> 538f1f927bf4fe11b80ae3a222ca104da0b2d525
+import TaskBar from "../components/dfhe/taskBar.vue";
 
 import AppList from "../components/dssun/DesktopAppList.vue";
 import Click from "../components/panzhou/click.vue";
 
 import EdgeApp from '../components/dssun/EdgeApp.vue';
+import MarkdownApp from '../components/xhli/MarkdownApp.vue';
 
 export default {
   name: "desktop",
@@ -42,6 +44,7 @@ export default {
     AppList,
     Click,
     EdgeApp,
+    MarkdownApp
   },
   data() {
     return {
@@ -54,6 +57,7 @@ export default {
         // * true -> false : 从显示状态最小化
         // * false -> true : 从最小化状态显示窗口
         edge: 'true',
+        markdown: 'true',
       },
       winHide: {
         // 窗口是否隐藏：false 否 true 是
@@ -61,6 +65,7 @@ export default {
         // * true -> false : 从关闭状态到打开
         // * false -> true : 从打开状态到关闭
         edge: 'true',
+        markdown: 'true',
       },
       winSize: {
         // 窗口尺寸：normal 还原窗口 max 最大化窗口
@@ -68,6 +73,7 @@ export default {
         // * normal -> max : 从还原状态到最大化
         // * max -> normal : 从最大化状态到还原
         edge: 'max',
+        markdown: 'normal',
       },
       //#endregion
     };
@@ -112,6 +118,7 @@ export default {
         else this.winMax[appname] = "false";
       } else {
         this.winHide[appname] = "false";
+        console.log('this.winHide', this.winHide[appname])
       }
     },
   },
