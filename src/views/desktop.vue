@@ -2,13 +2,15 @@
   <div class="desktop" :class="{ 'night-light': isOpenLightmode }">
     <div class="main" @click="closeClick" @contextmenu.prevent="rightClick">
       <!-- 鼠标右键出现的列表 -->
-      <Click></Click>
+      <Click @clickMenu = 'menuJudge'></Click>
+
       <!-- 桌面图标列表组件 -->
       <AppList
         :displayMode="displayMode"
         :sortMethod="sortMethod"
         @winStateChange="winStateChange"
         @changeDeskIconSize="changeDeskIconSize"
+        ref="appList"
       ></AppList>
       <!-- Edge应用窗口 -->
       <EdgeApp
@@ -24,6 +26,13 @@
         :winSize="winSize['vscode']"
         @winStateChange="winStateChange"
       ></VscodeApp>
+      <!-- Notepad应用窗口 -->
+      <NotepadApp
+        :winMax="winMax['notepad']"
+        :winHide="winHide['notepad']"
+        :winSize="winSize['notepad']"
+        @winStateChange="winStateChange"
+      ></NotepadApp>
       <!-- Markdown应用窗口 -->
       <MarkdownApp
         :winMax="winMax['markdown']"
@@ -31,7 +40,21 @@
         :winSize="winSize['markdown']"
         @winStateChange="winStateChange"
       ></MarkdownApp>
-      <!-- 回收站应用窗口 -->
+      <!-- Computer应用窗口 -->
+      <ComputerApp
+        :winMax="winMax['computer']"
+        :winHide="winHide['computer']"
+        :winSize="winSize['computer']"
+        @winStateChange="winStateChange"
+      ></ComputerApp>
+      <!-- Explorer应用窗口 -->
+      <ExplorerApp
+        :winMax="winMax['explorer']"
+        :winHide="winHide['explorer']"
+        :winSize="winSize['explorer']"
+        @winStateChange="winStateChange"
+      ></ExplorerApp>
+      <!-- Bin应用窗口 -->
       <BinApp
         :winMax="winMax['bin']"
         :winHide="winHide['bin']"
@@ -59,9 +82,13 @@ import AppList from "../components/dssun/DesktopAppList.vue";
 import Click from "../components/panzhou/click.vue";
 import EdgeApp from "../components/dssun/EdgeApp.vue";
 import VscodeApp from "../components/dssun/VscodeApp.vue";
-
+import NotepadApp from "../components/dssun/NotepadApp.vue";
 import MarkdownApp from "../components/xhli/MarkdownApp.vue";
 import BinApp from '../components/xhli/BinApp.vue';
+
+// import ComputerApp from "../components/";
+import ExplorerApp from "../components/yuzhang/FileExplorer.vue";
+// import BinApp from "../components/";
 
 export default {
   name: "desktop",
@@ -72,8 +99,12 @@ export default {
     BarTask,
     VscodeApp,
     ControlCenter,
+    NotepadApp,
     MarkdownApp,
     BinApp,
+    // ComputerApp,
+    ExplorerApp,
+    // BinApp,
   },
   data() {
     return {
@@ -88,7 +119,10 @@ export default {
         edge: "true",
         vscode: "true",
         markdown: "true",
-        bin: "true"
+        notepad: "true",
+        computer: "true",
+        explorer: "true",
+        bin: "true",
       },
       winHide: {
         // 窗口是否隐藏：false 否 true 是
@@ -98,7 +132,10 @@ export default {
         edge: "true",
         vscode: "true",
         markdown: "true",
-        bin: "true"
+        notepad: "true",
+        computer: "true",
+        explorer: "true",
+        bin: "true",
       },
       winSize: {
         // 窗口尺寸：normal 还原窗口 max 最大化窗口
@@ -107,8 +144,11 @@ export default {
         // * max -> normal : 从最大化状态到还原
         edge: "max",
         vscode: "max",
-        markdown: "normal",
-        bin: "normal"
+        markdown: "max",
+        notepad: "max",
+        computer: "max",
+        explorer: "max",
+        bin: "max",
       },
       //#endregion
 
@@ -121,6 +161,7 @@ export default {
     // 1. 鼠标右键点击出现 小弹框
     rightClick(e) {
       const { clientX, clientY } = e;
+
       this.$store.commit("setClick", {
         clientX,
         clientY,
@@ -133,15 +174,37 @@ export default {
         vis: false,
       });
     },
+    // 3. clickMenu的事件回调
+    menuJudge(arr) {
+      const type = arr[0];
+      const idx = arr[1];
+      console.log(type,idx);
+      switch(type) {
+        case 0:
+          this.changeDeskIconSize(idx); // 切换图标
+          break;
+        case 1:
+          break;
+        case 2:
+          break;
+        case 3:
+          break;  
+        case 4:
+          break;
+        case 5:
+          break;  
+        case 6:
+          break;
+        case 7:
+          break;            
+      }
+    },
     //#endregion
 
     //#region dssun 回调函数
-
     // 1 提供给**窗口子组件**的回调函数
     // 请在窗口子组件的右上角三个按钮的事件函数中使用 $emit 调用该函数以调整窗口状态
     winStateChange(appname, e) {
-      console.log(appname)
-      console.log(e)
       // appname 应用名称的唯一标识符
       // e 事件编码：0 关闭按钮被按下 1 最小化按钮被按下 2 最大化/还原按钮被按下 3 任务栏图标被按下 4 桌面图标被按下
       if (e === 0) {
@@ -166,6 +229,18 @@ export default {
       if (iconSize === 0) this.displayMode = "small";
       else if (iconSize === 1) this.displayMode = "middle";
       else this.displayMode = "big";
+    },
+    // 请在右键菜单子组件的切换图标排列方式的事件函数中使用 $emit 调用该函数以调整桌面图标排列方式
+    changeDeskIconSort(sortMethod) {
+      // sortMethod 要切换成的图标排序方式：0 按时间 1 按名称 2 按大小
+      if (sortMethod === 0) this.sortMethod = "date";
+      else if (sortMethod === 1) this.displayMode = "name";
+      else this.displayMode = "size";
+    },
+    // 请在右键菜单子组件的新建文件、文件夹的事件函数中使用 $emit 调用该函数
+    newFile(fileType) {
+      // fileType 新建的文件类型："folder" 文件夹 "txt" txt文件
+      this.$refs["appList"].createNewItem(fileType);
     },
 
     //#endregion
