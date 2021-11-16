@@ -1,8 +1,13 @@
 <template>
-  <div class="desktop">
+  <div class="desktop" :class="{ 'night-light': isOpenLightmode }">
     <div class="main" @click="closeClick" @contextmenu.prevent="rightClick">
       <!-- 鼠标右键出现的列表 -->
+<<<<<<< HEAD
       <Click @clickMenu = 'menuJudge'></Click>
+=======
+      <Click></Click>
+
+>>>>>>> 12450d3e6acb6f37f329638233d237c56aa85a98
       <!-- 桌面图标列表组件 -->
       <AppList
         :displayMode="displayMode"
@@ -24,18 +29,67 @@
         :winSize="winSize['vscode']"
         @winStateChange="winStateChange"
       ></VscodeApp>
+      <!-- Notepad应用窗口 -->
+      <NotepadApp
+        :winMax="winMax['notepad']"
+        :winHide="winHide['notepad']"
+        :winSize="winSize['notepad']"
+        @winStateChange="winStateChange"
+      ></NotepadApp>
+      <!-- Markdown应用窗口 -->
+      <MarkdownApp
+        :winMax="winMax['markdown']"
+        :winHide="winHide['markdown']"
+        :winSize="winSize['markdown']"
+        @winStateChange="winStateChange"
+      ></MarkdownApp>
+      <!-- Computer应用窗口 -->
+      <ComputerApp
+        :winMax="winMax['computer']"
+        :winHide="winHide['computer']"
+        :winSize="winSize['computer']"
+        @winStateChange="winStateChange"
+      ></ComputerApp>
+      <!-- Explorer应用窗口 -->
+      <ExplorerApp
+        :winMax="winMax['explorer']"
+        :winHide="winHide['explorer']"
+        :winSize="winSize['explorer']"
+        @winStateChange="winStateChange"
+      ></ExplorerApp>
+      <!-- Bin应用窗口 -->
+      <BinApp
+        :winMax="winMax['bin']"
+        :winHide="winHide['bin']"
+        :winSize="winSize['bin']"
+        @winStateChange="winStateChange"
+      ></BinApp>
     </div>
-    <BarTask></BarTask>
+
+    <!-- 状态栏弹框+护眼模式 -->
+    <transition name="el-fade-in">
+      <div v-show="isShowControls">
+        <ControlCenter @toggleLightMode="toggleLightMode"></ControlCenter>
+      </div>
+    </transition>
+    <!-- 任务栏 -->
+    <BarTask @showControls="showControls"></BarTask>
   </div>
 </template>
 
 <script>
-
 import BarTask from "../components/dfhe/BarTask.vue";
+import ControlCenter from "../components/dfhe/ControlCenter.vue";
 import AppList from "../components/dssun/DesktopAppList.vue";
 import Click from "../components/panzhou/click.vue";
 import EdgeApp from "../components/dssun/EdgeApp.vue";
 import VscodeApp from "../components/dssun/VscodeApp.vue";
+import NotepadApp from "../components/dssun/NotepadApp.vue";
+import MarkdownApp from "../components/xhli/MarkdownApp.vue";
+
+// import ComputerApp from "../components/";
+// import ExplorerApp from "../components/";
+// import BinApp from "../components/";
 
 export default {
   name: "desktop",
@@ -45,6 +99,12 @@ export default {
     EdgeApp,
     BarTask,
     VscodeApp,
+    ControlCenter,
+    NotepadApp,
+    MarkdownApp,
+    // ComputerApp,
+    // ExplorerApp,
+    // BinApp,
   },
   data() {
     return {
@@ -58,6 +118,11 @@ export default {
         // * false -> true : 从最小化状态显示窗口
         edge: "true",
         vscode: "true",
+        markdown: "true",
+        notepad: "true",
+        computer: "true",
+        explorer: "true",
+        bin: "true",
       },
       winHide: {
         // 窗口是否隐藏：false 否 true 是
@@ -66,6 +131,11 @@ export default {
         // * false -> true : 从打开状态到关闭
         edge: "true",
         vscode: "true",
+        markdown: "true",
+        notepad: "true",
+        computer: "true",
+        explorer: "true",
+        bin: "true",
       },
       winSize: {
         // 窗口尺寸：normal 还原窗口 max 最大化窗口
@@ -74,8 +144,16 @@ export default {
         // * max -> normal : 从最大化状态到还原
         edge: "max",
         vscode: "max",
+        markdown: "max",
+        notepad: "max",
+        computer: "max",
+        explorer: "max",
+        bin: "max",
       },
       //#endregion
+
+      isShowControls: false, //是否展示状态栏
+      isOpenLightmode: false, //是否开启夜间模式
     };
   },
   methods: {
@@ -153,6 +231,16 @@ export default {
       else this.displayMode = "big";
     },
     //#endregion
+
+    //以下为dfHe开发的
+    //是否出现状态栏
+    showControls(isShow) {
+      this.isShowControls = isShow;
+    },
+    //切换护眼模式
+    toggleLightMode(isOpen) {
+      this.isOpenLightmode = isOpen;
+    },
   },
 };
 </script>
@@ -175,5 +263,21 @@ export default {
     // background-color: green;
     height: calc(100vh - 40px);
   }
+}
+.desktop::after {
+  content: "";
+  background: rgba(255, 0, 0, 0.15);
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999999;
+  pointer-events: none;
+  transition: 2s;
+}
+.desktop.night-light::after {
+  opacity: 1;
 }
 </style>

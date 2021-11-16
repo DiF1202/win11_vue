@@ -1,7 +1,7 @@
 <template>
-  <div class="calendar-show calendar dark:bg-gray-600 dark:bg-opacity-50">
+  <div class="calendar-show calendar">
     <div class="datetoday-header">
-      <span class="datespan">{{ currentDate.format('dddd, MMMM D') }}</span>
+      <span class="datespan">{{ currentDate.format('dddd, MMMM D') }}日</span>
     </div>
     <div class="datetoday-middle">
       <div class="datetoday-middle-span">
@@ -9,22 +9,10 @@
           {{ this.date.format('MMMM') + ' ' + this.date.format('YYYY') }}</span
         >
       </div>
-      <div
-        class="
-          datetoday-middle-btn
-          dark:hover:bg-white dark:hover:bg-opacity-10
-        "
-        @click="addMonth()"
-      >
+      <div class="datetoday-middle-btn" @click="addMonth()">
         <img class="imgContainer" :src="imgsurl.arrowup" alt="arrowup" />
       </div>
-      <div
-        class="
-          datetoday-middle-btn
-          dark:hover:bg-white dark:hover:bg-opacity-10
-        "
-        @click="subtractMonth()"
-      >
+      <div class="datetoday-middle-btn" @click="subtractMonth()">
         <img class="imgContainer" :src="imgsurl.arrowdown" alt="arrowup" />
       </div>
     </div>
@@ -32,7 +20,7 @@
       <div
         v-for="(day, index) in weekDays"
         :key="'day_' + index"
-        class="weekDays dark:text-gray-100"
+        class="weekDays"
       >
         {{ day }}
       </div>
@@ -56,8 +44,8 @@ export default {
   data() {
     return {
       weekDays: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
-      currentDate: moment(),
-      date: moment(),
+      currentDate: moment().locale('zh-cn'),
+      date: moment().locale('zh-cn'),
       days: [],
       imgsurl: {
         arrowup: require('../../assets/img/taskbarIcons/triangleUp.png'),
@@ -83,7 +71,6 @@ export default {
     updateTime() {
       const firstDay = this.date.startOf('month').day();
       const daysNumber = this.date.daysInMonth();
-
       let daysObject = {};
 
       for (let i = 0; i < 42; i++) {

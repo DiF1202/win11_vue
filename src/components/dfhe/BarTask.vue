@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-11-13 12:03:20
- * @LastEditTime: 2021-11-15 10:30:52
+ * @LastEditTime: 2021-11-15 23:05:44
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \win11_vue\src\components\HeDiFei\test.vue
@@ -11,7 +11,7 @@
     <div class="taskcont">
       <div class="tasksCont"></div>
       <div class="taskRight">
-        <ul class="taskiconul">
+        <ul class="taskiconul" @click="iSshowControlsCenter">
           <li class="taskiconli">
             <img :src="imgUrl.arrowupImg" alt="arrowup" />
           </li>
@@ -37,18 +37,25 @@
           <calendar></calendar>
         </div>
       </transition>
+      <!-- <transition name="el-fade-in">
+        <div v-show="controlCenterShow">
+          <ControlCenter></ControlCenter>
+        </div>
+      </transition> -->
     </div>
   </div>
 </template>
 
 <script>
 import calendar from './BestCalendar.vue';
+// import ControlCenter from './ControlCenter.vue';
 export default {
   name: 'task-bar',
   components: { calendar },
   data() {
     return {
       dateBoxShow: false,
+      controlCenterShow: false,
       timer: null,
       today: {
         date: '',
@@ -63,6 +70,7 @@ export default {
       },
     };
   },
+  emits:['showControls'],
   methods: {
     updateTime() {
       this.today = {
@@ -80,6 +88,10 @@ export default {
     showdateBox() {
       this.dateBoxShow = !this.dateBoxShow;
     },
+    iSshowControlsCenter() {
+      this.controlCenterShow = !this.controlCenterShow;
+      this.$emit('showControls',this.controlCenterShow);
+    },
   },
   created() {
     this.updateTime();
@@ -95,7 +107,8 @@ export default {
 .taskBar {
   height: 39px;
   width: 100%;
-  background-color: rgba(243, 243, 243);
+  background-color: rgba(243, 243, 243, 0.83);
+  backdrop-filter: blur(16px);
   display: flex;
   align-self: flex-end;
   .taskcont {
@@ -117,7 +130,6 @@ export default {
         &:hover {
           background-color: rgb(209, 213, 219);
         }
-        // margin-right: -10px;
         padding: 10px 3px 10px 3px;
         cursor: pointer;
         display: flex;
@@ -155,47 +167,6 @@ export default {
         }
       }
     }
-    // .dateBox {
-    //   box-sizing: border-box;
-    //   width: 300px;
-    //   position: absolute;
-    //   right: 12px;
-    //   top: -430px;
-    //   border-radius: 8px;
-    //   overflow: hidden;
-    //   ::v-deep(.el-calendar__header) {
-    //     display: flex;
-    //     flex-direction: column;
-    //     // height: 50px;
-    //   }
-    //   ::v-deep(.el-calendar__title) {
-    //     // padding: 12px 20px 0;
-    //     font-size: 15px;
-    //   }
-    //   ::v-deep(.el-button-group) {
-    //     padding-top: 10px;
-    //     // display: flex;
-    //     // justify-content: center;
-    //     // align-items: center;
-    //   }
-    //   ::v-deep(.el-calendar__body) {
-    //     padding: 12px 20px 5px;
-    //     font-size: 10px;
-    //     height: 290px;
-    //   }
-    //   ::v-deep(.el-calendar-table) {
-    //     transition: none;
-    //     .el-calendar-day {
-    //       height: 52px;
-    //       &:hover {
-    //         background-color: rgb(201, 196, 201) !important;
-    //       }
-    //     }
-    //     // td.is-selected {
-    //     //   background-color: rgb(201, 196, 201) !important;
-    //     // }
-    //   }
-    // }
   }
 }
 </style>
