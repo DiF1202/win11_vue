@@ -142,6 +142,7 @@ export default {
 }
 
 .vscodeScreen {
+  background-color: rgb(28, 28, 28);
   width: 100%;
   flex-grow: 1;
   flex-direction: column;

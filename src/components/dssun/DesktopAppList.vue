@@ -32,6 +32,8 @@
 import Item from "./DesktopAppItem.vue";
 import NewItem from "./DesktopNewItem.vue";
 
+import moment from "moment";
+
 export default {
   name: "desktop-app-list",
   props: {
@@ -48,49 +50,49 @@ export default {
           appName: "计算机",
           description: "computer",
           size: 0,
-          date: "2020-01-01",
+          date: "2020-01-01 00:00:00",
         },
         {
           appName: "资源管理器",
           description: "explorer",
           size: 0,
-          date: "2020-01-02",
+          date: "2020-01-01 00:01:00",
         },
         {
           appName: "回收站",
           description: "bin",
           size: 0,
-          date: "2020-01-03",
+          date: "2020-01-01 00:02:00",
         },
         {
           appName: "浏览器",
           description: "edge",
           size: 1,
-          date: "2021-11-09",
+          date: "2021-11-09 00:00:00",
         },
         {
           appName: "应用商店",
           description: "store",
           size: 1,
-          date: "2021-11-10",
+          date: "2021-11-10 00:00:00",
         },
         {
           appName: "VSCode",
           description: "vscode",
           size: 2,
-          date: "2021-11-11",
+          date: "2021-11-11 00:00:00",
         },
         {
           appName: "GitHub",
           description: "github",
           size: 1,
-          date: "2021-11-12",
+          date: "2021-11-12 00:00:00",
         },
         {
           appName: "Mark Down",
           description: "markdown",
           size: 1,
-          date: "2021-11-14",
+          date: "2021-11-14 00:00:00",
         },
       ],
       appUrl: {
@@ -142,12 +144,14 @@ export default {
       this.newFileType = fileType;
     },
     newItemCallback(fileType, fileName) {
+      const momentNow = moment();
+      let date = momentNow.format("YYYY-MM-DD HH:mm:ss");
       this.ifNewFile = false;
       this.appsList.push({
         appName: fileName,
         description: fileType + "/" + fileName,
         size: 1,
-        date: "2021-11-12",
+        date,
       });
     },
     // 测试函数
