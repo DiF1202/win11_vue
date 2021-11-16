@@ -5148,8 +5148,8 @@ map-visit@^1.0.0:
 
 md-editor-v3@^1.6.4:
   version "1.6.4"
-  resolved "https://registry.npmmirror.com/md-editor-v3/download/md-editor-v3-1.6.4.tgz#419a8e8c14c595a43bb6190c08b81bd9c992021e"
-  integrity sha1-QZqOjBTFlaQ7thkMCLgb2cmSAh4=
+  resolved "https://registry.yarnpkg.com/md-editor-v3/-/md-editor-v3-1.6.4.tgz#419a8e8c14c595a43bb6190c08b81bd9c992021e"
+  integrity sha512-tqNRLNznAL8imo/Q+aCPvOCw/CaukUSRfseSrvGX0E/OU1TQ0adtH8eJvoZbf5uEwiAKBrph8mnTG16/jnwXtw==
 
 md5.js@^1.3.4:
   version "1.3.5"
