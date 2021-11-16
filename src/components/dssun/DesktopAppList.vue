@@ -86,10 +86,17 @@ export default {
           size: 1,
           date: "2021-11-12",
         },
+        {
+          appName: "Mark Down",
+          description: "markdown",
+          size: 1,
+          date: "2021-11-14",
+        },
       ],
       appUrl: {
         edge: "",
         vscode: "",
+        markdown: "",
         github: "https://github.com/",
       },
     };
