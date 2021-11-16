@@ -97,6 +97,9 @@ export default {
         edge: "",
         vscode: "",
         markdown: "",
+        computer: "",
+        explorer: "",
+        bin: "",
         github: "https://github.com/",
       },
     };

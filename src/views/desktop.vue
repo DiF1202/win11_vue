@@ -39,6 +39,27 @@
         :winSize="winSize['markdown']"
         @winStateChange="winStateChange"
       ></MarkdownApp>
+      <!-- Computer应用窗口 -->
+      <ComputerApp
+        :winMax="winMax['computer']"
+        :winHide="winHide['computer']"
+        :winSize="winSize['computer']"
+        @winStateChange="winStateChange"
+      ></ComputerApp>
+      <!-- Explorer应用窗口 -->
+      <ExplorerApp
+        :winMax="winMax['explorer']"
+        :winHide="winHide['explorer']"
+        :winSize="winSize['explorer']"
+        @winStateChange="winStateChange"
+      ></ExplorerApp>
+      <!-- Bin应用窗口 -->
+      <BinApp
+        :winMax="winMax['bin']"
+        :winHide="winHide['bin']"
+        :winSize="winSize['bin']"
+        @winStateChange="winStateChange"
+      ></BinApp>
     </div>
 
     <!-- 状态栏弹框+护眼模式 -->
@@ -62,6 +83,10 @@ import VscodeApp from "../components/dssun/VscodeApp.vue";
 import NotepadApp from "../components/dssun/NotepadApp.vue";
 import MarkdownApp from "../components/xhli/MarkdownApp.vue";
 
+// import ComputerApp from "../components/";
+// import ExplorerApp from "../components/";
+// import BinApp from "../components/";
+
 export default {
   name: "desktop",
   components: {
@@ -73,6 +98,9 @@ export default {
     ControlCenter,
     NotepadApp,
     MarkdownApp,
+    // ComputerApp,
+    // ExplorerApp,
+    // BinApp,
   },
   data() {
     return {
@@ -88,6 +116,9 @@ export default {
         vscode: "true",
         markdown: "true",
         notepad: "true",
+        computer: "true",
+        explorer: "true",
+        bin: "true",
       },
       winHide: {
         // 窗口是否隐藏：false 否 true 是
@@ -98,6 +129,9 @@ export default {
         vscode: "true",
         markdown: "true",
         notepad: "true",
+        computer: "true",
+        explorer: "true",
+        bin: "true",
       },
       winSize: {
         // 窗口尺寸：normal 还原窗口 max 最大化窗口
@@ -108,6 +142,9 @@ export default {
         vscode: "max",
         markdown: "max",
         notepad: "max",
+        computer: "max",
+        explorer: "max",
+        bin: "max",
       },
       //#endregion
 
