@@ -2,18 +2,15 @@
   <div class="desktop" :class="{ 'night-light': isOpenLightmode }">
     <div class="main" @click="closeClick" @contextmenu.prevent="rightClick">
       <!-- 鼠标右键出现的列表 -->
-<<<<<<< HEAD
       <Click @clickMenu = 'menuJudge'></Click>
-=======
-      <Click></Click>
 
->>>>>>> 12450d3e6acb6f37f329638233d237c56aa85a98
       <!-- 桌面图标列表组件 -->
       <AppList
         :displayMode="displayMode"
         :sortMethod="sortMethod"
         @winStateChange="winStateChange"
         @changeDeskIconSize="changeDeskIconSize"
+        ref="appList"
       ></AppList>
       <!-- Edge应用窗口 -->
       <EdgeApp
@@ -230,6 +227,19 @@ export default {
       else if (iconSize === 1) this.displayMode = "middle";
       else this.displayMode = "big";
     },
+    // 请在右键菜单子组件的切换图标排列方式的事件函数中使用 $emit 调用该函数以调整桌面图标排列方式
+    changeDeskIconSort(sortMethod) {
+      // sortMethod 要切换成的图标排序方式：0 按时间 1 按名称 2 按大小
+      if (sortMethod === 0) this.sortMethod = "date";
+      else if (sortMethod === 1) this.displayMode = "name";
+      else this.displayMode = "size";
+    },
+    // 请在右键菜单子组件的新建文件、文件夹的事件函数中使用 $emit 调用该函数
+    newFile(fileType) {
+      // fileType 新建的文件类型："folder" 文件夹 "txt" txt文件
+      this.$refs["appList"].createNewItem(fileType);
+    },
+
     //#endregion
 
     //以下为dfHe开发的
