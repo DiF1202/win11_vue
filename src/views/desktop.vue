@@ -2,7 +2,7 @@
   <div class="desktop">
     <div class="main" @click="closeClick" @contextmenu.prevent="rightClick">
       <!-- 鼠标右键出现的列表 -->
-      <Click></Click>
+      <Click @clickMenu = 'menuJudge'></Click>
       <!-- 桌面图标列表组件 -->
       <AppList
         :displayMode="displayMode"
@@ -83,6 +83,7 @@ export default {
     // 1. 鼠标右键点击出现 小弹框
     rightClick(e) {
       const { clientX, clientY } = e;
+
       this.$store.commit("setClick", {
         clientX,
         clientY,
@@ -95,10 +96,34 @@ export default {
         vis: false,
       });
     },
+    // 3. clickMenu的事件回调
+    menuJudge(arr) {
+      const type = arr[0];
+      const idx = arr[1];
+      console.log(type,idx);
+      switch(type) {
+        case 0:
+          this.changeDeskIconSize(idx); // 切换图标
+          break;
+        case 1:
+          break;
+        case 2:
+          break;
+        case 3:
+          break;  
+        case 4:
+          break;
+        case 5:
+          break;  
+        case 6:
+          break;
+        case 7:
+          break;            
+      }
+    },
     //#endregion
 
     //#region dssun 回调函数
-
     // 1 提供给**窗口子组件**的回调函数
     // 请在窗口子组件的右上角三个按钮的事件函数中使用 $emit 调用该函数以调整窗口状态
     winStateChange(appname, e) {
@@ -127,7 +152,6 @@ export default {
       else if (iconSize === 1) this.displayMode = "middle";
       else this.displayMode = "big";
     },
-
     //#endregion
   },
 };
