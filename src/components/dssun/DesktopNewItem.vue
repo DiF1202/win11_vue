@@ -30,7 +30,7 @@ export default {
   data() {
     let appName;
     if (this.fileType === "folder") appName = "新建文件夹";
-    else appName = "新建txt文件.txt";
+    else appName = "新建 txt 文件.txt";
     return {
       appName,
       imgClass: "normal",
@@ -156,7 +156,7 @@ export default {
 
 textarea {
   resize: none;
-  overflow-y: hidden;
+  overflow: hidden;
   text-align: center;
 }
 </style>

@@ -1,6 +1,6 @@
 <template >
   <div class="bg">
-   
+   <div class="mask"></div>
     <div id="log">
       <el-avatar
       src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
@@ -15,7 +15,7 @@
         class="el-input__inner"
       /><span class="el-input__suffix"
         ><span class="el-input__suffix-inner"
-          ><a href="#"
+          ><a href="#" 
             ><img
               height="40"
               width="40"
@@ -47,8 +47,8 @@
     /></a>
     </div>
   </div>
-
   </div>
+ 
   
 </template>
 
@@ -91,10 +91,21 @@ export default {
 .bg {
   height: 100vh;
   width: 100vw;
+  z-index: -2;
   background-size: cover;
-  background-image: url(../../assets/img/wallpapers/light.jpg);
+  background-color: black;
+  background-image: url(../../assets/img/login/lock.jpg);
 }
-
+.mask{
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            
+            background: rgb(0 11 93 / 49%);
+        }
 a {
   text-decoration: none;
 }

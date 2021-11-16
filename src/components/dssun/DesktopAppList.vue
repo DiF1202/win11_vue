@@ -15,10 +15,16 @@
       v-if="ifNewFile"
       @newItemCallback="newItemCallback"
     ></NewItem>
-    <!-- 测试按钮 -->
-    <button @click="test1" style="height: 42px">测试新建文件夹</button>
-    <button @click="test2" style="height: 42px">测试新建txt</button>
-    <button @click="test3" style="height: 42px">测试大小图标切换</button>
+    <!-- 测试 -->
+    <div class="testdiv">
+      <div class="test">当前可以点的图标：</div>
+      <div class="test">VSCode（窗口组件完成）</div>
+      <div class="test">GitHub（链接）</div>
+      <div class="test">浏览器（窗口组件完成）</div>
+      <button @click="test1" class="test">测试新建文件夹</button>
+      <button @click="test2" class="test">测试新建txt</button>
+      <button @click="test3" class="test">测试大小图标切换</button>
+    </div>
   </div>
 </template>
 
@@ -84,11 +90,12 @@ export default {
           appName: "markdown",
           description: "markdown",
           size: 1,
-          date: "2021-11-14"
+          date: "2021-11-16",
         }
       ],
       appUrl: {
         edge: "",
+        vscode: "",
         github: "https://github.com/",
       },
     };
@@ -167,5 +174,23 @@ height: calc(100vh - 任务栏高度); */
 
   width: 0;
   height: 100%;
+}
+
+/* 测试 */
+.test {
+  text-align: center;
+  width: 240px;
+  font-size: 14px;
+  color: black;
+  display: block;
+  margin: 10px;
+}
+.testdiv {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 240px;
+  padding: 10px;
+  border: crimson solid 1px;
 }
 </style>
