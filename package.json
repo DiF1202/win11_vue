@@ -9,6 +9,7 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "element-plus": "^1.2.0-beta.3",
+    "md-editor-v3": "^1.6.4",
     "moment": "^2.29.1",
     "postcss-pxtorem": "^6.0.0",
     "react": "^17.0.2",

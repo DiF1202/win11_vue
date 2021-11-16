@@ -36,19 +36,22 @@
       <div>帮助(<span>H</span>)</div>
     </div>
     <!-- markdown工作区 -->
-    <!-- <MDEditor :value="value" :plugins="plugins" @change="handleChange" /> -->
+    <div class="markdown-main">
+      <md-editor 
+        class="markdown-editor"
+        v-model="text" 
+        :toolbarsExclude="toolbarsExclude"
+        />
+    </div>
+    
     
   </div>
 </template>
 
 <script>
-// import { MDEditor, Viewer } from '@bytemd/vue';
-// import gfm from '@bytemd/plugin-gfm';
+import MdEditor from 'md-editor-v3';
+import 'md-editor-v3/lib/style.css';
 
-// const plugins = [
-//   gfm(),
-//   // Add more plugins here
-// ];
 export default {
   name: 'MarkdownApp',
   props: {
@@ -57,11 +60,19 @@ export default {
     winHide: String, // 窗口是否隐藏：false 否 true 是
   },
   components: {
-    // MDEditor
+    MdEditor
   },
-  // data() {
-  //   return { value: '', plugins };
-  // },
+  data() {
+    return { 
+      text: '',
+      toobars: ['bold', 'underline', 'italic', 'strikeThrough',
+      'sub','sup','quote','unorderedList', 'orderedList', 'codeRow',
+      'code', 'link', 'image', 'table', 'revoke',
+      'next', 'save', 'pageFullscreen', 'fullscreen',
+      'preview', 'htmlPreview'],
+      toolbarsExclude: ['github'] 
+      };
+  },
   methods: {
     // 标题栏按钮点击事件
     clickMinBtn() {
@@ -157,6 +168,15 @@ export default {
 
 .markdown-menu div span {
   text-decoration: underline;
+}
+
+.markdown-main {
+  color: #000;
+  font-size: 12px;
+  height: calc(100% - 26px - 26px);
+}
+.markdown-editor {
+  height: 100%;
 }
 
 </style>
