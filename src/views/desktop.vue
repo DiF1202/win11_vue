@@ -100,6 +100,8 @@ export default {
     // 1 提供给**窗口子组件**的回调函数
     // 请在窗口子组件的右上角三个按钮的事件函数中使用 $emit 调用该函数以调整窗口状态
     winStateChange(appname, e) {
+      console.log(appname)
+      console.log(e)
       // appname 应用名称的唯一标识符
       // e 事件编码：0 关闭按钮被按下 1 最小化按钮被按下 2 最大化/还原按钮被按下 3 任务栏图标被按下 4 桌面图标被按下
       if (e === 0) {
