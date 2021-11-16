@@ -23,7 +23,6 @@
         <div @click="clickCloseBtn">
           <img width="8" src="../../assets/img/appIcons/close.png"/>
         </div>
-
       </div>
     </div>
     <!-- 菜单栏 -->

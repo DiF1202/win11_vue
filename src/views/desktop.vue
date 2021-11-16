@@ -24,20 +24,23 @@
         :winSize="winSize['vscode']"
         @winStateChange="winStateChange"
       ></VscodeApp>
+      <!-- Markdown应用窗口 -->
       <MarkdownApp
         :winMax="winMax['markdown']"
         :winHide="winHide['markdown']"
         :winSize="winSize['markdown']"
         @winStateChange="winStateChange"
       ></MarkdownApp>
+      <!-- 回收站应用窗口 -->
+      <BinApp
+        :winMax="winMax['bin']"
+        :winHide="winHide['bin']"
+        :winSize="winSize['bin']"
+        @winStateChange="winStateChange"
+      />
     </div>
-    <!-- Markdown应用窗口 -->
-    <MarkdownApp
-      :winMax="winMax['markdown']"
-      :winHide="winHide['markdown']"
-      :winSize="winSize['markdown']"
-      @winStateChange="winStateChange"
-    ></MarkdownApp>
+    
+
     <!-- 状态栏弹框+护眼模式 -->
     <transition name="el-fade-in">
       <div v-show="isShowControls">
@@ -58,6 +61,7 @@ import EdgeApp from "../components/dssun/EdgeApp.vue";
 import VscodeApp from "../components/dssun/VscodeApp.vue";
 
 import MarkdownApp from "../components/xhli/MarkdownApp.vue";
+import BinApp from '../components/xhli/BinApp.vue';
 
 export default {
   name: "desktop",
@@ -69,6 +73,7 @@ export default {
     VscodeApp,
     ControlCenter,
     MarkdownApp,
+    BinApp,
   },
   data() {
     return {
@@ -83,6 +88,7 @@ export default {
         edge: "true",
         vscode: "true",
         markdown: "true",
+        bin: "true"
       },
       winHide: {
         // 窗口是否隐藏：false 否 true 是
@@ -92,6 +98,7 @@ export default {
         edge: "true",
         vscode: "true",
         markdown: "true",
+        bin: "true"
       },
       winSize: {
         // 窗口尺寸：normal 还原窗口 max 最大化窗口
@@ -100,7 +107,8 @@ export default {
         // * max -> normal : 从最大化状态到还原
         edge: "max",
         vscode: "max",
-        markdown: "max",
+        markdown: "normal",
+        bin: "normal"
       },
       //#endregion
 
