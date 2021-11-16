@@ -3,6 +3,7 @@
     <div class="main" @click="closeClick" @contextmenu.prevent="rightClick">
       <!-- 鼠标右键出现的列表 -->
       <Click></Click>
+
       <!-- 桌面图标列表组件 -->
       <AppList
         :displayMode="displayMode"
@@ -24,6 +25,14 @@
         :winSize="winSize['vscode']"
         @winStateChange="winStateChange"
       ></VscodeApp>
+      <!-- Notepad应用窗口 -->
+      <NotepadApp
+        :winMax="winMax['notepad']"
+        :winHide="winHide['notepad']"
+        :winSize="winSize['notepad']"
+        @winStateChange="winStateChange"
+      ></NotepadApp>
+      <!-- Markdown应用窗口 -->
       <MarkdownApp
         :winMax="winMax['markdown']"
         :winHide="winHide['markdown']"
@@ -31,13 +40,7 @@
         @winStateChange="winStateChange"
       ></MarkdownApp>
     </div>
-    <!-- Markdown应用窗口 -->
-    <MarkdownApp
-      :winMax="winMax['markdown']"
-      :winHide="winHide['markdown']"
-      :winSize="winSize['markdown']"
-      @winStateChange="winStateChange"
-    ></MarkdownApp>
+
     <!-- 状态栏弹框+护眼模式 -->
     <transition name="el-fade-in">
       <div v-show="isShowControls">
@@ -56,7 +59,7 @@ import AppList from "../components/dssun/DesktopAppList.vue";
 import Click from "../components/panzhou/click.vue";
 import EdgeApp from "../components/dssun/EdgeApp.vue";
 import VscodeApp from "../components/dssun/VscodeApp.vue";
-
+import NotepadApp from "../components/dssun/NotepadApp.vue";
 import MarkdownApp from "../components/xhli/MarkdownApp.vue";
 
 export default {
@@ -68,6 +71,7 @@ export default {
     BarTask,
     VscodeApp,
     ControlCenter,
+    NotepadApp,
     MarkdownApp,
   },
   data() {
@@ -83,6 +87,7 @@ export default {
         edge: "true",
         vscode: "true",
         markdown: "true",
+        notepad: "true",
       },
       winHide: {
         // 窗口是否隐藏：false 否 true 是
@@ -92,6 +97,7 @@ export default {
         edge: "true",
         vscode: "true",
         markdown: "true",
+        notepad: "true",
       },
       winSize: {
         // 窗口尺寸：normal 还原窗口 max 最大化窗口
@@ -101,6 +107,7 @@ export default {
         edge: "max",
         vscode: "max",
         markdown: "max",
+        notepad: "max",
       },
       //#endregion
 
