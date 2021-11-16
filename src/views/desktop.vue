@@ -85,7 +85,7 @@ import NotepadApp from "../components/dssun/NotepadApp.vue";
 import MarkdownApp from "../components/xhli/MarkdownApp.vue";
 
 // import ComputerApp from "../components/";
-// import ExplorerApp from "../components/";
+import ExplorerApp from "../components/yuzhang/FileExplorer.vue";
 // import BinApp from "../components/";
 
 export default {
@@ -100,7 +100,7 @@ export default {
     NotepadApp,
     MarkdownApp,
     // ComputerApp,
-    // ExplorerApp,
+    ExplorerApp,
     // BinApp,
   },
   data() {
