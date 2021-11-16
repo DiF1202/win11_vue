@@ -1,6 +1,6 @@
 <template>
   <div
-    class="edgeBrowser floatTab dpShadow"
+    class="explorer floatTab dpShadow"
     :win-size="winSize"
     :win-max="winMax"
     :win-hide="winHide"
@@ -129,13 +129,13 @@ export default {
   methods: {
     // 按钮点击事件
     clickMinBtn() {
-      this.$emit("winStateChange", "edge", 1);
+      this.$emit("winStateChange", "explorer", 1);
     },
     clickMaxBtn() {
-      this.$emit("winStateChange", "edge", 2);
+      this.$emit("winStateChange", "explorer", 2);
     },
     clickCloseBtn() {
-      this.$emit("winStateChange", "edge", 0);
+      this.$emit("winStateChange", "explorer", 0);
     },
     clickLeft() {
       if (this.historyUrl.length) {
@@ -148,7 +148,7 @@ export default {
 
 <style  lang="scss" scoped>
 @import "../../assets/scss/_window.scss";
-.edgeBrowser {
+.explorer {
   background-color: #f3f3f3;
   font-size: 12px;
 }
