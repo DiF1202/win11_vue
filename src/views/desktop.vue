@@ -300,8 +300,8 @@ export default {
       console.log(sortMethod);
       // sortMethod 要切换成的图标排序方式：0 按时间 1 按名称 2 按大小
       if (sortMethod === 0) this.sortMethod = 'date';
-      else if (sortMethod === 1) this.displayMode = 'name';
-      else this.displayMode = 'size';
+      else if (sortMethod === 1) this.sortMethod = 'name';
+      else this.sortMethod = 'size';
     },
     // 请在右键菜单子组件的新建文件、文件夹的事件函数中使用 $emit 调用该函数
     newFile(fileType) {
