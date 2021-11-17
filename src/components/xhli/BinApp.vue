@@ -137,13 +137,13 @@ export default {
     methods: {
          // 标题栏按钮点击事件
         clickMinBtn() {
-        this.$emit("winStateChange", "markdown", 1);
+        this.$emit("winStateChange", "bin", 1);
         },
         clickMaxBtn() {
-        this.$emit("winStateChange", "markdown", 2)
+        this.$emit("winStateChange", "bin", 2)
         },
         clickCloseBtn() {
-        this.$emit("winStateChange", "markdown", 0)
+        this.$emit("winStateChange", "bin", 0)
         },
     }
 }

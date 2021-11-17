@@ -148,7 +148,7 @@ export default {
         notepad: "max",
         computer: "max",
         explorer: "max",
-        bin: "max",
+        bin: "normal",
       },
       //#endregion
 
