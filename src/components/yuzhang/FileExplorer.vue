@@ -73,8 +73,18 @@
         <img src="../../assets/img/fileexplorer/右.png" alt="" />
         <img src="../../assets/img/fileexplorer/下.png" alt="" />
         <img src="../../assets/img/fileexplorer/上.png" alt="" />
-        <input class="Input p1" placeholder="                 快速访问"  type="text" style="border-width: 1px" />
-        <input class="Input p2" placeholder="            搜索“快速访问”" type="text" style="border-width: 1px" />
+        <input
+          class="Input p1"
+          placeholder="                 快速访问"
+          type="text"
+          style="border-width: 1px"
+        />
+        <input
+          class="Input p2"
+          placeholder="            搜索“快速访问”"
+          type="text"
+          style="border-width: 1px"
+        />
         <div class="inPut input1">
           <img src="../../assets/img/fileexplorer/五角星.png" alt="" />
           <img src="../../assets/img/fileexplorer/向右.png" alt="" />
@@ -91,51 +101,160 @@
     </div>
 
     <span class="part2">
-       
-       <el-divider></el-divider>
-       <p style="color:#01589b;width:87px;position:absolute;left:0px;top:10px;font-size:20px;background-color:white;padding-left:35px;padding-right:10px">文件夹(7)</p><img src="../../assets/img/fileexplorer/下.png" style="width:20px;position:absolute;left:6px;top:15px"><br>
-       <div class="files">
-      <div class="mouseupp"><img src="../../assets/img/fileexplorer/桌面.png" alt="" /> <div style="text-align:left;float:left;position:relative;left:-50px;top:30px;font-size:15px"><div style="">桌面</div><div style="color:gray;">    此电脑</div></div></div>
-      <div class="mouseupp"><img src="../../assets/img/fileexplorer/图片.png" alt=""/><div style="text-align:left;float:left;position:relative;left:-50px;top:30px;font-size:15px"><div style="">图片</div><div style="color:gray;">    此电脑</div></div></div>
-      <div class="mouseupp"><img src="../../assets/img/fileexplorer/下载.png" alt="" /><div style="text-align:left;float:left;position:relative;left:-50px;top:30px;font-size:15px"><div style="">下载</div><div style="color:gray;">    此电脑</div></div></div>
-      <div class="mouseupp"><img src="../../assets/img/fileexplorer/文档.png" alt="" /><div style="text-align:left;float:left;position:relative;left:-50px;top:30px;font-size:15px"><div style="">文档</div><div style="color:gray;">    此电脑</div></div></div>
-        <div class="mouseupp"><img src="../../assets/img/fileexplorer/文件夹.png" alt="" /><div style="text-align:left;float:left;position:relative;left:-50px;top:30px;font-size:15px"><div style="">照片</div><div style="color:gray;">    此电脑</div></div></div>
-          <div class="mouseupp"><img src="../../assets/img/fileexplorer/文件夹.png" alt="" /><div style="text-align:left;float:left;position:relative;left:-50px;top:30px;font-size:15px"><div style="">学习资料</div><div style="color:gray;">    D:\勿点\</div></div></div>
-            <div class="mouseupp"><img src="../../assets/img/fileexplorer/文件夹.png" alt="" /><div style="text-align:left;float:left;position:relative;left:-50px;top:30px;font-size:15px"><div style="">win11_vue</div><div style="color:gray;">    E:\win11\</div></div></div>
-       </div>
-       <el-divider  style="position:absolute;top:350px;"></el-divider>
-       <div><p style="color:#01589b;width:192px;position:absolute;left:0px;top:360px;font-size:20px;background-color:white;padding-left:35px;padding-right:10px">       最近使用的文件（0）</p><img src="../../assets/img/fileexplorer/下.png" style="width:20px;position:absolute;left:6px;top:365px"></div>
-       </span>
-    <span class="part1">
-        <ul>
+      <el-divider></el-divider>
+      <p
+        style="
+          color: #01589b;
+          width: 87px;
+          position: absolute;
+          left: 0px;
+          top: 10px;
+          font-size: 20px;
+          background-color: white;
+          padding-left: 35px;
+          padding-right: 10px;
+        "
+      >
+        文件夹(7)
+      </p>
+      <img
+        src="../../assets/img/fileexplorer/下.png"
+        style="width: 20px; position: absolute; left: 6px; top: 15px"
+      /><br />
+      <div class="files">
+        <template v-for="(item, index) in FilesData" :key="index">
+          <div class="files-item">
+            <img
+              :src="
+                require('@/assets/img/fileexplorer/' + item.picname + '.png')
+              "
+              alt="item.name"
+            />
+            <div class="files-name">
+              <p>{{ item.name }}</p>
+              <p>{{ item.path }}</p>
+            </div>
+          </div>
+        </template>
+      </div>
 
-            <li style="background-color:rgb(223, 223, 223)"><img src="../../assets/img/fileexplorer/向右.png" alt="" /><img src="../../assets/img/fileexplorer/五角星.png" alt="" /><div style="float:left;padding-left:5px;">快速访问</div></li>
-            <li><img src="../../assets/img/fileexplorer/向右.png" alt="" /><img src="../../assets/img/fileexplorer/此电脑.png" alt="" /><div style="float:left;padding-left:5px;">此电脑</div></li>
-            <li><img src="../../assets/img/fileexplorer/向右.png" alt="" /><img src="../../assets/img/fileexplorer/网络.png" alt="" /><div style="float:left;padding-left:5px;">网络</div></li>
-            <li><img src="../../assets/img/fileexplorer/向右.png" alt="" /><img src="../../assets/img/fileexplorer/OneDrive.png" alt="" /><div style="float:left;padding-left:5px;">OneDrive</div></li>
-        </ul>
+      <el-divider style="position: absolute; top: 350px"></el-divider>
+      <div>
+        <p
+          style="
+            color: #01589b;
+            width: 192px;
+            position: absolute;
+            left: 0px;
+            top: 360px;
+            font-size: 20px;
+            background-color: white;
+            padding-left: 35px;
+            padding-right: 10px;
+          "
+        >
+          最近使用的文件（0）
+        </p>
+        <img
+          src="../../assets/img/fileexplorer/下.png"
+          style="width: 20px; position: absolute; left: 6px; top: 365px"
+        />
+      </div>
+    </span>
+    <span class="part1">
+      <ul>
+        <li style="background-color: rgb(223, 223, 223)">
+          <img src="../../assets/img/fileexplorer/向右.png" alt="" /><img
+            src="../../assets/img/fileexplorer/五角星.png"
+            alt=""
+          />
+          <div style="float: left; padding-left: 5px">快速访问</div>
+        </li>
+        <li>
+          <img src="../../assets/img/fileexplorer/向右.png" alt="" /><img
+            src="../../assets/img/fileexplorer/此电脑.png"
+            alt=""
+          />
+          <div style="float: left; padding-left: 5px">此电脑</div>
+        </li>
+        <li>
+          <img src="../../assets/img/fileexplorer/向右.png" alt="" /><img
+            src="../../assets/img/fileexplorer/网络.png"
+            alt=""
+          />
+          <div style="float: left; padding-left: 5px">网络</div>
+        </li>
+        <li>
+          <img src="../../assets/img/fileexplorer/向右.png" alt="" /><img
+            src="../../assets/img/fileexplorer/OneDrive.png"
+            alt=""
+          />
+          <div style="float: left; padding-left: 5px">OneDrive</div>
+        </li>
+      </ul>
     </span>
   </div>
 </template>
 
 <script>
 export default {
-  name: "FileExplorer",
+  name: 'FileExplorer',
   props: {
     winSize: String, // 窗口尺寸：normal 还原窗口 max 最大化窗口
     winMax: String, // 窗口是否最大化：false 否 true 是
     winHide: String, // 窗口是否隐藏：false 否 true 是
   },
+  data() {
+    return {
+      FilesData: [
+        {
+          picname: 'desktop',
+          name: '桌面',
+          path: '此电脑',
+        },
+        {
+          picname: 'picture',
+          name: '图片',
+          path: '此电脑',
+        },
+        {
+          picname: 'download',
+          name: '下载',
+          path: '此电脑',
+        },
+        {
+          picname: 'file',
+          name: '文档',
+          path: '此电脑',
+        },
+        {
+          picname: 'folder',
+          name: '照片',
+          path: '此电脑',
+        },
+        {
+          picname: 'folder',
+          name: '学习资料',
+          path: 'D:\\勿点\\',
+        },
+        {
+          picname: 'folder',
+          name: 'win11_vue',
+          path: 'E:\\win11\\',
+        },
+      ],
+    };
+  },
   methods: {
     // 按钮点击事件
     clickMinBtn() {
-      this.$emit("winStateChange", "explorer", 1);
+      this.$emit('winStateChange', 'explorer', 1);
     },
     clickMaxBtn() {
-      this.$emit("winStateChange", "explorer", 2);
+      this.$emit('winStateChange', 'explorer', 2);
     },
     clickCloseBtn() {
-      this.$emit("winStateChange", "explorer", 0);
+      this.$emit('winStateChange', 'explorer', 0);
     },
     clickLeft() {
       if (this.historyUrl.length) {
@@ -147,7 +266,7 @@ export default {
 </script>
 
 <style  lang="scss" scoped>
-@import "../../assets/scss/_window.scss";
+@import '../../assets/scss/_window.scss';
 .explorer {
   background-color: #f3f3f3;
   font-size: 12px;
@@ -343,7 +462,6 @@ select:hover {
   left: 814px;
 }
 
-
 .part1 {
   position: absolute;
   top: 129px;
@@ -353,23 +471,22 @@ select:hover {
   border-right: solid #cfcfcf50;
   border-width: 1px;
 }
-.part1 ul{
-    left: 10px;
-    position: absolute;
-    top: 50px;
-
+.part1 ul {
+  left: 10px;
+  position: absolute;
+  top: 50px;
 }
-.part1 li{
- width: 200px;
- padding-bottom: 30px;
- padding-top: 10px;
+.part1 li {
+  width: 200px;
+  padding-bottom: 30px;
+  padding-top: 10px;
 }
-.part1 li:hover{
-    background-color: rgba(16, 155, 230, 0.228);
+.part1 li:hover {
+  background-color: rgba(16, 155, 230, 0.228);
 }
-.part1 img{
-    float: left;
-    width: 17px;
+.part1 img {
+  float: left;
+  width: 17px;
 }
 
 .part2 {
@@ -380,12 +497,27 @@ select:hover {
   height: 100%;
   background-color: #ffffff;
 }
-.files img{
-    float: left;
-    width: 70px;
-    padding: 14px 54px;
+.files {
+  display: flex;
+  flex-wrap: wrap;
+  .files-item {
+    width: 220px;
+    display: flex;
+    img {
+      width: 70px;
+      padding: 14px 0px 14px 54px;
+    }
+    .files-name {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size: 14px;
+      margin-left: 8px;
+    }
+  }
 }
-.mouseupp:hover{
-    background-color:rgba(16, 155, 230, 0.228)
+
+.mouseupp:hover {
+  background-color: rgba(16, 155, 230, 0.228);
 }
 </style>
