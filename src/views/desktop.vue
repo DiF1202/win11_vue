@@ -66,7 +66,7 @@
           :winSize="winSize['bin']"
           @winStateChange="winStateChange"
         />
-        <!--pdf-->
+        <!--Pdf文件窗口-->
         <PdfApp :winMax="winMax['pdf']"
           :winHide="winHide['pdf']"
           :winSize="winSize['pdf']"
@@ -84,7 +84,7 @@
         </div>
       </transition>
       <!-- 任务栏 -->
-      <BarTask @showControls="showControls"></BarTask>
+      <BarTask @showControls="showControls" @responseTaskbarAction="responseTaskbarAction" ref="taskBar"></BarTask>
     </div>
   </div>
 </template>
@@ -128,7 +128,7 @@ export default {
         'Todo List.txt': {
           fileName: 'Todo List.txt',
           content: '重生之我是尤Vue溪\n\n' + 
-                   '正在进行的任务：\n* 右键菜单-刷新、图标排序、新建文件/文件夹（攀攀）\n* 开始菜单、搜索栏、资讯栏（小斐）\n* 任务栏（大森）\n* 手风琴（心慧）\n* 计算机、文件资源管理器窗口组件（羽羽）\n\n' + 
+                   '正在进行的任务：\n* 右键菜单-刷新、图标排序、新建文件/文件夹（攀攀）\n* 开始菜单、搜索栏、资讯栏（小斐）\n* 窗口层叠调度（大森）\n* 手风琴（心慧）\n* 计算机、文件资源管理器窗口组件（羽羽）\n\n' + 
                    '未开始的组件开发：\n* 应用商店\n* 更换桌面壁纸\n* 计算器\n* 音乐播放器（可选）\n* 终端（可选）\n',
         },
       },
@@ -144,7 +144,7 @@ export default {
         computer: 'true',
         explorer: 'true',
         bin: 'true',
-        pdf:'true'
+        pdf:'true',
       },
       winHide: {
         // 窗口是否隐藏：false 否 true 是
@@ -236,16 +236,30 @@ export default {
       if (e === 0) {
         this.winHide[appname] = 'true';
         if(appname==='notepad') this.currentFile = {};
+        this.$refs["taskBar"].changeApp(appname, 0);
       } else if (e === 1) {
         this.winMax[appname] = 'false';
+        this.$refs["taskBar"].changeApp(appname, 1);
       } else if (e === 2) {
         if (this.winSize[appname] === 'normal') this.winSize[appname] = 'max';
         else this.winSize[appname] = 'normal';
       } else if (e === 3) {
-        if (this.winMax[appname] === 'false') this.winMax[appname] = 'true';
-        else this.winMax[appname] = 'false';
+        if(this.winHide[appname] === 'false') {
+          if (this.winMax[appname] === 'false') this.winMax[appname] = 'true';
+          else this.winMax[appname] = 'false';
+          this.$refs["taskBar"].changeApp(appname, 2);
+        }
+        else {
+          this.winHide[appname] = 'false';
+          this.$refs["taskBar"].changeApp(appname, 3);
+        }
+        
       } else {
         this.winHide[appname] = 'false';
+        if(this.$refs["taskBar"].getAppState(appname)) {
+          if(this.winMax[appname] === 'false') this.winMax[appname] = 'true';
+        }
+        this.$refs["taskBar"].changeApp(appname, 3);
       }
     },
 
@@ -285,6 +299,23 @@ export default {
     saveTxtFile(filename, filecontent) {
       this.noteFiles[filename].content = filecontent;
       this.$refs['appList'].alterTxtFileSize(filename, filecontent.length);
+    },
+
+    // 5 提供给任务栏的回调函数
+    responseTaskbarAction(appname) {
+      if(appname === "home") {
+        console.log("todo: 打开开始菜单");
+      }
+      else if(appname === "search") {
+        console.log("todo: 打开搜索栏");
+      }
+      else if(appname === "widget") {
+        console.log("todo: 打开资讯栏");
+      }
+      else {
+        if(appname === "settings") return;
+        this.winStateChange(appname,3);
+      }
     },
 
     //#endregion
