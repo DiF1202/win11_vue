@@ -383,7 +383,7 @@ select:hover {
 .files img{
     float: left;
     width: 70px;
-    padding: 14px 58px;
+    padding: 14px 54px;
 }
 .mouseupp:hover{
     background-color:rgba(16, 155, 230, 0.228)
