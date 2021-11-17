@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-11-15 16:26:10
- * @LastEditTime: 2021-11-16 02:09:21
+ * @LastEditTime: 2021-11-16 22:11:05
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \win11_vue\src\components\dfhe\ControlCenter.vue
@@ -32,32 +32,73 @@
           <span>{{ item.controlsName }}</span>
         </div>
       </div>
-      <ProgressBar></ProgressBar>
-      <ProgressBar></ProgressBar>
+      <div class="control-ProgressBar">
+        <div class="sliderCont">
+          <img
+            src="../../assets/img/taskbarIcons/brightness.png"
+            alt=""
+            width="20"
+          />
+          <input
+            class="sliders"
+            type="range"
+            min="10"
+            max="100"
+            defaultValue="100"
+            v-model="Lightness"
+          />
+        </div>
+        <div class="sliderCont">
+          <img
+            src="../../assets/img/taskbarIcons/audio3.png"
+            alt=""
+            width="20"
+          />
+          <input
+            class="sliders"
+            type="range"
+            min="0"
+            max="100"
+            defaultValue="100"
+            v-model="volumeSize"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 
 <script>
-import ProgressBar from './ProgressBar.vue';
+// import ProgressBar from './ProgressBar.vue';
 export default {
   name: 'control-center',
-  components: {
-    ProgressBar,
-  },
-  computed: {},
+  // components: {
+  //   ProgressBar,
+  // },
+  emits: ['toggleLightMode', 'changeLightnesss'],
   data() {
     return {
       controls: [],
       OpenLightMode: false,
+      Lightness: 100,
+      volumeSize: 100,
     };
   },
-  emits: ['toggleLightMode'],
+  watch: {
+    Lightness() {
+      this.$emit('changeLightnesss', this.Lightness);
+    },
+  },
+  computed: {},
+
   methods: {
     toggleNightLight() {
       this.OpenLightMode = !this.OpenLightMode;
       this.$emit('toggleLightMode', this.OpenLightMode);
+    },
+    changeLightness() {
+      console.log('asjkdbjaksdbk');
     },
     initItems() {
       this.controls = [
@@ -144,7 +185,7 @@ export default {
 
 <style lang="scss">
 .container-box {
-  width: 320px;
+  width: 360px;
   height: 420px;
   box-shadow: -6px 0 6px #0001;
   bottom: 50px;
@@ -155,12 +196,13 @@ export default {
   backdrop-filter: blur(16px);
   border-radius: 10px;
   .container-main {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px 20px 20px;
     .control-center {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
-      padding: 16px;
       .control-center-btn {
         border-radius: 4px;
         display: flex;
@@ -176,6 +218,21 @@ export default {
         }
       }
     }
+    .control-ProgressBar {
+      width: 100%;
+      height: 108px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .sliderCont {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 32px;
+      }
+    }
   }
 }
 
@@ -187,5 +244,35 @@ export default {
 .imgAcive {
   filter: invert(100%) !important;
   filter: grayscale(50%);
+}
+
+.sliders {
+  width: 280px;
+  height: 4px;
+  --track-color: linear-gradient(90deg, var(--clrPrm) 100%, #888888 100%);
+  -webkit-appearance: none;
+  background-color: transparent;
+  --clrPrm: #0067c0;
+  --bg1: rgba(249, 249, 249, 0.9);
+}
+
+.sliders[type='range']::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 5px;
+  background: var(--track-color);
+  border-radius: 10px;
+  border: 0;
+}
+.sliders[type='range']::-webkit-slider-thumb {
+  border: 4px solid var(--bg1);
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  background: var(--clrPrm);
+  -webkit-appearance: none;
+  margin-top: -9px;
+}
+.sliders[type='range']:focus::-webkit-slider-runnable-track {
+  background: var(--track-color);
 }
 </style>

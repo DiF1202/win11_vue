@@ -1,5 +1,5 @@
 <template>
-  <div  
+  <div
     class="markdown floatTab dpShadow"
     :win-size="winSize"
     :win-max="winMax"
@@ -15,15 +15,14 @@
       <!-- 窗口按钮 -->
       <div class="markdown-toolbar-actbtn">
         <div @click="clickMinBtn">
-          <img width="8" src="../../assets/img/appIcons/minimize.png"/>
+          <img width="8" src="../../assets/img/appIcons/minimize.png" />
         </div>
         <div @click="clickMaxBtn">
-          <img width="8" src="../../assets/img/appIcons/maximize.png"/>
+          <img width="8" src="../../assets/img/appIcons/maximize.png" />
         </div>
         <div @click="clickCloseBtn">
-          <img width="8" src="../../assets/img/appIcons/close.png"/>
+          <img width="8" src="../../assets/img/appIcons/close.png" />
         </div>
-
       </div>
     </div>
     <!-- 菜单栏 -->
@@ -37,14 +36,12 @@
     </div>
     <!-- markdown工作区 -->
     <div class="markdown-main">
-      <md-editor 
+      <md-editor
         class="markdown-editor"
-        v-model="text" 
+        v-model="text"
         :toolbarsExclude="toolbarsExclude"
-        />
+      />
     </div>
-    
-    
   </div>
 </template>
 
@@ -60,42 +57,59 @@ export default {
     winHide: String, // 窗口是否隐藏：false 否 true 是
   },
   components: {
-    MdEditor
+    MdEditor,
   },
   data() {
-    return { 
+    return {
       text: '',
-      toobars: ['bold', 'underline', 'italic', 'strikeThrough',
-      'sub','sup','quote','unorderedList', 'orderedList', 'codeRow',
-      'code', 'link', 'image', 'table', 'revoke',
-      'next', 'save', 'pageFullscreen', 'fullscreen',
-      'preview', 'htmlPreview'],
-      toolbarsExclude: ['github'] 
-      };
+      toobars: [
+        'bold',
+        'underline',
+        'italic',
+        'strikeThrough',
+        'sub',
+        'sup',
+        'quote',
+        'unorderedList',
+        'orderedList',
+        'codeRow',
+        'code',
+        'link',
+        'image',
+        'table',
+        'revoke',
+        'next',
+        'save',
+        'pageFullscreen',
+        'fullscreen',
+        'preview',
+        'htmlPreview',
+      ],
+      toolbarsExclude: ['github'],
+    };
   },
   methods: {
     // 标题栏按钮点击事件
     clickMinBtn() {
-      this.$emit("winStateChange", "markdown", 1);
+      this.$emit('winStateChange', 'markdown', 1);
     },
     clickMaxBtn() {
-      this.$emit("winStateChange", "markdown", 2)
+      this.$emit('winStateChange', 'markdown', 2);
     },
     clickCloseBtn() {
-      this.$emit("winStateChange", "markdown", 0)
+      this.$emit('winStateChange', 'markdown', 0);
     },
 
     // markdown 处理
     // handleChange(v) {
     //   value = v;
     // },
-    
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/_window.scss";
+@import '../../assets/scss/_window.scss';
 
 .markdown {
   --bg0: #e7eaec;
@@ -148,7 +162,7 @@ export default {
 }
 
 .markdown-toolbar-actbtn div:nth-child(3):hover {
-  background-color: rgb(255,65,65);
+  background-color: rgb(255, 65, 65);
 }
 
 .markdown-menu {
@@ -178,5 +192,4 @@ export default {
 .markdown-editor {
   height: 100%;
 }
-
 </style>
