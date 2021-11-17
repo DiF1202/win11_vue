@@ -2,12 +2,7 @@
   <div class="desktop" :class="{ 'night-light': isOpenLightmode }">
     <div class="main" @click="closeClick" @contextmenu.prevent="rightClick">
       <!-- 鼠标右键出现的列表 -->
-<<<<<<< HEAD
       <Click @clickMenu = 'menuJudge'></Click>
-=======
-      <Click></Click>
-
->>>>>>> 12450d3e6acb6f37f329638233d237c56aa85a98
       <!-- 桌面图标列表组件 -->
       <AppList
         :displayMode="displayMode"
