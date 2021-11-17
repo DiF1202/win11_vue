@@ -66,6 +66,12 @@
           :winSize="winSize['bin']"
           @winStateChange="winStateChange"
         />
+        <!--pdf-->
+        <PdfApp :winMax="winMax['pdf']"
+          :winHide="winHide['pdf']"
+          :winSize="winSize['pdf']"
+          @winStateChange="winStateChange">
+        </PdfApp>
       </div>
 
       <!-- 状态栏弹框+护眼模式 -->
@@ -93,9 +99,8 @@ import VscodeApp from '../components/dssun/VscodeApp.vue';
 import NotepadApp from '../components/dssun/NotepadApp.vue';
 import MarkdownApp from '../components/xhli/MarkdownApp.vue';
 import BinApp from '../components/xhli/BinApp.vue';
-
 import ExplorerApp from '../components/yuzhang/FileExplorer.vue';
-
+import PdfApp from '../components/yuzhang/PdfApp.vue';
 export default {
   name: 'desktop',
   components: {
@@ -110,6 +115,7 @@ export default {
     BinApp,
     // ComputerApp,
     ExplorerApp,
+    PdfApp
   },
   data() {
     return {
@@ -138,6 +144,7 @@ export default {
         computer: 'true',
         explorer: 'true',
         bin: 'true',
+        pdf:'true'
       },
       winHide: {
         // 窗口是否隐藏：false 否 true 是
@@ -151,6 +158,7 @@ export default {
         computer: 'true',
         explorer: 'true',
         bin: 'true',
+        pdf:'true'
       },
       winSize: {
         // 窗口尺寸：normal 还原窗口 max 最大化窗口
@@ -164,6 +172,7 @@ export default {
         computer: "normal",
         explorer: "normal",
         bin: "normal",
+        pdf:"max"
       },
       //#endregion
 
