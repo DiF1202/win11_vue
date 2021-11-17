@@ -77,7 +77,7 @@
                 </div>
                 <div class="bin-main-container">
                     <div class="bin-main-navBar">
-                        <div class="list-title">
+                        <div class="list-title" @click="handleListShow">
                             <img width="10" src="../../assets/img/binIcons/shortArrowDown.png"/>
                             <img width="16" src="../../assets/img/binIcons/star.png"/>
                             <span>快速访问</span>
@@ -145,6 +145,10 @@ export default {
         clickCloseBtn() {
         this.$emit("winStateChange", "bin", 0)
         },
+
+        handleListShow() {
+
+        }
     }
 }
 </script>
@@ -359,37 +363,48 @@ export default {
     margin-bottom: 5px;
 }
 
+.bin-main-content {
+    width: calc(100% - 158px);
+}
 .bin-main-content-tab {
     display: flex;
+    // flex-grow: 10;
     // grid-row: 3fr 3fr 2fr 1fr 2fr 1fr;
     height: 45px;
     width: 100%;
+    // background-color: red;
     margin: 10px;
 }
 .bin-main-content-tab div {
-
+    flex-grow: 1;
     height: 22px;
     margin: 5px;
     color: #4c6070;
     border-right: 1px solid #e5e5e5;
 }
 .bin-main-content-tab div:nth-of-type(1) {
-    width: 230px;
+    flex-grow: 5;
+    // width: 230px;
 }
 .bin-main-content-tab div:nth-of-type(2) {
-    width: 230px;
+    // width: 230px;
+    flex-grow: 5;
 }
 .bin-main-content-tab div:nth-of-type(3) {
-    width: 160px;
+    // width: 160px;
+    flex-grow: 3;
 }
 .bin-main-content-tab div:nth-of-type(4) {
-    width: 80px;
+    // width: 80px;
+    flex-grow: 2;
 }
 .bin-main-content-tab div:nth-of-type(5) {
-    width: 100px;
+    // width: 100px;
+    flex-grow: 2;
 }
 .bin-main-content-tab div:nth-of-type(6) {
-    width: 50px;
+    // width: 50px;
+    flex-grow: 1;
     border-right: none;
 }
 
