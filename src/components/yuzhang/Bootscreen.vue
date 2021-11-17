@@ -47,7 +47,7 @@ export default {
   position: fixed;
   left: 50%;
   top: 550px;
-  margin-left: -100px;
+  margin-left: -70px;
 }
 img {
   position: fixed;

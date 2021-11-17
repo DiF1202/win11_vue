@@ -93,7 +93,7 @@
     <span class="part2">
        
        <el-divider></el-divider>
-       <p style="color:#01589b;width:150px;position:absolute;left:0px;top:10px;font-size:20px;background-color:white;">文件夹(7)</p><img src="../../assets/img/fileexplorer/下.png" style="width:20px;position:absolute;left:6px;top:15px"><br>
+       <p style="color:#01589b;width:87px;position:absolute;left:0px;top:10px;font-size:20px;background-color:white;padding-left:35px;padding-right:10px">文件夹(7)</p><img src="../../assets/img/fileexplorer/下.png" style="width:20px;position:absolute;left:6px;top:15px"><br>
        <div class="files">
       <div class="mouseupp"><img src="../../assets/img/fileexplorer/桌面.png" alt="" /> <div style="text-align:left;float:left;position:relative;left:-50px;top:30px;font-size:15px"><div style="">桌面</div><div style="color:gray;">    此电脑</div></div></div>
       <div class="mouseupp"><img src="../../assets/img/fileexplorer/图片.png" alt=""/><div style="text-align:left;float:left;position:relative;left:-50px;top:30px;font-size:15px"><div style="">图片</div><div style="color:gray;">    此电脑</div></div></div>
@@ -104,7 +104,7 @@
             <div class="mouseupp"><img src="../../assets/img/fileexplorer/文件夹.png" alt="" /><div style="text-align:left;float:left;position:relative;left:-50px;top:30px;font-size:15px"><div style="">win11_vue</div><div style="color:gray;">    E:\win11\</div></div></div>
        </div>
        <el-divider  style="position:absolute;top:350px;"></el-divider>
-       <div><p style="color:#01589b;width:245px;position:absolute;left:0px;top:360px;font-size:20px;background-color:white;">       最近使用的文件（0）</p><img src="../../assets/img/fileexplorer/下.png" style="width:20px;position:absolute;left:6px;top:365px"></div>
+       <div><p style="color:#01589b;width:192px;position:absolute;left:0px;top:360px;font-size:20px;background-color:white;padding-left:35px;padding-right:10px">       最近使用的文件（0）</p><img src="../../assets/img/fileexplorer/下.png" style="width:20px;position:absolute;left:6px;top:365px"></div>
        </span>
     <span class="part1">
         <ul>
@@ -269,14 +269,14 @@ select:hover {
   width: 300px;
   position: absolute;
   top: -1px;
-  left: 281px;
+  left: 407px;
 }
 .op3 img {
   padding: 15px;
 }
 .op3 span {
   position: absolute;
-  left: 239px;
+  left: 110px;
 }
 .op4 {
   height: 40px;
@@ -286,7 +286,7 @@ select:hover {
   width: 300px;
   position: absolute;
   top: -1px;
-  left: 517px;
+  left: 644px;
 }
 .op4 img {
   padding: 15px;
@@ -334,13 +334,13 @@ select:hover {
   padding-right: 5px;
 }
 .input1 {
-  left: 145px;
+  left: 173px;
 }
 .input2 {
-  left: 690px;
+  left: 716px;
 }
 .input3 {
-  left: 770px;
+  left: 814px;
 }
 
 
