@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-11-13 12:03:20
- * @LastEditTime: 2021-11-15 23:05:44
+ * @LastEditTime: 2021-11-18 00:10:34
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \win11_vue\src\components\HeDiFei\test.vue
@@ -64,11 +64,11 @@
 </template>
 
 <script>
-import { handleError } from "@vue/runtime-core";
-import calendar from "./BestCalendar.vue";
+import { handleError } from '@vue/runtime-core';
+import calendar from './BestCalendar.vue';
 // import ControlCenter from './ControlCenter.vue';
 export default {
-  name: "task-bar",
+  name: 'task-bar',
   components: { calendar },
   data() {
     return {
@@ -76,36 +76,36 @@ export default {
       controlCenterShow: false,
       timer: null,
       today: {
-        date: "",
-        time: "",
+        date: '',
+        time: '',
         dateBoxShow: false,
       },
       imgUrl: {
-        wifiImg: require("../../assets/img/taskbarIcons/wifi.png"),
-        batteryImg: require("../../assets/img/taskbarIcons/battery.png"),
-        audio3Img: require("../../assets/img/taskbarIcons/audio3.png"),
-        arrowupImg: require("../../assets/img/taskbarIcons/arrowup.png"),
+        wifiImg: require('../../assets/img/taskbarIcons/wifi.png'),
+        batteryImg: require('../../assets/img/taskbarIcons/battery.png'),
+        audio3Img: require('../../assets/img/taskbarIcons/audio3.png'),
+        arrowupImg: require('../../assets/img/taskbarIcons/arrowup.png'),
       },
 
       smallerIcon: null,
       openedAppOrder: [],
       minApps: [],
-      activeAppList: ["home", "search", "widget", "settings", "explorer"],
-      initialAppList: ["home", "search", "widget", "settings", "explorer"],
+      activeAppList: ['home', 'search', 'widget', 'settings', 'explorer'],
+      initialAppList: ['home', 'search', 'widget', 'settings', 'explorer'],
     };
   },
-  emits: ["showControls", "responseTaskbarAction"],
+  emits: ['showControls', 'responseTaskbarAction'],
   methods: {
     updateTime() {
       this.today = {
-        date: new Date().toLocaleTimeString("en-US", {
-          hour: "numeric",
-          minute: "numeric",
+        date: new Date().toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: 'numeric',
         }),
-        time: new Date().toLocaleDateString("en-US", {
-          year: "2-digit",
-          month: "2-digit",
-          day: "numeric",
+        time: new Date().toLocaleDateString('en-US', {
+          year: '2-digit',
+          month: '2-digit',
+          day: 'numeric',
         }),
       };
     },
@@ -114,31 +114,31 @@ export default {
     },
     iSshowControlsCenter() {
       this.controlCenterShow = !this.controlCenterShow;
-      this.$emit("showControls", this.controlCenterShow);
+      this.$emit('showControls', this.controlCenterShow);
     },
 
     taskIconMouseDown(e) {
-      if (e.target.nodeName.toLowerCase() === "img")
+      if (e.target.nodeName.toLowerCase() === 'img')
         this.smallerIcon = e.target;
       else this.smallerIcon = e.target.firstChild;
-      this.smallerIcon.classList.add("smaller");
+      this.smallerIcon.classList.add('smaller');
     },
     taskIconMouseUp() {
       setTimeout(() => {
         if (!this.smallerIcon) return;
-        this.smallerIcon.classList.remove("smaller");
+        this.smallerIcon.classList.remove('smaller');
         this.smallerIcon = null;
       }, 200);
     },
     taskIconMouseLeave() {
       setTimeout(() => {
         if (!this.smallerIcon) return;
-        this.smallerIcon.classList.remove("smaller");
+        this.smallerIcon.classList.remove('smaller');
         this.smallerIcon = null;
       }, 200);
     },
     taskIconClick(appname) {
-      this.$emit("responseTaskbarAction", appname);
+      this.$emit('responseTaskbarAction', appname);
     },
     changeApp(appname, e) {
       // e: 0 关闭 1 最小化 2 任务栏按下 3 打开 4 记事本打开txt文件特殊处理
@@ -184,14 +184,14 @@ export default {
     openedAppOrder: {
       deep: true,
       handler() {
-        for (let item of document.getElementsByClassName("activeApp")) {
-          item.classList.remove("activeApp");
+        for (let item of document.getElementsByClassName('activeApp')) {
+          item.classList.remove('activeApp');
         }
         let idtext =
-          this.openedAppOrder[this.openedAppOrder.length - 1] + "Task";
+          this.openedAppOrder[this.openedAppOrder.length - 1] + 'Task';
         this.$nextTick(() => {
           let dom = document.getElementById(idtext);
-          if (dom) dom.classList.add("activeApp");
+          if (dom) dom.classList.add('activeApp');
         });
       },
     },
@@ -245,10 +245,10 @@ export default {
       }
       .taskIcon.activeApp::after {
         width: 14px;
-        background-color: rgb(0,103,192);
+        background-color: rgb(0, 103, 192);
       }
       .taskIcon::after {
-        content: "";
+        content: '';
         position: absolute;
         display: block;
         bottom: 0;
