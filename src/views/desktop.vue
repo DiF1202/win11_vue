@@ -19,7 +19,7 @@
         ></AppList>
         <!-- Edge应用窗口 -->
         <EdgeApp
-          :zIndex="{'z-index': zIndex['edge']}"
+          :zIndex="{ 'z-index': zIndex['edge'] }"
           :winMax="winMax['edge']"
           :winHide="winHide['edge']"
           :winSize="winSize['edge']"
@@ -27,7 +27,7 @@
         ></EdgeApp>
         <!-- VSCode应用窗口 -->
         <VscodeApp
-          :zIndex="{'z-index': zIndex['vscode']}"
+          :zIndex="{ 'z-index': zIndex['vscode'] }"
           :winMax="winMax['vscode']"
           :winHide="winHide['vscode']"
           :winSize="winSize['vscode']"
@@ -35,7 +35,7 @@
         ></VscodeApp>
         <!-- Notepad应用窗口 -->
         <NotepadApp
-          :zIndex="{'z-index': zIndex['notepad']}"
+          :zIndex="{ 'z-index': zIndex['notepad'] }"
           :winMax="winMax['notepad']"
           :winHide="winHide['notepad']"
           :winSize="winSize['notepad']"
@@ -46,7 +46,7 @@
         ></NotepadApp>
         <!-- Markdown应用窗口 -->
         <MarkdownApp
-          :zIndex="{'z-index': zIndex['markdown']}"
+          :zIndex="{ 'z-index': zIndex['markdown'] }"
           :winMax="winMax['markdown']"
           :winHide="winHide['markdown']"
           :winSize="winSize['markdown']"
@@ -54,7 +54,7 @@
         ></MarkdownApp>
         <!-- Computer应用窗口 -->
         <ComputerApp
-          :zIndex="{'z-index': zIndex['computer']}"
+          :zIndex="{ 'z-index': zIndex['computer'] }"
           :winMax="winMax['computer']"
           :winHide="winHide['computer']"
           :winSize="winSize['computer']"
@@ -62,7 +62,7 @@
         ></ComputerApp>
         <!-- Explorer应用窗口 -->
         <ExplorerApp
-          :zIndex="{'z-index': zIndex['explorer']}"
+          :zIndex="{ 'z-index': zIndex['explorer'] }"
           :winMax="winMax['explorer']"
           :winHide="winHide['explorer']"
           :winSize="winSize['explorer']"
@@ -70,7 +70,7 @@
         ></ExplorerApp>
         <!-- Bin应用窗口 -->
         <BinApp
-          :zIndex="{'z-index': zIndex['bin']}"
+          :zIndex="{ 'z-index': zIndex['bin'] }"
           :winMax="winMax['bin']"
           :winHide="winHide['bin']"
           :winSize="winSize['bin']"
@@ -78,7 +78,7 @@
         />
         <!--Pdf文件窗口-->
         <PdfApp
-          :zIndex="{'z-index': zIndex['pdf']}"
+          :zIndex="{ 'z-index': zIndex['pdf'] }"
           :winMax="winMax['pdf']"
           :winHide="winHide['pdf']"
           :winSize="winSize['pdf']"
@@ -86,18 +86,19 @@
         >
         </PdfApp>
         <!---->
-        <StoreApp 
-          :zIndex="{'z-index': zIndex['store']}"
+        <StoreApp
+          :zIndex="{ 'z-index': zIndex['store'] }"
           :winMax="winMax['store']"
           :winHide="winHide['store']"
           :winSize="winSize['store']"
-          @winStateChange="winStateChange">
+          @winStateChange="winStateChange"
+        >
         </StoreApp>
       </div>
 
       <!-- 状态栏弹框+护眼模式 -->
       <transition name="el-fade-in">
-        <div v-show="isShowControls" style="z-index: 999;">
+        <div v-show="isShowControls" style="z-index: 999">
           <ControlCenter
             @toggleLightMode="toggleLightMode"
             @changeLightnesss="getLightnesss"
@@ -105,14 +106,18 @@
         </div>
       </transition>
       <!-- 任务栏 -->
-      <BarTask 
-        @showControls="showControls" 
-        @responseTaskbarAction="responseTaskbarAction" 
-        @getActiveWin="getActiveWin" 
+      <BarTask
+        @showControls="showControls"
+        @responseTaskbarAction="responseTaskbarAction"
+        @getActiveWin="getActiveWin"
         ref="taskBar"
       ></BarTask>
       <!-- 开始栏 -->
-      <BeginBar @winStateChange="winStateChange" :isShowStartMenu="isShowStartMenu" @showStartmenu="showStartmenu"></BeginBar>
+      <BeginBar
+        @winStateChange="winStateChange"
+        :isShowStartMenu="isShowStartMenu"
+        @showStartmenu="showStartmenu"
+      ></BeginBar>
     </div>
   </div>
 </template>
@@ -130,9 +135,9 @@ import MarkdownApp from '../components/xhli/MarkdownApp.vue';
 import BinApp from '../components/xhli/BinApp.vue';
 import ExplorerApp from '../components/yuzhang/FileExplorer.vue';
 import PdfApp from '../components/yuzhang/PdfApp.vue';
-import ComputerApp from '../components/xhli/ComputerApp.vue'
+import ComputerApp from '../components/xhli/ComputerApp.vue';
 import BeginBar from '../components/dfhe/BeginBar.vue';
-import StoreApp from '../components/yuzhang/StoreApp.vue'
+import StoreApp from '../components/yuzhang/StoreApp.vue';
 export default {
   name: 'desktop',
   components: {
@@ -150,7 +155,7 @@ export default {
     ExplorerApp,
     PdfApp,
     BeginBar,
-    StoreApp
+    StoreApp,
   },
   data() {
     return {
@@ -182,7 +187,7 @@ export default {
         explorer: 'true',
         bin: 'true',
         pdf: 'true',
-        store:'true'
+        store: 'true',
       },
       winHide: {
         // 窗口是否隐藏：false 否 true 是
@@ -197,22 +202,22 @@ export default {
         explorer: 'true',
         bin: 'true',
         pdf: 'true',
-        store:'true'
+        store: 'true',
       },
       winSize: {
         // 窗口尺寸：normal 还原窗口 max 最大化窗口
         // 通过改变对应 app 的该数组项来控制窗口的**最大化和还原**：
         // * normal -> max : 从还原状态到最大化
         // * max -> normal : 从最大化状态到还原
-        edge: "max",
-        vscode: "max",
-        markdown: "normal",
-        notepad: "normal",
-        computer: "normal",
-        explorer: "normal",
-        bin: "normal",
-        pdf: "max",
-        store:'true'
+        edge: 'max',
+        vscode: 'max',
+        markdown: 'normal',
+        notepad: 'normal',
+        computer: 'normal',
+        explorer: 'normal',
+        bin: 'normal',
+        pdf: 'max',
+        store: 'true',
       },
       zIndex: {
         edge: 0,
@@ -223,14 +228,14 @@ export default {
         explorer: 0,
         bin: 0,
         pdf: 0,
-        store:0
+        store: 0,
       },
       //#endregion
 
       isShowControls: false, //是否展示状态栏
       isOpenLightmode: false, //是否开启夜间模式
       Lightness: 0, //亮度
-      isShowStartMenu:false,//是否展示开始栏
+      isShowStartMenu: false, //是否展示开始栏
     };
   },
   methods: {
@@ -265,6 +270,9 @@ export default {
       this.$refs['taskBar'].closeDateAndControls();
       // 记事本
       this.$refs['notepadApp'].closeFileMenu();
+      if(this.isShowStartMenu){
+        this.showStartmenu();
+      }
     },
     // 3. clickMenu的事件回调
     menuJudge(arr) {
@@ -306,15 +314,15 @@ export default {
     // 1 提供给**窗口子组件**的回调函数
     // 请在窗口子组件的右上角三个按钮的事件函数中使用 $emit 调用该函数以调整窗口状态
     winStateChange(appname, e) {
-      console.log(appname,e)
+      console.log(appname, e);
       // appname 应用名称的唯一标识符
       // e 事件编码：0 关闭按钮被按下 1 最小化按钮被按下 2 最大化/还原按钮被按下
       //            3 任务栏图标被按下 4 桌面图标或开始菜单被按下
       if (e === 0) {
         // 关闭按钮被按下
         this.winHide[appname] = 'true';
-        if(appname==='notepad') this.currentFile = {};
-        this.$refs["taskBar"].changeApp(appname, 0);
+        if (appname === 'notepad') this.currentFile = {};
+        this.$refs['taskBar'].changeApp(appname, 0);
         this.setZIndex(appname, 0);
       } else if (e === 1) {
         // 最小化按钮被按下
@@ -326,30 +334,27 @@ export default {
         else this.winSize[appname] = 'normal';
       } else if (e === 3) {
         // 任务栏图标被按下
-        if(this.winHide[appname] === 'false') {
+        if (this.winHide[appname] === 'false') {
           // 切换逻辑
           if (this.winMax[appname] === 'false') {
             // 当应用处于最小化状态时
             this.setZIndex(appname);
             this.winMax[appname] = 'true';
-            this.$refs["taskBar"].changeApp(appname, 2);
-          }
-          else {
+            this.$refs['taskBar'].changeApp(appname, 2);
+          } else {
             // 当应用处于非最小化状态时
-            if(this.getActiveWin() === appname) {
+            if (this.getActiveWin() === appname) {
               // 应用为当前活动窗口，最小化它并切换下一个窗口为活动窗口
               this.winMax[appname] = 'false';
               this.setZIndex(appname, 0);
-              this.$refs["taskBar"].changeApp(appname, 1);
-            }
-            else {
+              this.$refs['taskBar'].changeApp(appname, 1);
+            } else {
               // 否则，切换它
               this.setZIndex(appname);
-              this.$refs["taskBar"].changeApp(appname, 2);
+              this.$refs['taskBar'].changeApp(appname, 2);
             }
           }
-        }
-        else {
+        } else {
           // 打开逻辑
           this.setZIndex(appname);
           this.winHide[appname] = 'false';
@@ -409,8 +414,8 @@ export default {
     responseTaskbarAction(appname) {
       if (appname === 'home') {
         console.log('todo: 打开开始菜单');
-        this.showStartmenu()
-        console.log(this.isShowStartMenu)
+        this.showStartmenu();
+        console.log(this.isShowStartMenu);
       } else if (appname === 'search') {
         console.log('todo: 打开搜索栏');
       } else if (appname === 'widget') {
@@ -423,29 +428,28 @@ export default {
 
     // 6 窗口调度
     setZIndex(appname, val) {
-      if(typeof val === "undefined"){
+      if (typeof val === 'undefined') {
         this.zIndex[appname] = this.currentZIndex;
         this.currentZIndex++;
-      }
-      else {
+      } else {
         this.zIndex[appname] = val;
       }
     },
     getActiveWin() {
-      let appname = "";
+      let appname = '';
       let zindex;
-      for(let i in this.zIndex) {
-        if(!appname) {
+      for (let i in this.zIndex) {
+        if (!appname) {
           appname = i;
           zindex = this.zIndex[i];
           continue;
         }
-        if(this.zIndex[appname]<this.zIndex[i]) {
+        if (this.zIndex[appname] < this.zIndex[i]) {
           appname = i;
           zindex = this.zIndex[i];
         }
       }
-      if(zindex === 0) return "";
+      if (zindex === 0) return '';
       // console.log(appname);
       this.currentZIndex = zindex + 1;
       return appname;
@@ -466,9 +470,9 @@ export default {
     getLightnesss(Lightness) {
       this.Lightness = 1 - Lightness / 100;
     },
-    showStartmenu(){
-      this.isShowStartMenu=!this.isShowStartMenu
-    }
+    showStartmenu() {
+      this.isShowStartMenu = !this.isShowStartMenu;
+    },
   },
 };
 </script>
