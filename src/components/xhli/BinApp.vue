@@ -83,18 +83,21 @@
                     >
                         <div
                             v-for="(item,index) in list"
-                            :key="index"
+                            :key="index"                            
                         >
                             <div 
                                 class="list-title" 
+                                @click="handleListShow(index)"
                             >
-                                <img width="10" src="../../assets/img/binIcons/shortArrowDown.png"/>
+                                <img v-if="item.isShow" width="10" src="../../assets/img/binIcons/shortArrowDown.png"/>
+                                <img v-if="!item.isShow" width="10" src="../../assets/img/binIcons/shortArrowRight.png"/>
                                 <img width="16" v-bind:src="item.icon"/>
                                 <span>{{item.name}}</span>
                             </div>
                             <div class="list-content"
                                 v-for="(child,indexC) in list[index].children"
                                 :key="indexC" 
+                                v-show="list[index].isShow"
                             >
                         
                                 <div>
@@ -215,9 +218,9 @@ export default {
         this.$emit("winStateChange", "bin", 0)
         },
 
-        // handleListShow(index) {
-        //     this.list[index].isShow = !this.list[index].isShow
-        // }
+        handleListShow(index) {
+            this.list[index].isShow = !this.list[index].isShow
+        }
     }
 }
 </script>
