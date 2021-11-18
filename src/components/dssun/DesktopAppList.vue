@@ -104,7 +104,7 @@ export default {
         computer: "",
         explorer: "",
         bin: "",
-        github: "https://github.com/",
+        github: "https://github.com/DiF1202/win11_vue",
         pdf:"",
         store:''
       },
