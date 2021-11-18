@@ -5,6 +5,7 @@
     :win-max="winMax"
     :win-hide="winHide"
     @click="closeFileMenu"
+    @keydown.ctrl.s.prevent="saveBtnClick"
   >
     <!-- 标题栏 -->
     <div class="toolbar">
