@@ -12,8 +12,8 @@
       <div class="tasksCont">
         <div
           class="taskIcon"
-          v-for="(appname, index) in activeAppList"
-          :key="index"
+          v-for="appname in activeAppList"
+          :key="appname"
           @mousedown="taskIconMouseDown"
           @mouseup="taskIconMouseUp"
           @mouseleave="taskIconMouseLeave"
@@ -161,20 +161,34 @@ export default {
     changeApp(appname, e) {
       // e: 0 关闭 1 最小化 2 任务栏按下 3 打开 4 记事本打开txt文件特殊处理
       if (e === 0) {
-        this.openedAppOrder.pop();
+        this.openedAppOrder.splice(this.openedAppOrder.indexOf(appname), 1);
         if (this.initialAppList.indexOf(appname) === -1) {
           this.activeAppList.splice(this.activeAppList.indexOf(appname), 1);
         }
       } else if (e === 1) {
         this.minApps.push(this.openedAppOrder.pop());
       } else if (e === 2) {
+        // 任务栏按下
         if (this.minApps.indexOf(appname) !== -1) {
+          // 如果最小化的应用列表有它，把它最大化
           this.openedAppOrder.push(appname);
           this.minApps.splice(this.minApps.indexOf(appname), 1);
         } else if (this.openedAppOrder.indexOf(appname) !== -1) {
-          this.openedAppOrder.splice(this.openedAppOrder.indexOf(appname), 1);
-          this.minApps.push(appname);
+          // 如果打开的应用中有它
+          if(this.$emit("getActiveWin") === appname){
+            // 如果它是当前窗口，最小化它
+            this.openedAppOrder.splice(this.openedAppOrder.indexOf(appname), 1);
+            console.log(this.openedAppOrder);
+            this.minApps.push(appname);
+          }
+          else {
+            // 否则，切换到它
+            this.openedAppOrder.splice(this.openedAppOrder.indexOf(appname), 1);
+            this.openedAppOrder.push(appname);
+          }
+          
         } else {
+          // 否则，打开它
           this.openedAppOrder.push(appname);
         }
       } else {
@@ -189,6 +203,7 @@ export default {
           }
           this.openedAppOrder.push(appname);
         }
+        console.log(this.openedAppOrder);
       }
     },
     getAppState(appname) {
@@ -226,6 +241,7 @@ export default {
 
 <style lang="scss" scoped>
 .taskBar {
+  z-index: 999;
   height: 39px;
   width: 100%;
   background-color: rgba(243, 243, 243, 0.83);

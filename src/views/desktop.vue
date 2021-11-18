@@ -5,12 +5,12 @@
         <!-- 鼠标右键出现的列表 -->
         <Click @clickMenu="menuJudge"></Click>
         <!-- 鼠标右键图标出现的列表 -->
-        <IconMenu @iconMenu='iconEvent'></IconMenu>
+        <IconMenu @iconMenu="iconEvent"></IconMenu>
         <!-- 桌面图标列表组件 -->
         <AppList
           :displayMode="displayMode"
           :sortMethod="sortMethod"
-          @contextmenu.stop.prevent="iconMenu" 
+          @contextmenu.stop.prevent="iconMenu"
           @winStateChange="winStateChange"
           @changeDeskIconSize="changeDeskIconSize"
           @openTxtFile="openTxtFile"
@@ -19,6 +19,7 @@
         ></AppList>
         <!-- Edge应用窗口 -->
         <EdgeApp
+          :zIndex="{'z-index': zIndex['edge']}"
           :winMax="winMax['edge']"
           :winHide="winHide['edge']"
           :winSize="winSize['edge']"
@@ -26,6 +27,7 @@
         ></EdgeApp>
         <!-- VSCode应用窗口 -->
         <VscodeApp
+          :zIndex="{'z-index': zIndex['vscode']}"
           :winMax="winMax['vscode']"
           :winHide="winHide['vscode']"
           :winSize="winSize['vscode']"
@@ -33,16 +35,18 @@
         ></VscodeApp>
         <!-- Notepad应用窗口 -->
         <NotepadApp
+          :zIndex="{'z-index': zIndex['notepad']}"
           :winMax="winMax['notepad']"
           :winHide="winHide['notepad']"
           :winSize="winSize['notepad']"
           :currentFile="currentFile"
-          ref='notepadApp'
+          ref="notepadApp"
           @winStateChange="winStateChange"
           @saveTxtFile="saveTxtFile"
         ></NotepadApp>
         <!-- Markdown应用窗口 -->
         <MarkdownApp
+          :zIndex="{'z-index': zIndex['markdown']}"
           :winMax="winMax['markdown']"
           :winHide="winHide['markdown']"
           :winSize="winSize['markdown']"
@@ -50,6 +54,7 @@
         ></MarkdownApp>
         <!-- Computer应用窗口 -->
         <ComputerApp
+          :zIndex="{'z-index': zIndex['computer']}"
           :winMax="winMax['computer']"
           :winHide="winHide['computer']"
           :winSize="winSize['computer']"
@@ -57,6 +62,7 @@
         ></ComputerApp>
         <!-- Explorer应用窗口 -->
         <ExplorerApp
+          :zIndex="{'z-index': zIndex['explorer']}"
           :winMax="winMax['explorer']"
           :winHide="winHide['explorer']"
           :winSize="winSize['explorer']"
@@ -64,22 +70,26 @@
         ></ExplorerApp>
         <!-- Bin应用窗口 -->
         <BinApp
+          :zIndex="{'z-index': zIndex['bin']}"
           :winMax="winMax['bin']"
           :winHide="winHide['bin']"
           :winSize="winSize['bin']"
           @winStateChange="winStateChange"
         />
         <!--Pdf文件窗口-->
-        <PdfApp :winMax="winMax['pdf']"
+        <PdfApp
+          :zIndex="{'z-index': zIndex['pdf']}"
+          :winMax="winMax['pdf']"
           :winHide="winHide['pdf']"
           :winSize="winSize['pdf']"
-          @winStateChange="winStateChange">
+          @winStateChange="winStateChange"
+        >
         </PdfApp>
       </div>
 
       <!-- 状态栏弹框+护眼模式 -->
       <transition name="el-fade-in">
-        <div v-show="isShowControls">
+        <div v-show="isShowControls" style="z-index: 999;">
           <ControlCenter
             @toggleLightMode="toggleLightMode"
             @changeLightnesss="getLightnesss"
@@ -87,7 +97,14 @@
         </div>
       </transition>
       <!-- 任务栏 -->
-      <BarTask @showControls="showControls" @responseTaskbarAction="responseTaskbarAction" ref="taskBar"></BarTask>
+      <BarTask 
+        @showControls="showControls" 
+        @responseTaskbarAction="responseTaskbarAction" 
+        @getActiveWin="getActiveWin" 
+        ref="taskBar"
+      ></BarTask>
+      <!-- 开始栏 -->
+      <BeginBar @winStateChange="winStateChange" :isShowStartMenu="isShowStartMenu" @showStartmenu="showStartmenu"></BeginBar>
     </div>
   </div>
 </template>
@@ -97,7 +114,7 @@ import BarTask from '../components/dfhe/BarTask.vue';
 import ControlCenter from '../components/dfhe/ControlCenter.vue';
 import AppList from '../components/dssun/DesktopAppList.vue';
 import Click from '../components/panzhou/click.vue';
-import IconMenu from '../components/panzhou/iconMenu'
+import IconMenu from '../components/panzhou/iconMenu';
 import EdgeApp from '../components/dssun/EdgeApp.vue';
 import VscodeApp from '../components/dssun/VscodeApp.vue';
 import NotepadApp from '../components/dssun/NotepadApp.vue';
@@ -105,7 +122,11 @@ import MarkdownApp from '../components/xhli/MarkdownApp.vue';
 import BinApp from '../components/xhli/BinApp.vue';
 import ExplorerApp from '../components/yuzhang/FileExplorer.vue';
 import PdfApp from '../components/yuzhang/PdfApp.vue';
+<<<<<<< HEAD
 import ComputerApp from '../components/xhli/ComputerApp.vue'
+=======
+import BeginBar from '../components/dfhe/BeginBar.vue';
+>>>>>>> 18cfb78d7e19af97a7623f84ebf21a4c638c3fc2
 export default {
   name: 'desktop',
   components: {
@@ -122,20 +143,23 @@ export default {
     ComputerApp,
     ExplorerApp,
     PdfApp,
+    BeginBar,
   },
   data() {
     return {
       //#region  dssun 控制的 data
       displayMode: 'small', // 控制桌面图标大小：small 小图标（默认） middle 中图标 big 大图标
       sortMethod: 'date', // 控制图标排序方式：size 按大小 date 按时间 name 按名称
+      currentZIndex: 1,
       currentFile: {}, // 记事本当前文件
       noteFiles: {
         // 记事本保存的内容
         'Todo List.txt': {
           fileName: 'Todo List.txt',
-          content: '重生之我是尤Vue溪\n\n' + 
-                   '正在进行的任务：\n* 右键菜单-刷新、图标排序、新建文件/文件夹（攀攀）\n* 开始菜单、搜索栏、资讯栏（小斐）\n* 窗口层叠调度（大森）\n* 手风琴（心慧）\n* 计算机、文件资源管理器窗口组件（羽羽）\n\n' + 
-                   '未开始的组件开发：\n* 应用商店\n* 更换桌面壁纸\n* 计算器\n* 音乐播放器（可选）\n* 终端（可选）\n',
+          content:
+            '重生之我是尤Vue溪\n\n' +
+            '正在进行的任务：\n* 右键菜单-刷新、图标排序、新建文件/文件夹（攀攀）\n* 开始菜单、搜索栏、资讯栏（小斐）\n* 窗口层叠调度（大森）\n* 手风琴（心慧）\n* 计算机、文件资源管理器窗口组件（羽羽）\n\n' +
+            '未开始的组件开发：\n* 应用商店\n* 更换桌面壁纸\n* 计算器\n* 音乐播放器（可选）\n* 终端（可选）\n',
         },
       },
       winMax: {
@@ -150,7 +174,7 @@ export default {
         computer: 'true',
         explorer: 'true',
         bin: 'true',
-        pdf:'true',
+        pdf: 'true',
       },
       winHide: {
         // 窗口是否隐藏：false 否 true 是
@@ -164,7 +188,7 @@ export default {
         computer: 'true',
         explorer: 'true',
         bin: 'true',
-        pdf:'true'
+        pdf: 'true',
       },
       winSize: {
         // 窗口尺寸：normal 还原窗口 max 最大化窗口
@@ -178,13 +202,24 @@ export default {
         computer: "normal",
         explorer: "normal",
         bin: "normal",
-        pdf:"max"
+        pdf: "max",
+      },
+      zIndex: {
+        edge: 0,
+        vscode: 0,
+        markdown: 0,
+        notepad: 0,
+        computer: 0,
+        explorer: 0,
+        bin: 0,
+        pdf: 0,
       },
       //#endregion
 
       isShowControls: false, //是否展示状态栏
       isOpenLightmode: false, //是否开启夜间模式
       Lightness: 0, //亮度
+      isShowStartMenu:false,//是否展示开始栏
     };
   },
   methods: {
@@ -196,24 +231,24 @@ export default {
         clientX,
         clientY,
         vis: true,
-        iconVis: false
+        iconVis: false,
       });
     },
-    // 2. 
+    // 2.
     iconMenu(e) {
       const { clientX, clientY } = e;
       this.$store.commit('setClick', {
         clientX,
         clientY,
         vis: false,
-        iconVis: true
+        iconVis: true,
       });
     },
     // 2. 鼠标左键点击关闭小弹框
     closeClick() {
       this.$store.commit('setClick', {
         vis: false,
-        iconVis:false,
+        iconVis: false,
       });
       // 任务栏
       this.$refs['taskBar'].closeDateAndControls();
@@ -236,8 +271,8 @@ export default {
         case 3:
           break;
         case 4:
-          if(idx == 0)this.newFile('folder');
-          if(idx == 2)this.newFile('txt'); 
+          if (idx == 0) this.newFile('folder');
+          if (idx == 2) this.newFile('txt');
           break;
         case 5:
           break;
@@ -249,9 +284,9 @@ export default {
     },
     // 4.iconMenu 图标右键菜单回调
     iconEvent(idx) {
-      switch(idx) {
+      switch (idx) {
         case 0:
-          break
+          break;
       }
     },
     //#endregion
@@ -260,36 +295,63 @@ export default {
     // 1 提供给**窗口子组件**的回调函数
     // 请在窗口子组件的右上角三个按钮的事件函数中使用 $emit 调用该函数以调整窗口状态
     winStateChange(appname, e) {
+      console.log(appname,e)
       // appname 应用名称的唯一标识符
-      // e 事件编码：0 关闭按钮被按下 1 最小化按钮被按下 2 最大化/还原按钮被按下 
+      // e 事件编码：0 关闭按钮被按下 1 最小化按钮被按下 2 最大化/还原按钮被按下
       //            3 任务栏图标被按下 4 桌面图标或开始菜单被按下
       if (e === 0) {
+        // 关闭按钮被按下
         this.winHide[appname] = 'true';
         if(appname==='notepad') this.currentFile = {};
         this.$refs["taskBar"].changeApp(appname, 0);
+        this.setZIndex(appname, 0);
       } else if (e === 1) {
+        // 最小化按钮被按下
         this.winMax[appname] = 'false';
-        this.$refs["taskBar"].changeApp(appname, 1);
+        this.$refs['taskBar'].changeApp(appname, 1);
       } else if (e === 2) {
+        // 最大化/还原按钮被按下
         if (this.winSize[appname] === 'normal') this.winSize[appname] = 'max';
         else this.winSize[appname] = 'normal';
       } else if (e === 3) {
+        // 任务栏图标被按下
         if(this.winHide[appname] === 'false') {
-          if (this.winMax[appname] === 'false') this.winMax[appname] = 'true';
-          else this.winMax[appname] = 'false';
-          this.$refs["taskBar"].changeApp(appname, 2);
+          // 切换逻辑
+          if (this.winMax[appname] === 'false') {
+            // 当应用处于最小化状态时
+            this.setZIndex(appname);
+            this.winMax[appname] = 'true';
+            this.$refs["taskBar"].changeApp(appname, 2);
+          }
+          else {
+            // 当应用处于非最小化状态时
+            if(this.getActiveWin() === appname) {
+              // 应用为当前活动窗口，最小化它并切换下一个窗口为活动窗口
+              this.winMax[appname] = 'false';
+              this.setZIndex(appname, 0);
+              this.$refs["taskBar"].changeApp(appname, 1);
+            }
+            else {
+              // 否则，切换它
+              this.setZIndex(appname);
+              this.$refs["taskBar"].changeApp(appname, 2);
+            }
+          }
         }
         else {
+          // 打开逻辑
+          this.setZIndex(appname);
           this.winHide[appname] = 'false';
-          this.$refs["taskBar"].changeApp(appname, 3);
+          this.$refs['taskBar'].changeApp(appname, 3);
         }
-        
       } else {
+        // 桌面图标或开始菜单被按下
+        this.setZIndex(appname);
         this.winHide[appname] = 'false';
-        if(this.$refs["taskBar"].getAppState(appname)) {
-          if(this.winMax[appname] === 'false') this.winMax[appname] = 'true';
+        if (this.$refs['taskBar'].getAppState(appname)) {
+          if (this.winMax[appname] === 'false') this.winMax[appname] = 'true';
         }
-        this.$refs["taskBar"].changeApp(appname, 3);
+        this.$refs['taskBar'].changeApp(appname, 3);
       }
     },
 
@@ -303,7 +365,7 @@ export default {
     },
     // 请在右键菜单子组件的切换图标排列方式的事件函数中使用 $emit 调用该函数以调整桌面图标排列方式
     changeDeskIconSort(sortMethod) {
-      console.log(sortMethod);
+      // console.log(sortMethod);
       // sortMethod 要切换成的图标排序方式：0 按时间 1 按名称 2 按大小
       if (sortMethod === 0) this.sortMethod = 'date';
       else if (sortMethod === 1) this.sortMethod = 'name';
@@ -322,8 +384,8 @@ export default {
     newTxtFile(filename) {
       this.noteFiles[filename] = {
         fileName: filename,
-        content: "",
-      }
+        content: '',
+      };
     },
 
     // 4 提供给记事本的回调函数
@@ -334,19 +396,48 @@ export default {
 
     // 5 提供给任务栏的回调函数
     responseTaskbarAction(appname) {
-      if(appname === "home") {
-        console.log("todo: 打开开始菜单");
+      if (appname === 'home') {
+        console.log('todo: 打开开始菜单');
+        this.showStartmenu()
+        console.log(this.isShowStartMenu)
+      } else if (appname === 'search') {
+        console.log('todo: 打开搜索栏');
+      } else if (appname === 'widget') {
+        console.log('todo: 打开资讯栏');
+      } else {
+        if (appname === 'settings') return;
+        this.winStateChange(appname, 3);
       }
-      else if(appname === "search") {
-        console.log("todo: 打开搜索栏");
-      }
-      else if(appname === "widget") {
-        console.log("todo: 打开资讯栏");
+    },
+
+    // 6 窗口调度
+    setZIndex(appname, val) {
+      if(typeof val === "undefined"){
+        this.zIndex[appname] = this.currentZIndex;
+        this.currentZIndex++;
       }
       else {
-        if(appname === "settings") return;
-        this.winStateChange(appname,3);
+        this.zIndex[appname] = val;
       }
+    },
+    getActiveWin() {
+      let appname = "";
+      let zindex;
+      for(let i in this.zIndex) {
+        if(!appname) {
+          appname = i;
+          zindex = this.zIndex[i];
+          continue;
+        }
+        if(this.zIndex[appname]<this.zIndex[i]) {
+          appname = i;
+          zindex = this.zIndex[i];
+        }
+      }
+      if(zindex === 0) return "";
+      // console.log(appname);
+      this.currentZIndex = zindex + 1;
+      return appname;
     },
 
     //#endregion
@@ -364,6 +455,9 @@ export default {
     getLightnesss(Lightness) {
       this.Lightness = 1 - Lightness / 100;
     },
+    showStartmenu(){
+      this.isShowStartMenu=!this.isShowStartMenu
+    }
   },
 };
 </script>

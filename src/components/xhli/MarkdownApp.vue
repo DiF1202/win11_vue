@@ -1,6 +1,7 @@
 <template>
   <div
     class="markdown floatTab dpShadow"
+    :style="zIndex"
     :win-size="winSize"
     :win-max="winMax"
     :win-hide="winHide"
@@ -55,6 +56,7 @@ export default {
     winSize: String, // 窗口尺寸：normal 还原窗口 max 最大化窗口
     winMax: String, // 窗口是否最大化：false 否 true 是
     winHide: String, // 窗口是否隐藏：false 否 true 是
+    zIndex: Object,
   },
   components: {
     MdEditor,
