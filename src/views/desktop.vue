@@ -1,6 +1,6 @@
 <template>
   <div class="desktop-shade" :style="{ '--opacity': Lightness }">
-    <div class="desktop" :class="{ 'night-light': isOpenLightmode }">
+    <div class="desktop" :style="{backgroundImage:'url('+ bgArr[bgIdx] +')'}" :class="{ 'night-light': isOpenLightmode }">
       <div class="main" @click="closeClick" @contextmenu.prevent="rightClick">
         <!-- 鼠标右键出现的列表 -->
         <Click @clickMenu="menuJudge"></Click>
@@ -236,6 +236,17 @@ export default {
       isOpenLightmode: false, //是否开启夜间模式
       Lightness: 0, //亮度
       isShowStartMenu: false, //是否展示开始栏
+      bgIdx:0, // 背景图片
+      bgArr: [ 
+        require('../assets/img/wallpapers/light.jpg'),
+        require('../assets/img/wallpapers/dark.jpg'),
+        require('../assets/img/wallpapers/leisai.jpg'),
+        require('../assets/img/wallpapers/dianCiJun.jpg'),
+        require('../assets/img/wallpapers/xiaofei.png'),
+        require('../assets/img/wallpapers/xinhui.jpg'),
+        require('../assets/img/wallpapers/xinhui1.jpg'),
+        require('../assets/img/wallpapers/xinhui2.jpg'),
+      ]
     };
   },
   methods: {
@@ -283,21 +294,14 @@ export default {
           this.changeDeskIconSize(idx); // 切换图标
           break;
         case 1:
-          this.changeDeskIconSort(2); // 排序
-          break;
-        case 2:
-          break;
-        case 3:
+          this.changeDeskIconSort(idx); // 排序
           break;
         case 4:
           if (idx == 0) this.newFile('folder');
           if (idx == 2) this.newFile('txt');
           break;
         case 5:
-          break;
-        case 6:
-          break;
-        case 7:
+          this.changeBg();
           break;
       }
     },
@@ -307,6 +311,10 @@ export default {
         case 0:
           break;
       }
+    },
+    // 5. changeBg 更换背景
+    changeBg(){
+      this.bgIdx += 1;
     },
     //#endregion
 
@@ -381,9 +389,9 @@ export default {
     // 请在右键菜单子组件的切换图标排列方式的事件函数中使用 $emit 调用该函数以调整桌面图标排列方式
     changeDeskIconSort(sortMethod) {
       // sortMethod 要切换成的图标排序方式：0 按时间 1 按名称 2 按大小
-      if (sortMethod === 0) this.sortMethod = 'date';
-      else if (sortMethod === 1) this.sortMethod = 'name';
-      else this.sortMethod = 'size';
+      if (sortMethod === 3) this.sortMethod = 'date';
+      else if (sortMethod === 0) this.sortMethod = 'name';
+      else if (sortMethod === 1)this.sortMethod = 'size';
     },
     // 请在右键菜单子组件的新建文件、文件夹的事件函数中使用 $emit 调用该函数
     newFile(fileType) {
@@ -469,6 +477,12 @@ export default {
       this.isShowStartMenu = !this.isShowStartMenu;
     },
   },
+  watch:{
+    bgIdx() {
+      const n = this.bgArr.length;
+      this.bgIdx == n && (this.bgIdx = 0 )
+    }
+  }
 };
 </script>
 
@@ -479,7 +493,6 @@ export default {
   justify-content: flex-end;
   width: 100vw;
   height: 100vh;
-  background-image: url('../assets/img/wallpapers/light.jpg');
   background-position: center;
   background-size: cover;
   overflow: hidden;

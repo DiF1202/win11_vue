@@ -7,7 +7,7 @@
       <div class="refresh"><i></i>刷新</div>
       <div class="git"><i></i>Git Bash Here</div>
       <div class="new" @mouseenter="stayItem(4)"><i></i>新建<span></span></div>
-      <div class="changeBg"><i></i>更换背景</div>
+      <div class="changeBg" @mouseenter="stayItem(5)" @click.stop="tryEmit(false)"><i></i>更换背景</div>
       <div class="setting"><i></i>设置</div>
       <div class="personal"><i></i>个性化</div>
     </div>
@@ -43,6 +43,7 @@ export default {
     // menu停留显示单选项
     stayItem(val) {
       this.itemVis = true;
+      if(val == 5) this.itemVis = false;
       this.cur = val; // 确定当前是哪一个 Item
       this.detail = this.details[val];
       switch(val) {

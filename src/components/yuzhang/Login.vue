@@ -1,26 +1,13 @@
-<template >
+<template>
   <div class="bg">
     <div class="mask"></div>
     <div id="log">
-      <el-avatar
-        src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        size="100"
-      ></el-avatar>
+      <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" size="100"></el-avatar>
       <div id="username">Yuki</div>
       <div class="el-input--suffix el-input">
-        <input
-          type="text"
-          autocomplete="off"
-          :placeholder="content"
-          class="el-input__inner"
-        /><span class="el-input__suffix"
-          ><span class="el-input__suffix-inner"
-            ><a href="#"
-              ><img
-                height="40"
-                width="40"
-                src="../../assets/img/login/rightrow.png" /></a></span
-        ></span>
+        <input type="text" @keyup="keyEvent" autocomplete="off" :placeholder="content" class="el-input__inner" /><span
+          class="el-input__suffix"><span class="el-input__suffix-inner"><img @click="goDeskTop" height="40" width="40"
+              src="../../assets/img/login/rightrow.png" /></span></span>
       </div>
       <div class="fgmypw">
         忘记密码<br />
@@ -30,19 +17,11 @@
         <br />
       </div>
       <div class="logimg">
-        <a href="javascript:void(0);"
-          ><img
-            :class="a"
-            @click="changeBorderA"
-            src="../../assets/img/login/pinlock.png"
-        /></a>
+        <a href="javascript:void(0);"><img :class="a" @click="changeBorderA"
+            src="../../assets/img/login/pinlock.png" /></a>
         <span width="10px"></span>
         <a href="javascript:void(0);">
-          <img
-            :class="b"
-            @click="changeBorderB"
-            src="../../assets/img/login/passkey.png"
-        /></a>
+          <img :class="b" @click="changeBorderB" src="../../assets/img/login/passkey.png" /></a>
       </div>
     </div>
   </div>
@@ -71,6 +50,12 @@ export default {
       this.a = '';
       this.content = '密码';
     },
+    keyEvent(e) {
+      if(e.keyCode == 13) this.$router.push('/deskTop');
+    },
+    goDeskTop() {
+      this.$router.push('/deskTop')
+    }
   },
 };
 </script>

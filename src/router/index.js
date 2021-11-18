@@ -11,7 +11,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 const routes = [
   {
     path: "/",
-    redirect: "/desktop",
+    redirect: "/open",
   },
   {
     path: "/desktop",
