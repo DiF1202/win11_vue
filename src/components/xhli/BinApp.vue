@@ -76,39 +76,28 @@
                     </div>
                 </div>
                 <div class="bin-main-container">
-                    <div class="bin-main-navBar">
-                        <div class="list-title" @click="handleListShow">
+                    <div 
+                        class="bin-main-navBar"
+                        v-for="(item,index) in list"
+                        :key="index"
+                    >
+                        <div 
+                            class="list-title" 
+                        >
                             <img width="10" src="../../assets/img/binIcons/shortArrowDown.png"/>
-                            <img width="16" src="../../assets/img/binIcons/star.png"/>
-                            <span>快速访问</span>
+                            <img width="16" v-bind:src="item.icon"/>
+                            <span>{{item.name}}</span>
                         </div>
-                        <div class="list">
+                        <div class="list-content"
+                            v-for="(child,indexC) in list[index].children"
+                            :key="indexC"
+                            
+                        >
+                       
                             <div>
-                                <img width="18" src="../../assets/img/binIcons/desktop.png"/>
-                                <span>桌面</span>
+                                <img width="18" v-bind:src="child.icon"/>
+                                <span>{{child.name}}</span>
                             </div>
-                            <div>
-                                <img width="18" src="../../assets/img/binIcons/download.png"/>
-                                <span>下载</span>
-                            </div>
-                            <div>
-                                <img width="18" src="../../assets/img/binIcons/document.png"/>
-                                <span>文档</span>
-                            </div>
-                            <div>
-                                <img width="18" src="../../assets/img/binIcons/image.png"/>
-                                <span>图片</span>
-                            </div>
-                        </div>
-                        <div class="list-title">
-                            <img width="10" src="../../assets/img/binIcons/shortArrowRight.png"/>
-                            <img width="16" src="../../assets/img/binIcons/computer.png"/>
-                            <span>此电脑</span>
-                        </div>
-                        <div class="list-title">
-                            <img width="10" src="../../assets/img/binIcons/shortArrowRight.png"/>
-                            <img width="16" src="../../assets/img/binIcons/network.png"/>
-                            <span>网络</span>
                         </div>
                     </div>
                     <div class="bin-main-content">
@@ -134,6 +123,81 @@ export default {
         winMax: String, // 窗口是否最大化：false 否 true 是
         winHide: String, // 窗口是否隐藏：false 否 true 是
     },
+    data(){
+        return {
+            list: [
+                {
+                    name: '快速访问',
+                    icon: require('../../assets/img/binIcons/star.png'),
+                    isShow: true,
+                    children: [
+                        {
+                            name: '桌面',
+                            icon: require('../../assets/img/binIcons/desktop.png'),
+                        },
+                        {
+                            name: '下载',
+                            icon: require('../../assets/img/binIcons/download.png'),
+                        },
+                        {
+                            name: '文档',
+                            icon: require('../../assets/img/binIcons/document.png'),
+                        },
+                        {
+                            name: '图片',
+                            icon: require('../../assets/img/binIcons/image.png'),
+                        }
+                    ]
+                },
+                {
+                    name: '此电脑',
+                    icon: require('../../assets/img/binIcons/computer.png'),
+                    isShow: false,
+                    children: [
+                        {
+                            name: '视频',
+                            icon: require('../../assets/img/binIcons/radio.png'),
+                        },
+                        {
+                            name: '图片',
+                            icon: require('../../assets/img/binIcons/image.png'),
+                        },
+                        {
+                            name: '文档',
+                            icon: require('../../assets/img/binIcons/document.png'),
+                        },
+                        {
+                            name: '下载',
+                            icon: retuire('../../assets/img/binIcons/download.png'),
+                        },
+                        {
+                            name: '音乐',
+                            icon: require('../../assets/img/binIcons/music.png'),
+                        },
+                        {
+                            name: '桌面',
+                            icon: require('../../assets/img/binIcons/desktop.png'),
+                        },
+                        {
+                            name: 'Windows(C:)',
+                            icon: require('../../assets/img/binIcons/cDisk.png'),
+                        },
+                        {
+                            name: 'Windows(D:)',
+                            icon: require('../../assets/img/binIcons/disk.png'),
+                        }
+                    ]
+                },
+                // {
+                //     name: '网络',
+                //     icon: retuire('../../assets/img/binIcons/network.png'),
+                //     isShow: false,
+                //     children: null
+                // }   
+            ]
+        }
+    },
+            
     methods: {
          // 标题栏按钮点击事件
         clickMinBtn() {
@@ -146,9 +210,9 @@ export default {
         this.$emit("winStateChange", "bin", 0)
         },
 
-        handleListShow() {
-
-        }
+        // handleListShow(index) {
+        //     this.list[index].isShow = !this.list[index].isShow
+        // }
     }
 }
 </script>
@@ -351,11 +415,11 @@ export default {
     padding-left: 10px;
     align-items: center;
 }
-.list {
+.list-content {
     width: 123px;
     padding-left: 35px;
 }
-.list div{
+.list-content div{
     display: flex;
     column-gap: 5px;
     height: 32px;
