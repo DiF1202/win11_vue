@@ -37,6 +37,7 @@
           :winHide="winHide['notepad']"
           :winSize="winSize['notepad']"
           :currentFile="currentFile"
+          ref='notepadApp'
           @winStateChange="winStateChange"
           @saveTxtFile="saveTxtFile"
         ></NotepadApp>
@@ -119,7 +120,7 @@ export default {
     BinApp,
     // ComputerApp,
     ExplorerApp,
-    PdfApp
+    PdfApp,
   },
   data() {
     return {
@@ -213,6 +214,10 @@ export default {
         vis: false,
         iconVis:false,
       });
+      // 任务栏
+      this.$refs['taskBar'].closeDateAndControls();
+      // 记事本
+      this.$refs['notepadApp'].closeFileMenu();
     },
     // 3. clickMenu的事件回调
     menuJudge(arr) {

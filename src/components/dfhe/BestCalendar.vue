@@ -1,5 +1,5 @@
 <template>
-  <div class="calendar-show calendar">
+  <div class="calendar-show calendar" @click.stop=";">
     <div class="datetoday-header">
       <span class="datespan">{{ currentDate.format('dddd, MMMM D') }}日</span>
     </div>

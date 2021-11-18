@@ -15,16 +15,6 @@
       v-if="ifNewFile"
       @newItemCallback="newItemCallback"
     ></NewItem>
-    <!-- 测试 -->
-    <div class="testdiv">
-      <div class="test">当前可以点的图标：</div>
-      <div class="test">VSCode（窗口组件完成）</div>
-      <div class="test">GitHub（链接）</div>
-      <div class="test">浏览器（窗口组件完成）</div>
-      <button @click="test1" class="test">测试新建文件夹</button>
-      <button @click="test2" class="test">测试新建txt</button>
-      <button @click="test3" class="test">测试大小图标切换</button>
-    </div>
   </div>
 </template>
 
@@ -208,18 +198,18 @@ export default {
       }
     },
     // 测试函数
-    test1() {
-      this.createNewItem("folder");
-    },
-    test2() {
-      this.createNewItem("txt");
-    },
-    test3() {
-      if (this.displayMode === "small") this.$emit("changeDeskIconSize", 1);
-      else if (this.displayMode === "middle")
-        this.$emit("changeDeskIconSize", 2);
-      else this.$emit("changeDeskIconSize", 0);
-    },
+    // test1() {
+    //   this.createNewItem("folder");
+    // },
+    // test2() {
+    //   this.createNewItem("txt");
+    // },
+    // test3() {
+    //   if (this.displayMode === "small") this.$emit("changeDeskIconSize", 1);
+    //   else if (this.displayMode === "middle")
+    //     this.$emit("changeDeskIconSize", 2);
+    //   else this.$emit("changeDeskIconSize", 0);
+    // },
   },
 };
 </script>

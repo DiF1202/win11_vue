@@ -7,7 +7,7 @@
  * @FilePath: \win11_vue\src\components\HeDiFei\test.vue
 -->
 <template>
-  <div class="taskBar">
+  <div class="taskBar" @click="taskbarClick">
     <div class="taskcont">
       <div class="tasksCont">
         <div
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="taskRight">
-        <ul class="taskiconul" @click="iSshowControlsCenter">
+        <ul class="taskiconul" @click.stop="iSshowControlsCenter">
           <li class="taskiconli">
             <img :src="imgUrl.arrowupImg" alt="arrowup" />
           </li>
@@ -43,7 +43,7 @@
           </li>
         </ul>
         <div class="taskDate">
-          <ul class="dateDiv" @click="showdateBox">
+          <ul class="dateDiv" @click.stop="showdateBox">
             <li>{{ today.date }}</li>
             <li>{{ today.time }}</li>
           </ul>
@@ -111,12 +111,30 @@ export default {
     },
     showdateBox() {
       this.dateBoxShow = !this.dateBoxShow;
+      // 打开时间栏，关闭状态栏
+      if(this.controlCenterShow) {
+        this.controlCenterShow = false;
+        this.$emit('showControls', this.controlCenterShow);
+      }
     },
     iSshowControlsCenter() {
       this.controlCenterShow = !this.controlCenterShow;
       this.$emit('showControls', this.controlCenterShow);
+      // 打开状态栏，关闭时间栏
+      if(this.dateBoxShow) this.dateBoxShow = false;
     },
 
+    // dssun
+    taskbarClick() {
+      this.closeDateAndControls();
+    },
+    closeDateAndControls() {
+      if(this.controlCenterShow) {
+        this.controlCenterShow = false;
+        this.$emit('showControls', this.controlCenterShow);
+      }
+      if(this.dateBoxShow) this.dateBoxShow = false;
+    },
     taskIconMouseDown(e) {
       if (e.target.nodeName.toLowerCase() === 'img')
         this.smallerIcon = e.target;
