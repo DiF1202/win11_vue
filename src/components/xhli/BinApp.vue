@@ -76,29 +76,34 @@
                     </div>
                 </div>
                 <div class="bin-main-container">
+                    
                     <div 
                         class="bin-main-navBar"
-                        v-for="(item,index) in list"
-                        :key="index"
+                        
                     >
-                        <div 
-                            class="list-title" 
+                        <div
+                            v-for="(item,index) in list"
+                            :key="index"
                         >
-                            <img width="10" src="../../assets/img/binIcons/shortArrowDown.png"/>
-                            <img width="16" v-bind:src="item.icon"/>
-                            <span>{{item.name}}</span>
-                        </div>
-                        <div class="list-content"
-                            v-for="(child,indexC) in list[index].children"
-                            :key="indexC"
-                            
-                        >
-                       
-                            <div>
-                                <img width="18" v-bind:src="child.icon"/>
-                                <span>{{child.name}}</span>
+                            <div 
+                                class="list-title" 
+                            >
+                                <img width="10" src="../../assets/img/binIcons/shortArrowDown.png"/>
+                                <img width="16" v-bind:src="item.icon"/>
+                                <span>{{item.name}}</span>
+                            </div>
+                            <div class="list-content"
+                                v-for="(child,indexC) in list[index].children"
+                                :key="indexC" 
+                            >
+                        
+                                <div>
+                                    <img width="18" v-bind:src="child.icon"/>
+                                    <span>{{child.name}}</span>
+                                </div>
                             </div>
                         </div>
+                        
                     </div>
                     <div class="bin-main-content">
                         <div class="bin-main-content-tab">
@@ -152,7 +157,7 @@ export default {
                 {
                     name: '此电脑',
                     icon: require('../../assets/img/binIcons/computer.png'),
-                    isShow: false,
+                    isShow: true,
                     children: [
                         {
                             name: '视频',
@@ -168,7 +173,7 @@ export default {
                         },
                         {
                             name: '下载',
-                            icon: retuire('../../assets/img/binIcons/download.png'),
+                            icon: require('../../assets/img/binIcons/download.png'),
                         },
                         {
                             name: '音乐',
@@ -188,12 +193,12 @@ export default {
                         }
                     ]
                 },
-                // {
-                //     name: '网络',
-                //     icon: retuire('../../assets/img/binIcons/network.png'),
-                //     isShow: false,
-                //     children: null
-                // }   
+                {
+                    name: '网络',
+                    icon: require('../../assets/img/binIcons/network.png'),
+                    isShow: false,
+                    children: null
+                }   
             ]
         }
     },
