@@ -327,14 +327,14 @@ export default {
         height: 100%;
         width: 60px;
         display: flex;
-        padding: 3px 4px 4px 4px;
+        padding: 0px 4px 4px 4px;
         font-size: 13px;
         flex-direction: column;
         margin-right: 10px;
+        &:hover {
+          background-color: rgb(209, 213, 219);
+        }
         .dateDiv {
-          &:hover {
-            background-color: rgb(209, 213, 219);
-          }
           cursor: pointer;
           width: 100%;
           height: 100%;

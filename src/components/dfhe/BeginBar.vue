@@ -209,6 +209,7 @@ export default {
 
 <style lang="scss" >
 .start-menu {
+  z-index: 999;
   position: absolute;
   left: 50%;
   width: 520px;
@@ -298,8 +299,8 @@ export default {
   }
 }
 
-.closeBtn{
-    // background-color:red;
+// .closeBtn{
+//     // background-color:red;
     
-}
+// }
 </style>
