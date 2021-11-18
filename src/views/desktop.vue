@@ -314,7 +314,6 @@ export default {
     // 1 提供给**窗口子组件**的回调函数
     // 请在窗口子组件的右上角三个按钮的事件函数中使用 $emit 调用该函数以调整窗口状态
     winStateChange(appname, e) {
-      console.log(appname, e);
       // appname 应用名称的唯一标识符
       // e 事件编码：0 关闭按钮被按下 1 最小化按钮被按下 2 最大化/还原按钮被按下
       //            3 任务栏图标被按下 4 桌面图标或开始菜单被按下
@@ -381,7 +380,6 @@ export default {
     },
     // 请在右键菜单子组件的切换图标排列方式的事件函数中使用 $emit 调用该函数以调整桌面图标排列方式
     changeDeskIconSort(sortMethod) {
-      // console.log(sortMethod);
       // sortMethod 要切换成的图标排序方式：0 按时间 1 按名称 2 按大小
       if (sortMethod === 0) this.sortMethod = 'date';
       else if (sortMethod === 1) this.sortMethod = 'name';
@@ -413,9 +411,7 @@ export default {
     // 5 提供给任务栏的回调函数
     responseTaskbarAction(appname) {
       if (appname === 'home') {
-        console.log('todo: 打开开始菜单');
         this.showStartmenu();
-        console.log(this.isShowStartMenu);
       } else if (appname === 'search') {
         console.log('todo: 打开搜索栏');
       } else if (appname === 'widget') {
@@ -450,7 +446,6 @@ export default {
         }
       }
       if (zindex === 0) return '';
-      // console.log(appname);
       this.currentZIndex = zindex + 1;
       return appname;
     },

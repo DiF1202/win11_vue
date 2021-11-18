@@ -1,6 +1,6 @@
 <template>
   <div
-    class="edgeBrowser floatTab dpShadow"
+    class="pdf floatTab dpShadow"
     :style="zIndex"
     :win-size="winSize"
     :win-max="winMax"
@@ -63,7 +63,7 @@ export default {
 <style  lang="scss" scoped>
 @import "../../assets/scss/_window.scss";
 
-.edgeBrowser {
+.pdf {
   background: #e7eaec;
 }
 

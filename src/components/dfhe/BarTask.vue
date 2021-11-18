@@ -178,7 +178,6 @@ export default {
           if(this.$emit("getActiveWin") === appname){
             // 如果它是当前窗口，最小化它
             this.openedAppOrder.splice(this.openedAppOrder.indexOf(appname), 1);
-            console.log(this.openedAppOrder);
             this.minApps.push(appname);
           }
           else {
@@ -203,7 +202,6 @@ export default {
           }
           this.openedAppOrder.push(appname);
         }
-        console.log(this.openedAppOrder);
       }
     },
     getAppState(appname) {
@@ -327,14 +325,14 @@ export default {
         height: 100%;
         width: 60px;
         display: flex;
-        padding: 3px 4px 4px 4px;
+        padding: 0px 4px 4px 4px;
         font-size: 13px;
         flex-direction: column;
         margin-right: 10px;
+        &:hover {
+          background-color: rgb(209, 213, 219);
+        }
         .dateDiv {
-          &:hover {
-            background-color: rgb(209, 213, 219);
-          }
           cursor: pointer;
           width: 100%;
           height: 100%;

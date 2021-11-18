@@ -129,6 +129,12 @@ export default {
   position: absolute;
   left: 30px;
 }
+
+.el-carousel__item {
+  left: 40px;
+  width: calc(100% - 40px);
+}
+
 .el-carousel__item h3 {
   color: #475669;
   font-size: 14px;
@@ -160,55 +166,64 @@ export default {
   justify-content: flex-start;
 }
 
+::v-deep .el-carousel__indicators li {
+  display: flex;
+  align-items: center;
+  // vertical-align: middle;
+  height: 40px;
+}
+
 ::v-deep .el-carousel__indicator:nth-child(1) button {
-  position: relative;
+  position: absolute;
   height: 18px;
   width: 18px;
-  left: 0px;
+  left: 11px;
   background-image: url("../../assets/img/store/home.png");
   background-size: cover;
-    margin-bottom: 20px;
 }
 
 ::v-deep .el-carousel__indicator:nth-child(2) button {
-  position: relative;
+  position: absolute;
   height: 18px;
   width: 18px;
-  left: 0px;
+  left: 11px;
   background-image: url("../../assets/img/store/windows.png");
   background-size: cover;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
 }
 ::v-deep .el-carousel__indicator:nth-child(3) button {
-  position: relative;
+  position: absolute;
   height: 18px;
   width: 18px;
-  left: 0px;
+  left: 11px;
   background-image: url("../../assets/img/store/game.png");
   background-size: cover;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
 }
 ::v-deep .el-carousel__indicator:nth-child(4) button {
-  position: relative;
+  position: absolute;
   height: 18px;
   width: 18px;
-  left: 0px;
+  left: 11px;
   background-image: url("../../assets/img/store/movie.png");
   background-size: cover;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
 }
 ::v-deep .el-carousel__indicator:nth-child(5) button {
-  position: relative;
+  position: absolute;
   height: 18px;
   width: 18px;
-  left: 0px;
+  left: 11px;
   background-image: url("../../assets/img/store/download.png");
   background-size: cover;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
 }
 
 ::v-deep .el-carousel__indicator.is-active{
   border-left:solid #0a72fa 5px;
+}
+::v-deep .el-carousel__indicator.is-active button{
+  left: 13px
 }
 ::v-deep .el-carousel {
   height: 100%;
@@ -217,9 +232,9 @@ export default {
   background-color: #f1f1f200;
 }
 .imgsize{
-  width: 99%;
-  height: 99%;
-  padding:10px 0px 10px 40px;
-  border-radius: 100px;
+  width: 100%;
+  height: 100%;
+  // padding:10px 0px 10px 40px;
+  border-radius: 30px;
 }
 </style>

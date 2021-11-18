@@ -209,7 +209,11 @@ export default {
 
 <style lang="scss" >
 .start-menu {
+
   z-index: 9999;
+
+
+
   position: absolute;
   left: 50%;
   width: 520px;
@@ -298,4 +302,5 @@ export default {
     gap: 8px;
   }
 }
+
 </style>
