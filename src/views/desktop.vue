@@ -105,6 +105,7 @@ import MarkdownApp from '../components/xhli/MarkdownApp.vue';
 import BinApp from '../components/xhli/BinApp.vue';
 import ExplorerApp from '../components/yuzhang/FileExplorer.vue';
 import PdfApp from '../components/yuzhang/PdfApp.vue';
+import ComputerApp from '../components/xhli/ComputerApp.vue'
 export default {
   name: 'desktop',
   components: {
@@ -118,7 +119,7 @@ export default {
     NotepadApp,
     MarkdownApp,
     BinApp,
-    // ComputerApp,
+    ComputerApp,
     ExplorerApp,
     PdfApp,
   },
