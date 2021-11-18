@@ -178,7 +178,6 @@ export default {
           if(this.$emit("getActiveWin") === appname){
             // 如果它是当前窗口，最小化它
             this.openedAppOrder.splice(this.openedAppOrder.indexOf(appname), 1);
-            console.log(this.openedAppOrder);
             this.minApps.push(appname);
           }
           else {
@@ -203,7 +202,6 @@ export default {
           }
           this.openedAppOrder.push(appname);
         }
-        console.log(this.openedAppOrder);
       }
     },
     getAppState(appname) {

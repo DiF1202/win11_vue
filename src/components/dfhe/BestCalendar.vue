@@ -115,6 +115,9 @@ export default {
 <style lang="scss" scoped>
 .calendar {
   position: absolute !important;
+  box-shadow: -4px -4px 4px #0001;
+  border-right: rgb(245, 245, 245) solid 2px;
+  border-bottom: rgb(245, 245, 245) solid 2px;
   right: 10px;
   bottom: -100px;
   width: 290px;
