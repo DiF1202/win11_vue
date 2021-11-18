@@ -86,7 +86,9 @@
         >
         </PdfApp>
         <!---->
-        <StoreApp :winMax="winMax['store']"
+        <StoreApp 
+          :zIndex="{'z-index': zIndex['store']}"
+          :winMax="winMax['store']"
           :winHide="winHide['store']"
           :winSize="winSize['store']"
           @winStateChange="winStateChange">
@@ -130,6 +132,7 @@ import ExplorerApp from '../components/yuzhang/FileExplorer.vue';
 import PdfApp from '../components/yuzhang/PdfApp.vue';
 import ComputerApp from '../components/xhli/ComputerApp.vue'
 import BeginBar from '../components/dfhe/BeginBar.vue';
+import StoreApp from '../components/yuzhang/StoreApp.vue'
 export default {
   name: 'desktop',
   components: {
@@ -147,6 +150,7 @@ export default {
     ExplorerApp,
     PdfApp,
     BeginBar,
+    StoreApp
   },
   data() {
     return {
@@ -178,6 +182,7 @@ export default {
         explorer: 'true',
         bin: 'true',
         pdf: 'true',
+        store:'true'
       },
       winHide: {
         // 窗口是否隐藏：false 否 true 是
@@ -192,6 +197,7 @@ export default {
         explorer: 'true',
         bin: 'true',
         pdf: 'true',
+        store:'true'
       },
       winSize: {
         // 窗口尺寸：normal 还原窗口 max 最大化窗口
@@ -206,6 +212,7 @@ export default {
         explorer: "normal",
         bin: "normal",
         pdf: "max",
+        store:'true'
       },
       zIndex: {
         edge: 0,
@@ -216,6 +223,7 @@ export default {
         explorer: 0,
         bin: 0,
         pdf: 0,
+        store:0
       },
       //#endregion
 
