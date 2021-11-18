@@ -1,6 +1,7 @@
 <template>
   <div
     class="notepad floatTab dpShadow"
+    :style="zIndex"
     :win-size="winSize"
     :win-max="winMax"
     :win-hide="winHide"
@@ -81,6 +82,7 @@ export default {
     winHide: String, // 窗口是否隐藏：false 否 true 是
     noteCurContent: String, // 文本内容
     currentFile: Object, // 文件
+    zIndex: Object,
   },
   data() {
     return {
