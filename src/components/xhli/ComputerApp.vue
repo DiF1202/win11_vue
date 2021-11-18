@@ -1,7 +1,6 @@
 <template>
     <div 
         class="bin floatTab dpShadow"
-        :style="zIndex"
         :win-size="winSize"
         :win-max="winMax"
         :win-hide="winHide"
@@ -10,8 +9,8 @@
         <div class="bin-toolbar">
             <!-- 图片与标题 -->
             <div class="bin-toolbar-icon">
-                <img width="16" src="../../assets/img/appIcons/bin.png"/>
-                <span>回收站</span>
+                <img width="16" src="../../assets/img/binIcons/computer.png"/>
+                <span>此电脑</span>
             </div>
             <!-- 窗口按钮 -->
             <div class="bin-toolbar-actbtn">
@@ -62,9 +61,9 @@
                     <div class="bin-main-history">
                         <!-- 左侧图标 -->
                         <div>
-                            <img width="16" src="../../assets/img/appIcons/bin.png"/>
+                            <img width="16" src="../../assets/img/binIcons/computer.png"/>
                             <img width="8" src="../../assets/img/binIcons/shortArrowRight.png"/>
-                            <span>回收站</span>
+                            <span>此电脑</span>
                         </div>
                         <!-- 右侧图标 -->
                         <div>
@@ -73,7 +72,7 @@
                     </div>
                     <div class="bin-main-search">
                         <img width="15" src="../../assets/img/binIcons/search.png"/>
-                        <span>搜索回收站</span>
+                        <span>搜索"此电脑"</span>
                     </div>
                 </div>
                 <div class="bin-main-container">
@@ -110,15 +109,44 @@
                         
                     </div>
                     <div class="bin-main-content">
-                        <div class="bin-main-content-tab">
-                            <div>名称</div>
-                            <div>原位置</div>
-                            <div>删除日期</div>
-                            <div>大小</div>
-                            <div>项目类型</div>
-                            <div>修改日期</div>
+                        <div class="floder">
+                            <div class="floder-title">
+                                <img width="10" src="../../assets/img/binIcons/ArrowGrey.png" />
+                                <span>文件夹(6)</span>
+                                <div ></div>
+                            </div>
+                            <div class="floder-content">
+                                <div
+                                    v-for="item,index in floder" 
+                                    :key="index"
+                                >
+                                    <img width="42" v-bind:src="item.icon"/>
+                                    <span>{{item.name}}</span>
+                                </div>                                
+                            </div>
                         </div>
-                        <p>此文件夹为空</p>
+                        <div class="device">
+                            <div class="device-title">
+                                <img width="10" src="../../assets/img/binIcons/ArrowGrey.png" />
+                                <span>设备和驱动器(4)</span>
+                                <div></div>
+                            </div>
+                            <div class="device-content">
+                                <div 
+                                    class="device-item"
+                                    v-for="item,index in device"
+                                    :key="index"
+                                >
+                                    <img width="45" v-bind:src="item.icon"/>
+                                    <div>
+                                        {{item.name}}
+                                        <img width="190" src="../../assets/img/binIcons/processBar.png">
+                                        <span>151 GB 可用, 共 280 GB</span>
+                                    </div>
+                                </div>                     
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -131,10 +159,23 @@ export default {
         winSize: String, // 窗口尺寸：normal 还原窗口 max 最大化窗口
         winMax: String, // 窗口是否最大化：false 否 true 是
         winHide: String, // 窗口是否隐藏：false 否 true 是
-        zIndex: Object,
     },
     data(){
         return {
+            device: [
+                { name: "Windows(C:)", icon: require('../../assets/img/binIcons/cDisk.png'), },
+                { name: "Windows(D:)", icon: require('../../assets/img/binIcons/disk.png'), },
+                { name: "Windows(E:)", icon: require('../../assets/img/binIcons/disk.png'), },
+                { name: "Windows(F:)", icon: require('../../assets/img/binIcons/disk.png'), },
+            ],
+            floder: [
+                { name: "视频", icon: require('../../assets/img/binIcons/radio.png'), },
+                { name: "图片", icon: require('../../assets/img/binIcons/image-file.png'), },
+                { name: "文档", icon: require('../../assets/img/binIcons/document-file.png'), },
+                { name: "下载", icon: require('../../assets/img/binIcons/download.png'), },
+                { name: "音乐", icon: require('../../assets/img/binIcons/music.png'), },
+                { name: "桌面", icon: require('../../assets/img/binIcons/desktop.png'), },
+            ],
             list: [
                 {
                     name: '快速访问',
@@ -211,13 +252,13 @@ export default {
     methods: {
          // 标题栏按钮点击事件
         clickMinBtn() {
-        this.$emit("winStateChange", "bin", 1);
+        this.$emit("winStateChange", "computer", 1);
         },
         clickMaxBtn() {
-        this.$emit("winStateChange", "bin", 2)
+        this.$emit("winStateChange", "computer", 2)
         },
         clickCloseBtn() {
-        this.$emit("winStateChange", "bin", 0)
+        this.$emit("winStateChange", "computer", 0)
         },
 
         handleListShow(index) {
@@ -439,52 +480,62 @@ export default {
 
 .bin-main-content {
     width: calc(100% - 158px);
-}
-.bin-main-content-tab {
-    display: flex;
-    // flex-grow: 10;
-    // grid-row: 3fr 3fr 2fr 1fr 2fr 1fr;
-    height: 45px;
-    width: 100%;
+    padding: 10px;
     // background-color: red;
-    margin: 10px;
 }
-.bin-main-content-tab div {
-    flex-grow: 1;
-    height: 22px;
-    margin: 5px;
-    color: #4c6070;
-    border-right: 1px solid #e5e5e5;
+.floder-title, .device-title {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    font-size: 16px;
+    color: #1e3287;
 }
-.bin-main-content-tab div:nth-of-type(1) {
-    flex-grow: 5;
-    // width: 230px;
-}
-.bin-main-content-tab div:nth-of-type(2) {
-    // width: 230px;
-    flex-grow: 5;
-}
-.bin-main-content-tab div:nth-of-type(3) {
-    // width: 160px;
-    flex-grow: 3;
-}
-.bin-main-content-tab div:nth-of-type(4) {
-    // width: 80px;
-    flex-grow: 2;
-}
-.bin-main-content-tab div:nth-of-type(5) {
-    // width: 100px;
-    flex-grow: 2;
-}
-.bin-main-content-tab div:nth-of-type(6) {
-    // width: 50px;
-    flex-grow: 1;
-    border-right: none;
+.floder-title div {
+    width: calc(100% - 104px);
+    height: 0;
+    border: solid 1px #e5e5e5;
 }
 
-.bin-main-content p {
-    width: 100%;
-    color: rgb(135,135,135);
-    text-align: center;
+.floder-content, .device-content {
+    padding: 10px;
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 10px;
+    row-gap: 20px;
+}
+.floder-content div{
+    display: flex;
+    align-items: flex-start;
+    column-gap: 5px;
+    height: 40px;
+    width: 256px;
+    // background-color: red;
+}
+.floder-content div span {
+    padding-top: 5px;
+}
+.device-title span {
+    width: 120px;
+    // background-color: red;
+}
+.device-title div {
+    width: calc(100% - 158px);
+    height: 0;
+    border: solid 1px #e5e5e5;
+}
+
+.device-item {
+    display: flex;
+    width: 245px;
+    height: 50px;
+    column-gap: 5px;
+}
+.device-item div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+.device-item div span {
+    color: #6d6d6d;
 }
 </style>

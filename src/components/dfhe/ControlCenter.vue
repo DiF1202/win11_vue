@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-11-15 16:26:10
- * @LastEditTime: 2021-11-16 22:11:05
+ * @LastEditTime: 2021-11-18 11:50:26
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \win11_vue\src\components\dfhe\ControlCenter.vue
@@ -97,9 +97,7 @@ export default {
       this.OpenLightMode = !this.OpenLightMode;
       this.$emit('toggleLightMode', this.OpenLightMode);
     },
-    changeLightness() {
-      console.log('asjkdbjaksdbk');
-    },
+    none() {},
     initItems() {
       this.controls = [
         {
@@ -172,7 +170,7 @@ export default {
           controlsName: '切换模式',
           description: 'focus-assist',
           active: this.false,
-          click: this.toggleDarkMode,
+          click: this.none,
         },
       ];
     },
