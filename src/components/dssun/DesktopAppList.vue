@@ -115,7 +115,8 @@ export default {
         explorer: "",
         bin: "",
         github: "https://github.com/",
-        pdf:""
+        pdf:"",
+        store:''
       },
       newFileNum: {
         folder: 1,
