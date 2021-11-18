@@ -47,19 +47,19 @@
     <div class="start-user">
       <div class="user">
         <img
-          src="@/assets/img/appIcons/power.png"
+          src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
           style="border-radius: 999px"
           width="26"
         />
         <span
           style="font-size: 10.4px; line-height: 12.8px; color: rgb(31, 41, 55)"
-          >重生之我是尤vue溪</span
+          >Yuki</span
         >
-        <div class="flex-grow"></div>
-        <img
+        <div style="flex-grow:1"></div>
+        <img class="closeBtn"
           src="@/assets/img/appIcons/power.png"
           style="border-radius: 999px"
-          width="14"
+          width="18"
         />
       </div>
     </div>
@@ -296,5 +296,10 @@ export default {
     align-items: center;
     gap: 8px;
   }
+}
+
+.closeBtn{
+    // background-color:red;
+    
 }
 </style>
