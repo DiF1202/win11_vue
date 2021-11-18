@@ -3,8 +3,8 @@
     <div class="start-container">
       <div class="start-appIcons">
         <div class="start-appIcons-header">
-          <div style="font-size: 12px;line-height:16px;font-weight: 600"
-            >已固定
+          <div style="font-size: 12px; line-height: 16px; font-weight: 600">
+            已固定
           </div>
         </div>
         <div class="start-appIcons-container">
@@ -12,7 +12,7 @@
             v-for="(item, index) in apps"
             :key="index"
             class="start-appIcons-items"
-            @click="item.click(item.openkey);"
+            @click="item.click(item.openkey)"
           >
             <img :src="item.icon" width="24" />
             <span>{{ item.name }}</span>
@@ -22,9 +22,9 @@
 
       <div class="recommend-appIcons">
         <div style="padding: 0px 24px 17px 24px">
-          <div style="font-size: 12px; line-height: 16px; font-weight: 600"
-            >推荐应用</div
-          >
+          <div style="font-size: 12px; line-height: 16px; font-weight: 600">
+            推荐应用
+          </div>
         </div>
 
         <div class="recommend-container">
@@ -32,7 +32,7 @@
             v-for="(item, index) in recommendedApps"
             :key="index"
             class="recommend-item"
-             @click="item.click(item.openkey);"
+            @click="item.click(item.openkey)"
           >
             <img :src="item.icon" width="24" />
             <span
@@ -55,8 +55,9 @@
           style="font-size: 10.4px; line-height: 12.8px; color: rgb(31, 41, 55)"
           >Yuki</span
         >
-        <div style="flex-grow:1"></div>
-        <img class="closeBtn"
+        <div style="flex-grow: 1"></div>
+        <img
+          class="closeBtn"
           src="@/assets/img/appIcons/power.png"
           style="border-radius: 999px"
           width="18"
@@ -69,19 +70,19 @@
 <script>
 export default {
   name: 'StartMenu',
-  emits: ['winStateChange','showStartmenu'],
-  props:{
-      isShowStartMenu:Boolean,
+  emits: ['winStateChange', 'showStartmenu'],
+  props: {
+    isShowStartMenu: Boolean,
   },
   methods: {
     none() {},
-    openApp(openkey){
-        console.log(openkey)
-        // this.$emit('openApp', appname);
-        // appname="edge"
-        this.$emit("winStateChange", openkey, 4);
-        this.$emit('showStartmenu')
-    }
+    openApp(openkey) {
+      console.log(openkey);
+      // this.$emit('openApp', appname);
+      // appname="edge"
+      this.$emit('winStateChange', openkey, 4);
+      this.$emit('showStartmenu');
+    },
   },
   data() {
     return {
@@ -91,7 +92,7 @@ export default {
           icon: require('@/assets/img/appIcons/edge.png'),
           active: false,
           click: this.openApp,
-          openkey:"edge"
+          openkey: 'edge',
         },
         {
           name: 'Word',
@@ -128,21 +129,21 @@ export default {
           icon: require('@/assets/img/appIcons/vscode.png'),
           active: false,
           click: this.openApp,
-           openkey:"vscode"
+          openkey: 'vscode',
         },
         {
           name: 'GitHub',
           icon: require('@/assets/img/appIcons/github.png'),
           active: false,
           click: this.openApp,
-          openkey:"GitHub"
+          openkey: 'GitHub',
         },
         {
           name: 'MarkDown',
           icon: require('@/assets/img/appIcons/markdown.png'),
           active: false,
           click: this.openApp,
-          openkey:"markdown"
+          openkey: 'markdown',
         },
         {
           name: 'PDF',
@@ -160,15 +161,15 @@ export default {
           icon: require('@/assets/img/appIcons/edge.png'),
           active: false,
           click: this.openApp,
-          openkey:"edge"
+          openkey: 'edge',
         },
-                {
+        {
           name: 'VS Code',
           subLabel: 'Yesterday at 4:24 PM',
           icon: require('@/assets/img/appIcons/vscode.png'),
           active: false,
           click: this.openApp,
-           openkey:"vscode"
+          openkey: 'vscode',
         },
         {
           name: 'GitHub',
@@ -183,7 +184,7 @@ export default {
           icon: require('@/assets/img/appIcons/markdown.png'),
           active: false,
           click: this.openApp,
-          openkey:"markdown"
+          openkey: 'markdown',
         },
         {
           name: '应用商店',
@@ -203,12 +204,12 @@ export default {
       ],
     };
   },
-
 };
 </script>
 
 <style lang="scss" >
 .start-menu {
+  z-index: 9999;
   position: absolute;
   left: 50%;
   width: 520px;
@@ -236,7 +237,7 @@ export default {
     .start-appIcons {
       flex-grow: 1;
       .start-appIcons-header {
-        display:flex;
+        display: flex;
         align-items: center;
         padding: 16px 24px;
       }
@@ -296,10 +297,5 @@ export default {
     align-items: center;
     gap: 8px;
   }
-}
-
-.closeBtn{
-    // background-color:red;
-    
 }
 </style>

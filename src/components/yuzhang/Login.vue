@@ -1,90 +1,86 @@
 <template >
   <div class="bg">
-   <div class="mask"></div>
+    <div class="mask"></div>
     <div id="log">
       <el-avatar
-      src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-      size="100"
-    ></el-avatar>
-    <div id="username">Yuki</div>
-    <div class="el-input--suffix el-input">
-      <input
-        type="text"
-        autocomplete="off"
-        :placeholder="content"
-        class="el-input__inner"
-      /><span class="el-input__suffix"
-        ><span class="el-input__suffix-inner"
-          ><a href="#" 
-            ><img
-              height="40"
-              width="40"
-              src="../../assets/img/login/rightrow.png" /></a
-          ></span
-        ></span
-      >
+        src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+        size="100"
+      ></el-avatar>
+      <div id="username">Yuki</div>
+      <div class="el-input--suffix el-input">
+        <input
+          type="text"
+          autocomplete="off"
+          :placeholder="content"
+          class="el-input__inner"
+        /><span class="el-input__suffix"
+          ><span class="el-input__suffix-inner"
+            ><a href="#"
+              ><img
+                height="40"
+                width="40"
+                src="../../assets/img/login/rightrow.png" /></a></span
+        ></span>
+      </div>
+      <div class="fgmypw">
+        忘记密码<br />
+        <br />
+        <br />
+        登录选项
+        <br />
+      </div>
+      <div class="logimg">
+        <a href="javascript:void(0);"
+          ><img
+            :class="a"
+            @click="changeBorderA"
+            src="../../assets/img/login/pinlock.png"
+        /></a>
+        <span width="10px"></span>
+        <a href="javascript:void(0);">
+          <img
+            :class="b"
+            @click="changeBorderB"
+            src="../../assets/img/login/passkey.png"
+        /></a>
+      </div>
     </div>
-    <div class="fgmypw">
-    忘记密码<br />
-    <br />
-    <br />
-    登录选项
-    <br />
   </div>
-  <div class="logimg">
-    <a href="javascript:void(0);"
-      ><img
-        :class="a"
-        @click="changeBorderA"
-        src="../../assets/img/login/pinlock.png"
-    /></a>
-    <span width="10px"></span>
-    <a href="javascript:void(0);">
-      <img
-        :class="b"
-        @click="changeBorderB"
-        src="../../assets/img/login/passkey.png"
-    /></a>
-    </div>
-  </div>
-  </div>
- 
-  
 </template>
 
 <script>
 export default {
-  name: "Name",
+  name: 'Name',
   data() {
     return {
-      input: "",
-      a: "",
-      b: "active",
-      content: "密码",
+      input: '',
+      a: '',
+      b: 'active',
+      content: '密码',
     };
   },
 
   methods: {
     changeBorderA() {
-      this.a = "active";
-      this.b = "";
-      this.content = "Pin";
+      this.a = 'active';
+      this.b = '';
+      this.content = 'Pin';
     },
     changeBorderB() {
-      this.b = "active";
-      this.a = "";
-      this.content = "密码";
+      this.b = 'active';
+      this.a = '';
+      this.content = '密码';
     },
   },
 };
 </script>
 
 <style scoped>
-#log{
+#log {
   margin: auto;
   position: absolute;
   left: 50%;
-  margin-left:-140px ;
+  margin-left: -140px;
   height: 700px;
   width: 300px;
 }
@@ -96,16 +92,16 @@ export default {
   background-color: black;
   background-image: url(../../assets/img/login/lock.jpg);
 }
-.mask{
-            position: absolute;
-            left: 0;
-            top: 0;
-            z-index: 0;
-            width: 100%;
-            height: 100%;
-            
-            background: rgb(0 11 93 / 49%);
-        }
+.mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgb(0 11 93 / 49%);
+}
 a {
   text-decoration: none;
 }
@@ -135,8 +131,8 @@ a:active {
   border-style: dashed;
 }
 #username {
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
-    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
   font-weight: 600;
   position: absolute;
   top: 310px;

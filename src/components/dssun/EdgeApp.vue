@@ -117,7 +117,7 @@
 
 <script>
 export default {
-  name: "edge-app",
+  name: 'edge-app',
   props: {
     winSize: String, // 窗口尺寸：normal 还原窗口 max 最大化窗口
     winMax: String, // 窗口是否最大化：false 否 true 是
@@ -126,41 +126,41 @@ export default {
   },
   data() {
     return {
-      frameURL: "", // 页面URL
-      pageTitle: "新标签页", // 页面标题
+      frameURL: '', // 页面URL
+      pageTitle: '新标签页', // 页面标题
       historyUrl: [], // URL历史
       books: [
         {
-          tittle: "必应",
-          Url: "https://cn.bing.com/",
+          tittle: '必应',
+          Url: 'https://cn.bing.com/',
         },
         {
-          tittle: "哔哩哔哩",
-          Url: "https://www.bilibili.com/",
+          tittle: '哔哩哔哩',
+          Url: 'https://www.bilibili.com/',
         },
         {
-          tittle: "淘宝网",
-          Url: "https://www.taobao.com/",
+          tittle: '淘宝网',
+          Url: 'https://www.taobao.com/',
         },
         {
-          tittle: "力扣",
-          Url: "https://leetcode-cn.com/",
+          tittle: '力扣',
+          Url: 'https://leetcode-cn.com/',
         },
         {
-          tittle: "掘金",
-          Url: "https://juejin.cn/",
+          tittle: '掘金',
+          Url: 'https://juejin.cn/',
         },
         {
-          tittle: "Vue.js",
-          Url: "https://vuejs.org/",
+          tittle: 'Vue.js',
+          Url: 'https://vuejs.org/',
         },
         {
-          tittle: "React",
-          Url: "https://react.docschina.org/",
+          tittle: 'React',
+          Url: 'https://react.docschina.org/',
         },
         {
-          tittle: "Win11 in Vue",
-          Url: "/",
+          tittle: 'Win11 in Vue',
+          Url: '/',
         },
       ],
     };
@@ -168,19 +168,19 @@ export default {
   watch: {
     // 监视浏览器首次打开，在首次打开时再加载页面
     winHide(nvalue) {
-      if (nvalue === "false" && this.frameURL === "") this.goHome();
+      if (nvalue === 'false' && this.frameURL === '') this.goHome();
     },
   },
   methods: {
     // 按钮点击事件
     clickMinBtn() {
-      this.$emit("winStateChange", "edge", 1);
+      this.$emit('winStateChange', 'edge', 1);
     },
     clickMaxBtn() {
-      this.$emit("winStateChange", "edge", 2);
+      this.$emit('winStateChange', 'edge', 2);
     },
     clickCloseBtn() {
-      this.$emit("winStateChange", "edge", 0);
+      this.$emit('winStateChange', 'edge', 0);
     },
     clickLeft() {
       if (this.historyUrl.length) {
@@ -189,11 +189,11 @@ export default {
     },
     clickHome() {
       this.goHome();
-      this.historyUrl.push("https://cn.bing.com/");
+      this.historyUrl.push('https://cn.bing.com/');
     },
     clickEnterBtn() {
-      console.log("hhh");
-      let url = document.getElementById("urlin").value;
+      console.log('hhh');
+      let url = document.getElementById('urlin').value;
       this.goTo(url);
     },
     // 收藏标签点击事件
@@ -205,13 +205,13 @@ export default {
         ++i;
       }
       if (i >= 5) return;
-      let book = this.books[parseInt(tar.id.split("k")[1])];
+      let book = this.books[parseInt(tar.id.split('k')[1])];
       this.goTo(book.Url);
       this.pageTitle = book.tittle;
     },
     // 地址栏键盘监听
     submitInput() {
-      let url = document.getElementById("urlin").value;
+      let url = document.getElementById('urlin').value;
       this.goTo(url);
     },
     // 跳转函数
@@ -220,20 +220,20 @@ export default {
       if (!mark) this.historyUrl.push(url);
     },
     goHome() {
-      this.frameURL = "https://cn.bing.com/";
-      this.pageTitle = "必应";
+      this.frameURL = 'https://cn.bing.com/';
+      this.pageTitle = '必应';
     },
     // 图标URL生成
     bookIconUrl(title, url) {
-      if (title === "Vue.js") return "favicon.ico";
-      return url + "favicon.ico";
+      if (title === 'Vue.js') return 'favicon.ico';
+      return url + 'favicon.ico';
     },
   },
 };
 </script>
 
 <style  lang="scss" scoped>
-@import "../../assets/scss/_window.scss";
+@import '../../assets/scss/_window.scss';
 
 .edgeBrowser {
   background: #e7eaec;
@@ -377,8 +377,8 @@ export default {
   padding-right: 15px;
   padding-top: 2px;
   padding-bottom: 4px;
-  font-family: "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue";
+  font-family: 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue';
   outline: none;
 }
 
