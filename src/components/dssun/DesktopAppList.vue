@@ -15,16 +15,6 @@
       v-if="ifNewFile"
       @newItemCallback="newItemCallback"
     ></NewItem>
-    <!-- 测试 -->
-    <div class="testdiv">
-      <div class="test">当前可以点的图标：</div>
-      <div class="test">VSCode（窗口组件完成）</div>
-      <div class="test">GitHub（链接）</div>
-      <div class="test">浏览器（窗口组件完成）</div>
-      <button @click="test1" class="test">测试新建文件夹</button>
-      <button @click="test2" class="test">测试新建txt</button>
-      <button @click="test3" class="test">测试大小图标切换</button>
-    </div>
   </div>
 </template>
 
@@ -79,7 +69,7 @@ export default {
         {
           appName: "VSCode",
           description: "vscode",
-          size: 2,
+          size: 3,
           date: "2021-11-11 00:00:00",
         },
         {
@@ -91,8 +81,20 @@ export default {
         {
           appName: "Mark Down",
           description: "markdown",
-          size: 1,
+          size: 2,
           date: "2021-11-14 00:00:00",
+        },
+        {
+          appName: "Todo List.txt",
+          description: "txt/Todo List.txt",
+          size: 999,
+          date: "2021-11-15 00:00:00",
+        },
+        {
+          appName: "win 11.pdf",
+          description: "pdf",
+          size: 1,
+          date: "2021-11-17 00:00:00",
         },
       ],
       appUrl: {
@@ -103,6 +105,11 @@ export default {
         explorer: "",
         bin: "",
         github: "https://github.com/",
+        pdf:""
+      },
+      newFileNum: {
+        folder: 1,
+        txt: 1,
       },
     };
   },
@@ -135,7 +142,13 @@ export default {
         ++i;
       }
       if (i >= 5) return;
+      // 判断是否是txt文件
+      if(tar.id.substr(0,4)==="txt/") {
+        this.$emit("openTxtFile", tar.id.substr(4,tar.id.length-4));
+        this.$emit("winStateChange", "notepad", 4);
+      }
       if (typeof this.appUrl[tar.id] == "undefined") return;
+      // 区分URL和App
       if (this.appUrl[tar.id]) window.open(this.appUrl[tar.id]);
       else this.$emit("winStateChange", tar.id, 4);
     },
@@ -146,27 +159,57 @@ export default {
     newItemCallback(fileType, fileName) {
       const momentNow = moment();
       let date = momentNow.format("YYYY-MM-DD HH:mm:ss");
+      let appName = fileName;
+      for (let item of this.appsList) {
+        if (item.appName === fileName) {
+          appName = "";
+          break;
+        }
+      }
+      if (!appName) {
+        if (fileType === "folder") {
+          if (fileName === "新建文件夹") {
+            appName = "新建文件夹 (" + this.newFileNum.folder + ")";
+            this.newFileNum.folder++;
+          } else appName = fileName + " (1)";
+        } else {
+          if (fileName === "新建 txt 文件.txt") {
+            appName = "新建 txt 文件 (" + this.newFileNum.txt + ").txt";
+            this.newFileNum.txt++;
+          } else
+            appName = fileName.substr(0, fileName.length - 4) + " (1)" + ".txt";
+        }
+      }
       this.ifNewFile = false;
       this.appsList.push({
-        appName: fileName,
-        description: fileType + "/" + fileName,
-        size: 1,
+        appName,
+        description: fileType + "/" + appName,
+        size: 0,
         date,
       });
+      if(fileType === "txt") this.$emit("newTxtFile", appName);
+    },
+    alterTxtFileSize(filename, filesize) {
+      for(let item of this.appsList) {
+        if(item.appName === filename) {
+          item.size = filesize;
+          break;
+        }
+      }
     },
     // 测试函数
-    test1() {
-      this.createNewItem("folder");
-    },
-    test2() {
-      this.createNewItem("txt");
-    },
-    test3() {
-      if (this.displayMode === "small") this.$emit("changeDeskIconSize", 1);
-      else if (this.displayMode === "middle")
-        this.$emit("changeDeskIconSize", 2);
-      else this.$emit("changeDeskIconSize", 0);
-    },
+    // test1() {
+    //   this.createNewItem("folder");
+    // },
+    // test2() {
+    //   this.createNewItem("txt");
+    // },
+    // test3() {
+    //   if (this.displayMode === "small") this.$emit("changeDeskIconSize", 1);
+    //   else if (this.displayMode === "middle")
+    //     this.$emit("changeDeskIconSize", 2);
+    //   else this.$emit("changeDeskIconSize", 0);
+    // },
   },
 };
 </script>

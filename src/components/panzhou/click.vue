@@ -1,5 +1,5 @@
 <template>
-  <div class="root" @click.stop="fn" v-if="this.$store.getters.getClick.vis" @mouseleave="closeItem"
+  <div class="root" @click.stop="" v-if="this.$store.getters.getClick.vis" @mouseleave="closeItem"
     :style="{left:this.$store.getters.getClick.clientX+'px',top:this.$store.getters.getClick.clientY+'px'}">
     <div class="main">
       <div class="view" @mouseenter="stayItem(0)"><i></i>查看<span></span></div>
@@ -69,7 +69,6 @@ export default {
       this.$store.commit('setClick',{vis:false});
     }
   },
-  components:{},
   created(){
 
   }

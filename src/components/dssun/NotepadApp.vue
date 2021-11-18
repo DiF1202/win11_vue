@@ -4,6 +4,8 @@
     :win-size="winSize"
     :win-max="winMax"
     :win-hide="winHide"
+    @click="closeFileMenu"
+    @keydown.ctrl.s.prevent="saveBtnClick"
   >
     <!-- 标题栏 -->
     <div class="toolbar">
@@ -12,7 +14,9 @@
         <div class="icon" hidden>
           <img src="../../assets/img/appIcons/notepad.png" alt="" />
         </div>
-        <div class="appFullName">{{ "无标题" }} - 记事本</div>
+        <div class="appFullName">
+          {{ isContentChanged ? "*" : " " }} {{ currentFile ? currentFile.fileName : "无标题" }} - 记事本
+        </div>
       </div>
       <!-- 窗口按钮 -->
       <div class="actbtns">
@@ -30,7 +34,9 @@
     <!-- Notepad主内容 -->
     <div class="notepadMain">
       <div class="menuBar">
-        <div class="menuItem" @click="ifFileMenuShow=!ifFileMenuShow">文件(F)</div>
+        <div class="menuItem" @click.stop="ifFileMenuShow = !ifFileMenuShow">
+          文件(F)
+        </div>
         <div class="menuItem">编辑(E)</div>
         <div class="menuItem">格式(O)</div>
         <div class="menuItem">查看(V)</div>
@@ -46,14 +52,21 @@
         <div class="fileMenuItem">页面设置(U)...</div>
         <div class="fileMenuItem">打印(P)...</div>
         <div class="newGroup"></div>
-        <div class="fileMenuItem">退出(X)</div>
+        <div class="fileMenuItem" @click="clickCloseBtn">退出(X)</div>
       </div>
-      <textarea name="" id="" v-model="content"></textarea>
+      <textarea
+        name=""
+        id=""
+        v-model="content"
+        @input="contentChange"
+      ></textarea>
       <div class="stateBar">
-        <div class="stateItem" style="width:80px">UTF-8</div>
+        <div class="stateItem" style="width: 80px">UTF-8</div>
         <div class="stateItem">Windows(CRLF)</div>
         <div class="stateItem">100%</div>
-        <div class="stateItem" style="width:100px">共{{content.length}}个字符</div>
+        <div class="stateItem" style="width: 100px">
+          共{{ content.length }}个字符
+        </div>
       </div>
     </div>
   </div>
@@ -66,12 +79,24 @@ export default {
     winSize: String, // 窗口尺寸：normal 还原窗口 max 最大化窗口
     winMax: String, // 窗口是否最大化：false 否 true 是
     winHide: String, // 窗口是否隐藏：false 否 true 是
+    noteCurContent: String, // 文本内容
+    currentFile: Object, // 文件
   },
   data() {
     return {
+      isContentChanged: false,
       ifFileMenuShow: false,
       content: "",
     };
+  },
+  watch: {
+    currentFile(nvar) {
+      if (nvar.content) {
+        this.content = nvar.content;
+      } else {
+        this.content = "";
+      }
+    },
   },
   methods: {
     // 按钮点击事件
@@ -85,8 +110,18 @@ export default {
       this.$emit("winStateChange", "notepad", 0);
     },
     saveBtnClick() {
-      this.ifFileMenuShow = false;
-    }
+      if(this.isContentChanged) {
+        this.$emit("saveTxtFile", this.currentFile.fileName, this.content);
+        this.isContentChanged = false;
+      }
+    },
+    // 点击其他区域关闭菜单
+    closeFileMenu() {
+      if (this.ifFileMenuShow === true) this.ifFileMenuShow = false;
+    },
+    contentChange() {
+      this.isContentChanged = true;
+    },
   },
 };
 </script>
@@ -188,8 +223,8 @@ export default {
   transform: all 0.1s;
 }
 .menuItem:hover {
-  border: rgb(204,232,255) solid 1px;
-  background-color: rgb(229,243,255);
+  border: rgb(204, 232, 255) solid 1px;
+  background-color: rgb(229, 243, 255);
 }
 .stateItem {
   text-align: left;
@@ -203,7 +238,7 @@ export default {
   top: 49px;
   display: flex;
   flex-direction: column;
-  background-color: rgb(240,240,240);
+  background-color: rgb(240, 240, 240);
   border: rgb(211, 211, 211) solid 1px;
   box-shadow: 1px 1px 2px gray;
   width: 150px;
@@ -213,7 +248,7 @@ export default {
   padding: 5px 0px 5px 30px;
 }
 .fileMenuItem:hover {
-  background-color: rgb(144,200,246);
+  background-color: rgb(144, 200, 246);
 }
 
 .newGroup {

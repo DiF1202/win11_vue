@@ -14,6 +14,7 @@
         v-model="appName"
         ref="appNameInput"
         @blur="inputSubmit"
+        @keydown.enter.prevent="inputEnter"
         :style="{ height: calHeight + 'px' }"
       ></textarea>
     </div>
@@ -40,6 +41,9 @@ export default {
     inputSubmit() {
       this.nameSubmit = true;
       this.$emit("newItemCallback", this.fileType, this.appName);
+    },
+    inputEnter() {
+      this.$refs["appNameInput"].blur();
     },
   },
   computed: {
