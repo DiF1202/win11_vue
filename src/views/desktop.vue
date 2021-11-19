@@ -245,7 +245,7 @@ export default {
         require('../assets/img/wallpapers/dark.jpg'),
         require('../assets/img/wallpapers/leisai.jpg'),
         require('../assets/img/wallpapers/dianCiJun.jpg'),
-        require('../assets/img/wallpapers/xiaofei.png'),
+        // require('../assets/img/wallpapers/xiaofei.png'),
         require('../assets/img/wallpapers/xinhui.jpg'),
         require('../assets/img/wallpapers/xinhui1.jpg'),
         require('../assets/img/wallpapers/xinhui2.jpg'),
