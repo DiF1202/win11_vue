@@ -166,12 +166,15 @@ export default {
       currentFile: {}, // 记事本当前文件
       noteFiles: {
         // 记事本保存的内容
-        'Todo List.txt': {
-          fileName: 'Todo List.txt',
+        '项目介绍.txt': {
+          fileName: '项目介绍.txt',
           content:
-            '重生之我是尤Vue溪\n\n' +
-            '正在进行的任务：\n* 右键菜单-刷新、图标排序（攀攀）\n* 开始菜单、搜索栏、资讯栏（小斐）\n* 手风琴（心慧）\n\n' +
-            '未开始的组件开发：\n* 更换桌面壁纸\n* 计算器\n* 音乐播放器（可选）\n* 终端（可选）\n',
+            '# Win11 in Vue! \n\n## 你从未体验过的全新版本！\n\n' + 
+            '该项目作为第二届阿里巴巴练习生计划“重生之我是尤Vue溪”小组的开发项目，旨在使用 HTML、CSS (SCSS) 和 JS 等 Web 技术和 Vue 框架，在 Web 上复刻 Windows 11 的 UI 体验。\n\n' + 
+            '**本项目只做交流学习使用，禁止用于其他用途！**\n\n' + 
+            '## 项目内容\n\n- 桌面与图标\n- 开始菜单\n- 任务栏与窗口调度\n- 控制中心与日历\n- 窗口状态管理\n- 计算机、资源管理器、回收站\n- 应用商店、浏览器、VSCode\n- Markdown编辑器\n- 记事本（文件打开与保存）\n- 右键菜单（图标大小与排序）\n- 右键菜单（新建文件与文件夹）\n- 更换壁纸\n\n' + 
+            '## Todo\n\n- 搜索栏\n- 资讯与小工具\n- 快速布局\n- 右键菜单（终端）\n- 文件右键菜单\n- 设置\n\n' + 
+            '## 技术栈\n\n- 框架 - Vue 3\n- 组件/UI库 - Element UI\n- 样式 - CSS / SCSS',
         },
       },
       winMax: {
@@ -242,7 +245,7 @@ export default {
         require('../assets/img/wallpapers/dark.jpg'),
         require('../assets/img/wallpapers/leisai.jpg'),
         require('../assets/img/wallpapers/dianCiJun.jpg'),
-        require('../assets/img/wallpapers/xiaofei.png'),
+        // require('../assets/img/wallpapers/xiaofei.png'),
         require('../assets/img/wallpapers/xinhui.jpg'),
         require('../assets/img/wallpapers/xinhui1.jpg'),
         require('../assets/img/wallpapers/xinhui2.jpg'),
