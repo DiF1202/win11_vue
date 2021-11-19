@@ -1,36 +1,36 @@
 {
-  "name": "win11_vue",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
-  },
-  "dependencies": {
-    "core-js": "^3.6.5",
-    "element-plus": "^1.2.0-beta.3",
-    "md-editor-v3": "^1.6.4",
-    "moment": "^2.29.1",
-    "postcss-pxtorem": "^6.0.0",
-    "vue": "^3.0.0",
-    "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.0-0"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-plugin-vuex": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0",
-    "sass": "^1.26.5",
-    "sass-loader": "^8.0.2",
-    "vue-cli-plugin-element": "^1.0.1",
-    "vue-loader": "^15.9.8",
-    "vue-template-compiler": "^2.6.14"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "name": "win11_vue",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build"
+    },
+    "dependencies": {
+        "core-js": "^3.6.5",
+        "element-plus": "^1.2.0-beta.3",
+        "md-editor-v3": "^1.6.4",
+        "moment": "^2.29.1",
+        "postcss-pxtorem": "^6.0.0",
+        "vue": "^3.0.0",
+        "vue-router": "^4.0.0-0",
+        "vuex": "^4.0.0-0"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "~4.5.0",
+        "@vue/cli-plugin-router": "~4.5.0",
+        "@vue/cli-plugin-vuex": "~4.5.0",
+        "@vue/cli-service": "~4.5.0",
+        "@vue/compiler-sfc": "^3.0.0",
+        "sass": "^1.26.5",
+        "sass-loader": "^8.0.2",
+        "vue-cli-plugin-element": "^1.0.1",
+        "vue-loader": "^15.9.8",
+        "vue-template-compiler": "^2.6.14"
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not dead"
+    ]
 }

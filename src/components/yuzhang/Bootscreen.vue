@@ -25,6 +25,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'Bootscreen',
   data() {
@@ -32,7 +33,6 @@ export default {
       fullscreenLoading: false,
     };
   },
- 
 };
 </script>
 

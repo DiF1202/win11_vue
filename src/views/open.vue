@@ -28,6 +28,7 @@
 import Bootscreen from "../components/yuzhang/Bootscreen.vue";
 import Login from "../components/yuzhang/Login.vue";
 import Secpage from "../components/yuzhang/Secpage.vue";
+import preLoad from '../utils/preLoad'
 
 export default {
   name: "open",
@@ -48,10 +49,13 @@ export default {
     },
   },
   mounted: function () {
-    console.log("sss");
-    setTimeout(() => {
-      this.clock = true;
-    }, 5000);
+    // 图片预加载完成后 2 s执行本地加载
+    preLoad().then(res=>{
+      setTimeout(()=>{
+        this.clock = true;
+      },2000)
+    })
+    
   },
 };
 </script>
