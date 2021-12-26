@@ -7,9 +7,9 @@
  * @FilePath: \win11_vue\src\components\HeDiFei\test.vue
 -->
 <template>
-  <div  id="roll">
-    <img height="270" src="../../assets/img/login/rootscreen.png" />
+  <div id="roll">
     <div id="box">
+      <img src="../../assets/img/login/rootscreen.png" />
       <div class="loading">
         <div>
           <span></span>
@@ -38,31 +38,30 @@ export default {
 
 <style scoped>
 /* 这个 我reset过啦  margin:0这些*/
-#roll{
+#roll {
   height: 100vh;
   width: 100vw;
   background-color: black;
 }
+
 #box {
   position: fixed;
   left: 50%;
-  top: 550px;
-  margin-left: -70px;
+  top: 40%;
+  transform: translate(-50%, -50%);
 }
+
 img {
-  position: fixed;
-  left: 50%;
-  top: 250px;
-  margin-left: -243px;
+  height: 270px;
 }
 
 .loading div {
-  margin: auto;
-  position: fixed;
   width: 60px;
   height: 60px;
-  display: block;
-  z-index: 1;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -20%;
 }
 
 .loading span {
@@ -74,7 +73,7 @@ img {
 }
 
 .loading span:after {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   left: 0px;

@@ -61,14 +61,6 @@ export default {
 </script>
 
 <style scoped>
-#log {
-  margin: auto;
-  position: absolute;
-  left: 50%;
-  margin-left: -140px;
-  height: 700px;
-  width: 300px;
-}
 .bg {
   height: 100vh;
   width: 100vw;
@@ -77,14 +69,19 @@ export default {
   background-color: black;
   background-image: url(../../assets/img/login/lock.jpg);
 }
+
+#log {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  width: 300px;
+}
 .mask {
   position: absolute;
-  left: 0;
-  top: 0;
   z-index: 0;
   width: 100%;
   height: 100%;
-
   background: rgb(0 11 93 / 49%);
 }
 a {
